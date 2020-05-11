@@ -1,0 +1,9 @@
+.ant-menu-item .anticon,
+.ant-menu-submenu-title .anticon {
+  font-size: 20px;
+}
+
+.ant-menu-item .anticon + span,
+.ant-menu-submenu-title .anticon + span {
+  font-size: 15px;
+}
