@@ -36,7 +36,7 @@ const HeaderMenu = () => {
         </ItemGroup>
       </SubMenu>
 
-      <SubMenu icon={<FileTextOutlined />} title="Financial Reports">
+      <SubMenu icon={<StockOutlined />} title="Transactions">
         <ItemGroup title="Item 1">
           <Item key="setting:1">Option 1</Item>
           <Item key="setting:2">Option 2</Item>
@@ -47,7 +47,7 @@ const HeaderMenu = () => {
         </ItemGroup>
       </SubMenu>
 
-      <SubMenu icon={<StockOutlined />} title="Statistics">
+      <SubMenu icon={<FileTextOutlined />} title="Financial Reports">
         <ItemGroup title="Item 1">
           <Item key="setting:1">Option 1</Item>
           <Item key="setting:2">Option 2</Item>

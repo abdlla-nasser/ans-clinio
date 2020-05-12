@@ -20,7 +20,7 @@ const BasePage = ({
 }) => {
   const isLogin = pathname === "/";
   const fullwidth = isFullWidthRouteScreen(pathname);
-  const height = getHeightAfterOffset(isLogin ? 110 : 180);
+  const height = getHeightAfterOffset(isLogin ? 110 : 60);
 
   return (
     <StyledContainer dir="ltr">
@@ -29,7 +29,7 @@ const BasePage = ({
       <ContentView fullwidth={fullwidth} height={height}>
         {children}
       </ContentView>
-      {!isLogin && <AppFooter />}
+      {!fullwidth && !isLogin && <AppFooter />}
     </StyledContainer>
   );
 };

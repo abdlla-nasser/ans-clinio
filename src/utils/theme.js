@@ -3,6 +3,7 @@ const colors = {
   red: "#cf4048",
   green: "#5cb172",
   lightBlue: "#a2b5db",
+  yellow: "#ebb74f",
 };
 
 export { colors };

@@ -39,12 +39,12 @@ const AppHeader = ({ pushToPath, onSwitchLang, countryFlag, isRtl }) => {
           <StyledBadge showZero count={0}>
             <HeaderSvg src={bellSvg} alt="notifications" marginEnd="-10px" />
           </StyledBadge>
-          <HeaderSvg src={messagesSvg} alt="messages" width="40px" />
+          <HeaderSvg src={messagesSvg} alt="messages" width="30px" />
           <HeaderSvg
             src={settingsSvg}
             alt="settings"
-            height="27px"
-            marginTop="-4px"
+            height="22px"
+            marginTop="-7px"
           />
           <HeaderSvg src={searchSvg} alt="search" />
           <HeaderSvg src={logoutSvg} alt="logout" marginEnd="0px" />

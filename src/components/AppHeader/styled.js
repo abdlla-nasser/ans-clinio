@@ -9,14 +9,16 @@ export const MainHeader = styled(Header)`
   display: flex;
   flex-direction: column;
   height: min-content;
-  border-bottom: 1px solid #edeef9;
+  /* border-bottom: 1px solid #edeef9; */
   background-color: #fff;
   padding: 5px 50px 0px 50px;
 `;
 
 export const LogoSettingsContainer = styled(Flex)`
-  width: 85%;
-  margin: auto;
+  width: 100%;
+  padding: inherit;
+  /* margin: auto; */
+  border-bottom: 2px solid #edeef9;
   justify-content: space-between;
   align-items: center;
 `;
@@ -33,8 +35,8 @@ export const Settings = styled.div`
 
 export const HeaderSvg = styled.img`
   cursor: pointer;
-  width: ${({ width }) => width || "30px"};
-  height: ${({ height }) => height || "30px"};
+  width: ${({ width }) => width || "25px"};
+  height: ${({ height }) => height || "25px"};
   margin-inline-end: ${({ marginEnd }) => marginEnd || "30px"};
   margin-top: ${({ marginTop }) => marginTop};
 `;

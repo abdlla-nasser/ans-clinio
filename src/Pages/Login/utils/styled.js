@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  background: ${({ image }) => `url(${image}) center center no-repeat`};
+  background-image: ${({ image }) => `url(${image})`};
+  background-size: cover;
+  background-position-x: 100%;
+  background-repeat: no-repeat;
   width: 100%;
   min-height: inherit;
   margin-top: 47px;
@@ -43,5 +46,8 @@ export const FormContainer = styled.form`
 export const LogoImg = styled.img`
   width: 112px;
   height: 47px;
+  transform: scale(1.7);
+  transform-origin: left;
+  margin-block-end: 100px;
   object-fit: contain;
 `;

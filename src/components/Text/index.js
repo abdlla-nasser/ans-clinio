@@ -9,9 +9,10 @@ export const getTextProps = ({ size = 15, fontfamily, fontweight }) => {
 };
 
 export default styled.p`
-  ${({ width, flex, color, align, margin, ...otherStyleProps }) => `
+  ${({ width, flex, color, align, margin, lineHeight, ...otherStyleProps }) => `
   display: inline;
   margin: ${margin || "0px"};
+  line-height: ${lineHeight};
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
