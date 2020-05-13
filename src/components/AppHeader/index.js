@@ -1,41 +1,49 @@
 import React from "react";
 import Menu from "./menu";
 import Text from "../Text";
-import Icon from "../Icon";
-import clinioLogo from "../../assets/images/clinioLogo.png";
+import Flex from "../Flex";
+import { colors } from "../../utils/theme";
+import clinioLogo from "../../assets/svgs/mainLogo.svg";
 import bellSvg from "../../assets/svgs/bell.svg";
 import messagesSvg from "../../assets/svgs/messages.svg";
 import settingsSvg from "../../assets/svgs/settings.svg";
 import searchSvg from "../../assets/svgs/search.svg";
 import logoutSvg from "../../assets/svgs/logout.svg";
-import dropDownSvg from "../../assets/svgs/dropDown.svg";
 import {
   MainHeader,
   LogoSettingsContainer,
   OptionsContainer,
   Logo,
-  Settings,
+  SettingsContainer,
   HeaderSvg,
-  StyledOption,
   StyledBadge,
 } from "./styled";
 
 const { memo } = React;
 
-const Option = ({ children, marginEnd }) => (
-  <StyledOption marginEnd={marginEnd}>
-    <Text size={16} children={children} />
-    <Icon src={dropDownSvg} />
-  </StyledOption>
+const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
+  <Flex column>
+    <Text
+      children={`Welcome back ${user}`}
+      color={colors.appPrimiry}
+      size={18}
+      lineHeight="30px"
+    />
+    <Text
+      children={`Last Login ${lastLogin} ago`}
+      color={colors.yellow}
+      size={12.5}
+    />
+  </Flex>
 );
 
 const AppHeader = ({ pushToPath, onSwitchLang, countryFlag, isRtl }) => {
   return (
     <MainHeader>
       <LogoSettingsContainer>
-        <Logo src={clinioLogo} alt="EXSYS_Logo" />
+        <Logo src={clinioLogo} alt="Clinio Logo" />
 
-        <Settings>
+        <SettingsContainer>
           <StyledBadge showZero count={0}>
             <HeaderSvg src={bellSvg} alt="notifications" marginEnd="-10px" />
           </StyledBadge>
@@ -48,10 +56,11 @@ const AppHeader = ({ pushToPath, onSwitchLang, countryFlag, isRtl }) => {
           />
           <HeaderSvg src={searchSvg} alt="search" />
           <HeaderSvg src={logoutSvg} alt="logout" marginEnd="0px" />
-        </Settings>
+        </SettingsContainer>
       </LogoSettingsContainer>
 
       <OptionsContainer>
+        <WelcomeText />
         <Menu />
       </OptionsContainer>
     </MainHeader>

@@ -4,8 +4,8 @@ import SettingOutlined from "@ant-design/icons/SettingOutlined";
 import FileTextOutlined from "@ant-design/icons/FileTextOutlined";
 import StockOutlined from "@ant-design/icons/StockOutlined";
 import UserOutlined from "@ant-design/icons/UserOutlined";
-
 import "./index.css";
+import { StyledMenu } from "./styled";
 
 const { SubMenu, ItemGroup, Item } = Menu;
 
@@ -22,7 +22,7 @@ const HeaderMenu = () => {
   //   };
 
   return (
-    <Menu
+    <StyledMenu
       //   onClick={this.handleClick}
       //   selectedKeys={[this.state.current]}
       mode="horizontal"
@@ -68,7 +68,7 @@ const HeaderMenu = () => {
           <Item key="setting:4">Option 4</Item>
         </ItemGroup>
       </SubMenu>
-    </Menu>
+    </StyledMenu>
   );
 };
 

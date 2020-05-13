@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Flex from "../Flex";
+import Menu from "antd/lib/menu";
 import Layout from "antd/lib/layout";
 import Badge from "antd/lib/badge";
 
@@ -9,27 +10,22 @@ export const MainHeader = styled(Header)`
   display: flex;
   flex-direction: column;
   height: min-content;
-  /* border-bottom: 1px solid #edeef9; */
-  background-color: #fff;
-  padding: 5px 50px 0px 50px;
+  background-color: inherit;
+  padding: 5px 0;
 `;
 
 export const LogoSettingsContainer = styled(Flex)`
-  width: 100%;
-  padding: inherit;
-  /* margin: auto; */
-  border-bottom: 2px solid #edeef9;
   justify-content: space-between;
-  align-items: center;
+  margin-block-start: 5px;
+  margin-block-end: 20px;
 `;
 
 export const Logo = styled.img`
-  width: 150px;
   height: 55px;
   object-fit: contain;
 `;
 
-export const Settings = styled.div`
+export const SettingsContainer = styled.div`
   display: inline-block;
 `;
 
@@ -49,11 +45,14 @@ export const StyledBadge = styled(Badge)`
   }
 `;
 
-export const OptionsContainer = styled(LogoSettingsContainer)`
-  justify-content: flex-end;
+export const OptionsContainer = styled(Flex)`
+  padding-block-end: 5px;
+  justify-content: space-between;
+  border-bottom: 1px solid #87cefa;
 `;
 
-export const StyledOption = styled.nav`
-  display: -webkit-inline-box;
-  margin-inline-end: ${({ marginEnd }) => marginEnd || "70px"};
+export const StyledMenu = styled(Menu)`
+  background-color: inherit;
+  font-size: 15.5px;
+  line-height: 46px !important;
 `;

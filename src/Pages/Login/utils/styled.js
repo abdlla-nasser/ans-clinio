@@ -44,9 +44,9 @@ export const FormContainer = styled.form`
 `;
 
 export const LogoImg = styled.img`
-  width: 112px;
-  height: 47px;
-  transform: scale(1.7);
+  width: 115px;
+  height: 50px;
+  transform: scale(1.5);
   transform-origin: left;
   margin-block-end: 100px;
   object-fit: contain;

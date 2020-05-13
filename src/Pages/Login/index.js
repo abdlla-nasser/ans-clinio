@@ -4,7 +4,7 @@ import Form from "./partials/form";
 import { Container, Wrapper, Text, LogoImg } from "./utils/styled";
 
 import mainImageUrl from "../../assets/images/main.jpg";
-import logo from "../../assets/images/clinioLogo.png";
+import logo from "../../assets/svgs/mainLogo.svg";
 
 const LoginPage = ({ history: { push } }) => {
   return (

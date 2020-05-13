@@ -3,24 +3,17 @@ import Layout from "antd/lib/layout";
 
 const { Footer } = Layout;
 
-// export default styled(Footer)`
-//   font-family: Roboto;
-//   font-size: 14px;
-//   line-height: 7px;
-//   text-align: right;
-//   color: #fff;
-//   background-color: #326dbb;
-//   height: 50px;
-//   bottom: 0px;
-//   position: relative;
-// `;
-
-export default styled.footer`
+export const StyledFooter = styled(Footer)`
   width: 100%;
-  height: 3.8rem;
+  height: 2.2rem;
   background-color: rgb(50, 109, 187);
   color: #fff;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
-  padding: 0px 64px;
+  padding: 10px 6.5rem;
+`;
+
+export const FooterLogo = styled.img`
+  width: 50px;
+  height: 20px;
 `;
