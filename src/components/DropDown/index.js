@@ -5,45 +5,6 @@ import Button from "../Button";
 
 const { Item: MenuItem } = Menu;
 
-function DropDown({
-  button,
-  selectedKeys = [],
-  dataSource,
-  valuePropName,
-  onSelect,
-  renderMenu,
-  buttonProps = null,
-  multiple,
-  disabled,
-  lastItem,
-}) {
-  function handleClick({ key }) {
-    return onSelect && onSelect(dataSource[+key]);
-  }
-
-  const menu = renderMenu
-    ? renderMenu
-    : createMenu({
-        handleClick,
-        items: dataSource,
-        selectedKeys,
-        valuePropName,
-        multiple,
-        lastItem,
-      });
-
-  return (
-    <BaseDropDown
-      trigger={["click"]}
-      overlay={menu}
-      placement="bottomCenter"
-      disabled={disabled}
-    >
-      <Button {...buttonProps}>{button}</Button>
-    </BaseDropDown>
-  );
-}
-
 function createMenu({
   handleClick,
   selectedKeys,
@@ -78,6 +39,45 @@ function createMenu({
 
       {lastItem && <MenuItem>{lastItem}</MenuItem>}
     </Menu>
+  );
+}
+
+function DropDown({
+  button,
+  selectedKeys = [],
+  dataSource,
+  valuePropName,
+  onSelect,
+  renderMenu,
+  buttonProps = null,
+  multiple,
+  disabled,
+  lastItem,
+}) {
+  function handleClick({ key }) {
+    return onSelect && onSelect(dataSource[+key]);
+  }
+
+  const menu = renderMenu
+    ? renderMenu
+    : createMenu({
+        handleClick,
+        items: dataSource,
+        selectedKeys,
+        valuePropName,
+        multiple,
+        lastItem,
+      });
+
+  return (
+    <BaseDropDown
+      trigger={["click"]}
+      overlay={menu}
+      placement="bottomCenter"
+      disabled={disabled}
+    >
+      {button}
+    </BaseDropDown>
   );
 }
 

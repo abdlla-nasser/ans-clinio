@@ -1,13 +1,4 @@
-/* .ant-menu-item .anticon,
-.ant-menu-submenu-title .anticon {
-  font-size: 20px;
+.ant-dropdown-menu-item:hover,
+.ant-dropdown-menu-submenu-title:hover {
+  background-color: #326dbb6b;
 }
-
-.ant-menu-item .anticon + span,
-.ant-menu-submenu-title .anticon + span {
-  font-size: 16.5px;
-} */
-
-/* .ant-menu-horizontal {
-  line-height: 46px !important;
-} */

@@ -12,6 +12,9 @@ const Input = styled.input`
   font-size: 16px;
   line-height: 1.31;
   color: #95b6e2;
+  ::placeholder {
+    opacity: 0.5;
+  }
   &:disabled {
     background-color: transparent;
     cursor: pointer;

@@ -33,13 +33,23 @@ export const HeaderSvg = styled.img`
   cursor: pointer;
   width: ${({ width }) => width || "25px"};
   height: ${({ height }) => height || "25px"};
-  margin-inline-end: ${({ marginEnd }) => marginEnd || "30px"};
+  margin-inline-end: ${({ marginEnd }) => marginEnd || "20px"};
   margin-top: ${({ marginTop }) => marginTop};
+`;
+
+export const FlagImg = styled(HeaderSvg)`
+  width: 30px;
+  height: 20px;
+  margin-block-start: -5px;
+`;
+
+export const FlagListImg = styled(FlagImg)`
+  margin-inline-end: 0;
 `;
 
 export const StyledBadge = styled(Badge)`
   margin-top: 10px;
-  margin-inline-end: 50px;
+  margin-inline-end: 40px;
   > .ant-badge-count {
     background-color: #ebb74e;
   }

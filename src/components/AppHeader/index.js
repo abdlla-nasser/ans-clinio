@@ -1,14 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import Menu from "./menu";
 import Text from "../Text";
 import Flex from "../Flex";
 import { colors } from "../../utils/theme";
-import clinioLogo from "../../assets/svgs/mainLogo.svg";
-import bellSvg from "../../assets/svgs/bell.svg";
-import messagesSvg from "../../assets/svgs/messages.svg";
-import settingsSvg from "../../assets/svgs/settings.svg";
-import searchSvg from "../../assets/svgs/search.svg";
-import logoutSvg from "../../assets/svgs/logout.svg";
+import CountriesDropdown from "./countryDropdown";
+import { langList, getLanguageFlag } from "../../utils/getCountry";
+import { changeAppLanguage } from "../../Pages/BasePage/modules/actions";
 import {
   MainHeader,
   LogoSettingsContainer,
@@ -17,9 +15,17 @@ import {
   SettingsContainer,
   HeaderSvg,
   StyledBadge,
+  FlagListImg,
 } from "./styled";
 
-const { memo } = React;
+import bellSvg from "../../assets/svgs/bell.svg";
+import logoutSvg from "../../assets/svgs/logout.svg";
+import searchSvg from "../../assets/svgs/search.svg";
+import clinioLogo from "../../assets/svgs/mainLogo.svg";
+import messagesSvg from "../../assets/svgs/messages.svg";
+import settingsSvg from "../../assets/svgs/settings.svg";
+
+const { memo, useCallback } = React;
 
 const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
   <Flex column>
@@ -37,7 +43,27 @@ const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
   </Flex>
 );
 
-const AppHeader = ({ pushToPath, onSwitchLang, countryFlag, isRtl }) => {
+const AppHeader = ({
+  pushToPath,
+  onSwitchLang,
+  countryFlag,
+  isRtl,
+  selectedLanguage,
+}) => {
+  const dispatch = useDispatch();
+
+  const getOtherLanguages = useCallback(() => {
+    let otherLanguagList = [];
+    let tempArr = langList.filter((lang) => lang !== selectedLanguage);
+    tempArr.map((lang) => {
+      otherLanguagList.push({
+        label: <FlagListImg src={getLanguageFlag(lang)} />,
+        onClick: () => dispatch(changeAppLanguage(lang)),
+      });
+    });
+    return otherLanguagList;
+  }, [selectedLanguage]);
+
   return (
     <MainHeader>
       <LogoSettingsContainer>
@@ -54,7 +80,11 @@ const AppHeader = ({ pushToPath, onSwitchLang, countryFlag, isRtl }) => {
             height="22px"
             marginTop="-7px"
           />
-          <HeaderSvg src={searchSvg} alt="search" />
+          <HeaderSvg src={searchSvg} alt="search" marginEnd="15px" />
+          <CountriesDropdown
+            selectedLanguage={selectedLanguage}
+            otherLanguages={getOtherLanguages()}
+          />
           <HeaderSvg src={logoutSvg} alt="logout" marginEnd="0px" />
         </SettingsContainer>
       </LogoSettingsContainer>
