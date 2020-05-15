@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import Input from "./shadowInput";
-import { FormContainer } from "../utils/styled";
 import Link from "../../../components/Link";
 import Flex from "../../../components/Flex";
 import Text from "../../../components/Text";
 import Button from "../../../components/Button/ButtonWithIcon";
-import { ErrorView } from "../../../Hocs/FieldShadow/styled";
 import { colors } from "../../../utils/theme";
+import { FormContainer } from "../utils/styled";
+import { ErrorView } from "../../../Hocs/FieldShadow/styled";
+import { mapStateToProps, mapDispatchToProps } from "../utils/selectors";
 
 import userSvg from "../../../assets/svgs/user.svg";
 import lockSvg from "../../../assets/svgs/lock.svg";
@@ -17,7 +18,13 @@ const flexProps = {
   width: "415px",
 };
 
-const LoginForm = ({ formError, schemaError }) => {
+const LoginForm = ({
+  username,
+  password,
+  onInputChange,
+  formError,
+  schemaError,
+}) => {
   return (
     <FormContainer>
       <Input
@@ -26,8 +33,8 @@ const LoginForm = ({ formError, schemaError }) => {
         placeholder="Email or Phone no."
         autofocus
         error=""
-        value=""
-        onChange={() => {}}
+        value={username}
+        onChange={onInputChange("username")}
       />
 
       <Input
@@ -35,9 +42,9 @@ const LoginForm = ({ formError, schemaError }) => {
         imageAlt="password"
         placeholder="Password"
         error=""
-        value=""
+        value={password}
         autocomplete="new-password"
-        onChange={() => {}}
+        onChange={onInputChange("password")}
       />
 
       {formError ||
@@ -77,4 +84,4 @@ const LoginForm = ({ formError, schemaError }) => {
   );
 };
 
-export default LoginForm;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

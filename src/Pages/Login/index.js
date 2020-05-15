@@ -18,4 +18,4 @@ const LoginPage = ({ history: { push } }) => {
   );
 };
 
-export default LoginPage;
+export default connect(null, null)(LoginPage);
