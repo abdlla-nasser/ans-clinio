@@ -13,26 +13,40 @@ import { mapStateToProps, mapDispatchToProps } from "../utils/selectors";
 import userSvg from "../../../assets/svgs/user.svg";
 import lockSvg from "../../../assets/svgs/lock.svg";
 
+const { useCallback } = React;
+
 const flexProps = {
   margin: "10px 0px",
   width: "415px",
 };
 
 const LoginForm = ({
+  onLogin,
   username,
   password,
+  usernameError,
+  passwordError,
   onInputChange,
   formError,
   schemaError,
+  isSubmittingLogin,
 }) => {
+  const handleLogin = useCallback(
+    (e) => {
+      e.preventDefault();
+      return onLogin();
+    },
+    [onLogin]
+  );
+
   return (
-    <FormContainer>
+    <FormContainer onSubmit={handleLogin}>
       <Input
         image={userSvg}
         imageAlt="user"
         placeholder="Email or Phone no."
         autofocus
-        error=""
+        error={usernameError}
         value={username}
         onChange={onInputChange("username")}
       />
@@ -41,7 +55,8 @@ const LoginForm = ({
         image={lockSvg}
         imageAlt="password"
         placeholder="Password"
-        error=""
+        error={passwordError}
+        type="password"
         value={password}
         autocomplete="new-password"
         onChange={onInputChange("password")}
@@ -58,8 +73,8 @@ const LoginForm = ({
       >
         <Button
           title="Sign in"
-          // loading={isLoading}
-          // disabled={isLoading}
+          loading={isSubmittingLogin}
+          disabled={isSubmittingLogin}
           type="primary"
           htmlType="submit"
         />
