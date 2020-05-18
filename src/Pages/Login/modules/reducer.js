@@ -1,10 +1,10 @@
 import { ON_LOGIN_INPUT_CHANGED, ON_LOGIN, ON_LOGIN_FINISHED } from "./types";
 
 const initialState = {
-  username: undefined,
-  password: undefined,
-  usernameError: undefined,
-  passwordError: undefined,
+  username: "",
+  password: "",
+  usernameError: "",
+  passwordError: "",
   formError: undefined,
   isSubmittingLogin: false,
 };

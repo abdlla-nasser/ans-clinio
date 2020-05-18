@@ -22,7 +22,7 @@ const DownloadExcel = ({
   disabled,
   sheets = [{ dataSet: [], sheetName: "", columns: [] }],
   filename = "Download",
-  buttonElement
+  buttonElement,
 }) => {
   const donwloadEl = useMemo(
     () =>

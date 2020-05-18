@@ -9,9 +9,20 @@ import { onClickLoginFinished } from "./actions";
 
 const loginSelector = ({ loginReducer }) => loginReducer;
 
+// {
+//     "data": {
+//         "email": "staff3@staff3.com",
+//         "password": "$2a$08$4sv0wR.7OwpzDFRtJkqo1O7jPeQLMhREwtgqErY0cInSbm88X13dW",
+//         "Active_Flag": false,
+//         "Role": "Staff",
+//         "_id": "5ebbfb1bef9c150459d86489"
+//     },
+//     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWJiZmIxYmVmOWMxNTA0NTlkODY0ODkiLCJpYXQiOjE1ODk4MDM1OTN9.lXYlGaLh90RhXtvd3ZygkA6ZRxQT02DA2Y_53khJDR4"
+// }
+
 function* requestLogin({ navigateTo }) {
   try {
-    const { username, password } = yield select(loginSelector);
+    const { username, password, formError } = yield select(loginSelector);
 
     const formErrors = validateForm({
       username,
@@ -24,17 +35,22 @@ function* requestLogin({ navigateTo }) {
       return yield put(onClickLoginFinished(formErrors));
     } else {
       const apiUrl = createApiUrl({
-        url: "superadmin/login",
+        url: "general/login",
       });
 
       let response = yield postRequest(apiUrl, {
-        username,
+        email: username,
         password,
       });
-      let result = yield response.json();
+      response = yield response.json();
 
-      console.log("response: ", response);
-      console.log("result: ", result);
+      if (response === "email_not_found") {
+        yield put(onClickLoginFinished({ formError: "Email does not exist" }));
+      } else if (response === "incorrect_password") {
+        yield put(onClickLoginFinished({ formError: "Incorrect password" }));
+      } else {
+        console.log("success!");
+      }
     }
   } catch (error) {
     console.log("Error in requestLogin => ", error);

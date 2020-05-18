@@ -58,6 +58,6 @@ export default WithTableHoc({
   WrappedComponent: ClinicalSpecialitiesSetup,
   renderColumns,
   rowKey: "punish_id",
-  width: "100%",
+  width: "95%",
   pageName: "clinicalSpecialitiesSetup",
 });

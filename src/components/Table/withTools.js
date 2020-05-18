@@ -34,7 +34,7 @@ function TableWithToolsContainer({
   excelView,
   rowSelctionProps,
   onDoubleClickRecord,
-  withPagination
+  withPagination,
 }) {
   const isThereSelectedRow =
     selectedRow || (typeof selectedRow === "number" && selectedRow >= 0);
@@ -84,7 +84,7 @@ function TableWithToolsContainer({
           withPagination={withPagination}
           scroll={{
             y: mainHeight - y,
-            x
+            x,
           }}
         />
         {AnthorView && <AnthorView />}
@@ -96,7 +96,7 @@ function TableWithToolsContainer({
       <PageContent
         applyBorders
         offset={140}
-        margin="20px 0px auto 0px"
+        margin="10px 0px auto 0px"
         useHeight
         children={renderChildren}
       />

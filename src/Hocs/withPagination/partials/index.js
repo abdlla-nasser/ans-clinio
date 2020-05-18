@@ -10,7 +10,7 @@ const { useMemo } = React;
 const iconProps = {
   lineheight: "0",
   marginend: "0",
-  size: 14
+  size: 14,
 };
 
 export default ({
@@ -21,13 +21,13 @@ export default ({
   onUpdatePageSize,
   pageSizeOptions,
   currentPage,
-  disableNextIcon
+  disableNextIcon,
 }) => {
   const pageNeighbours = Math.max(0, Math.min(1, 2));
   const totalPages = pagesNumbers.length;
 
   const options = useMemo(() => createSelectOptions(pageSizeOptions), [
-    pageSizeOptions
+    pageSizeOptions,
   ]);
 
   const pages = useMemo(
@@ -35,12 +35,12 @@ export default ({
       fetchPageNumbers({
         currentPage,
         pageNeighbours,
-        totalPages
+        totalPages,
       }),
     [pageNeighbours, totalPages, currentPage]
   );
 
-  const onSelectPage = page => () => updateCurrentPage(page);
+  const onSelectPage = (page) => () => updateCurrentPage(page);
 
   const onClickNextIcon = () => {
     if (currentPage === totalPages) {

@@ -1,6 +1,5 @@
 import React from "react";
 import { StyledButton, RenderView } from "./styled";
-import SearchOutlined from "@ant-design/icons/SearchOutlined";
 import Icon from "../../../components/Icon";
 import Input from "../../../components/Input";
 
@@ -16,8 +15,7 @@ export default ({ clearFilter, fetchData, isRtl }) => {
     fetchData();
   };
 
-  // const filterIcon = () => <Icon marginend="0" type="search" color="#fff" />;
-  const filterIcon = () => <SearchOutlined />;
+  const filterIcon = () => <Icon marginend="0" type="search" color="#fff" />;
 
   return {
     filterDropdown: ({
