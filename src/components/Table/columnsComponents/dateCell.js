@@ -7,8 +7,8 @@ const DateCell = ({
   isEditing,
   onChange,
   errors,
-  renderCell
-}) => record => {
+  renderCell,
+}) => (record) => {
   const { [rowKey]: rowKeyValue } = record;
   const { dIdxs, onInputChanged } = renderCell;
   const value = record[dIdxs];
@@ -21,14 +21,14 @@ const DateCell = ({
       const params = {
         name: dIdxs,
         value: selectedDate,
-        key: rowKeyValue
+        key: rowKeyValue,
       };
 
       return onInputChanged
         ? onInputChanged({
             onChange,
             record,
-            ...params
+            ...params,
           })
         : onChange(params);
     };
@@ -38,7 +38,7 @@ const DateCell = ({
       height: 25,
       width: "100%",
       inputWrapperStyle: {
-        justifyContent: "center"
+        justifyContent: "center",
       },
       error: errs,
       inputProps: {
@@ -47,8 +47,8 @@ const DateCell = ({
         flex: 0.75,
         className: "edit-td-input",
         size: "small",
-        defaultValue: null
-      }
+        defaultValue: null,
+      },
     });
   }
 

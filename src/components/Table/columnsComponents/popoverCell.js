@@ -1,7 +1,7 @@
 import React from "react";
 import { matchErrors } from "./utils";
 import PopoverLanguage from "../../PopoverLanguage";
-import renderPopover from "../../../Pages/ExsysApis/utils/renderHover";
+import { renderPopover } from "./utils";
 
 const PopoverCell = ({
   rowKey,
@@ -9,8 +9,8 @@ const PopoverCell = ({
   isEditing,
   onChange,
   errors,
-  renderCell
-}) => record => {
+  renderCell,
+}) => (record) => {
   const {
     dIdxs,
     onInputChanged,
@@ -31,7 +31,7 @@ const PopoverCell = ({
 
   if (getDeepValuesInSingleDIndx) {
     const { val1, val2 } = getDeepValuesInSingleDIndx({
-      values: record[dIdxs]
+      values: record[dIdxs],
     });
 
     v1 = val1 || "";
@@ -50,13 +50,13 @@ const PopoverCell = ({
         name,
         value: setValueLowerCase ? value.toLowerCase() : value,
         key: rowKeyValue,
-        ...(onChangeUseInputLang ? { langId } : null)
+        ...(onChangeUseInputLang ? { langId } : null),
       };
 
       return onInputChanged
         ? onInputChanged({
             onChange,
-            ...params
+            ...params,
           })
         : onChange(params);
     };
@@ -83,7 +83,7 @@ const PopoverCell = ({
         dIdIx: dIdxs,
         dIdIxForOver: dIXForHover,
         width: "540px",
-        height: "480px"
+        height: "480px",
       })(record)
     : textValue
     ? textValue

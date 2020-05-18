@@ -6,11 +6,11 @@ import isModalVisible from "./utils/isModalVisible";
 import getFields from "./utils/getFileds";
 import getTitle from "./utils/getTitle";
 import SearchInjector from "./utils/injectSearchWithColumns";
-import { handlerDispatchers, stateHandler } from "../../utlities/reduxHandlers";
-import { isArrayHasData } from "../../utlities/isThereData";
+import { handlerDispatchers, stateHandler } from "../../utils/reduxHandlers";
+import { isArrayHasData } from "../../utils/isThereData";
 import CommonView from "../../components/Table/withTools";
-import { usePrevious } from "../../utlities/customUseHooks";
-import loadable from "../../components/loadable";
+import { usePrevious } from "../../utils/customUseHooks";
+import loadable from "../../components/Loadable";
 const DownloadExcel = loadable(() => import("../../components/DownloadExcel"));
 
 const { useEffect, useState, useMemo, memo, useCallback } = React;
@@ -34,9 +34,9 @@ export default ({
   tableScroll,
   noFetchData,
   rowSelectionPropName,
-  getExcelSheetProps
+  getExcelSheetProps,
 }) => {
-  const TableHoc = props => {
+  const TableHoc = (props) => {
     const {
       selectedRow,
       isEditing,
@@ -90,13 +90,13 @@ export default ({
 
     const currentRecord = useMemo(() => {
       if (dataSource) {
-        return dataSource.find(item => item[rowKey] === selectedRow);
+        return dataSource.find((item) => item[rowKey] === selectedRow);
       }
       return false;
     }, [dataSource, selectedRow]);
 
     const toggleModal = useCallback(
-      rowId => {
+      (rowId) => {
         const isOpen = isModalVisible(rowId) && rowId;
         updateModalState(isOpen);
       },
@@ -113,7 +113,7 @@ export default ({
       if (errors) {
         return updateState({
           ...formError,
-          ...errors
+          ...errors,
         });
       }
       return requestInsertAndUpdate(currentRecord);
@@ -122,7 +122,7 @@ export default ({
       formError,
       requestInsertAndUpdate,
       onPressEdit,
-      currentRecord
+      currentRecord,
     ]);
 
     const onInputChanged = useCallback(
@@ -130,7 +130,7 @@ export default ({
         if (formError) {
           updateState({
             ...formError,
-            [name]: undefined
+            [name]: undefined,
           });
         }
         return onChangeData({ [name]: value }, key, rest);
@@ -140,7 +140,7 @@ export default ({
 
     const handleDeleteAction = useCallback(() => onDelete(currentRecord), [
       onDelete,
-      currentRecord
+      currentRecord,
     ]);
 
     const memorizedCols = useMemo(() => {
@@ -148,13 +148,13 @@ export default ({
         return renderColumns({
           isRtl,
           onChangeModalShow: otherProps.onChangeModalShow,
-          authorization_type
+          authorization_type,
         });
       } else return false;
     }, [isRtl, otherProps, authorization_type]);
 
-    const getLabelTitle = useCallback(title => getTitle(labels, title), [
-      labels
+    const getLabelTitle = useCallback((title) => getTitle(labels, title), [
+      labels,
     ]);
 
     const injectedColumns = useMemo(() => {
@@ -175,7 +175,7 @@ export default ({
           onChange: onInputChanged,
           errors: formError,
           columns: memorizedCols,
-          ...otherProps
+          ...otherProps,
         });
       }
       return columns;
@@ -191,7 +191,7 @@ export default ({
       selectedRow,
       getLabelTitle,
       isEditing,
-      editabletable
+      editabletable,
     ]);
 
     const parentProps = useMemo(() => {
@@ -200,7 +200,7 @@ export default ({
         fields = getFields([...defaultRequiredProps, ...requiredProps], {
           ...props,
           currentRecord,
-          isPrevEquelCurrentlang
+          isPrevEquelCurrentlang,
         });
       }
       if (useModalState) {
@@ -211,7 +211,7 @@ export default ({
           labels,
           modalData: currentRecord,
           onModalInputsChanged: onChangeData,
-          itemsPrivs: itemsPriviliges
+          itemsPrivs: itemsPriviliges,
         };
       }
       return fields;
@@ -223,7 +223,7 @@ export default ({
       isVisible,
       currentRecord,
       onChangeData,
-      itemsPriviliges
+      itemsPriviliges,
     ]);
 
     const renderExcelView = useMemo(() => {
@@ -231,7 +231,7 @@ export default ({
       if (getExcelSheetProps && isDsExsist) {
         let { columns, dataSet } = getExcelSheetProps({
           dataSource,
-          ...otherProps
+          ...otherProps,
         });
 
         if (columns && dataSet) {
@@ -239,11 +239,13 @@ export default ({
             let labelValue = "";
             if (label.includes(",")) {
               const labelsArr = label.split(",");
-              labelValue = labelsArr.map(item => getLabelTitle(item)).join(" ");
+              labelValue = labelsArr
+                .map((item) => getLabelTitle(item))
+                .join(" ");
             } else labelValue = getLabelTitle(label);
             return {
               label: labelValue,
-              value
+              value,
             };
           });
 
@@ -254,8 +256,8 @@ export default ({
                 {
                   dataSet,
                   columns,
-                  sheetName: pageName
-                }
+                  sheetName: pageName,
+                },
               ]}
             />
           );
@@ -268,7 +270,7 @@ export default ({
       if (rowSelectionPropName && onRowSelection) {
         return {
           onSelect: onRowSelection,
-          checkPropName: rowSelectionPropName
+          checkPropName: rowSelectionPropName,
         };
       }
     }, [onRowSelection]);
@@ -317,8 +319,8 @@ export default ({
       createDisptacher: createDisptacher({
         rowKey,
         pageName,
-        actions
-      })
+        actions,
+      }),
     })
   )(memo(TableHoc));
 };

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { colors } from '../../../utlities/theme';
+import styled from "styled-components";
+import { colors } from "../../../utils/theme";
 
 export const Container = styled.ul`
   box-sizing: border-box;
@@ -10,8 +10,8 @@ export const Container = styled.ul`
   font-variant: tabular-nums;
   line-height: 1.5;
   list-style: none;
-  -webkit-font-feature-settings: 'tnum';
-  font-feature-settings: 'tnum';
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
 `;
 
 export const PageItem = styled.li`
@@ -32,9 +32,9 @@ export const PageItem = styled.li`
   -ms-user-select: none;
   user-select: none;
   cursor: ${({ disabled }) =>
-    disabled ? 'not-allowed' : 'pointer'} !important;
+    disabled ? "not-allowed" : "pointer"} !important;
   ${({ noBorder, selected }) =>
     !noBorder &&
     `
-    border: 1px solid ${selected ? colors.appPrimiry : '#d9d9d9'}`};
+    border: 1px solid ${selected ? colors.appPrimiry : "#d9d9d9"}`};
 `;

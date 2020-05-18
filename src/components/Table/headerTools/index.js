@@ -1,14 +1,14 @@
 import React from "react";
 import { ToolsContainer } from "../styled";
 import Icon from "../../Icon";
-import loadable from "../../loadable";
+import loadable from "../../Loadable";
 const Select = loadable(() => import("../../Select"));
 
 const MARGIN_END = 7;
 const SIZE = 24;
 
 function onClick(clickable, callback) {
-  return function() {
+  return function () {
     if (clickable && callback) {
       callback();
     }
@@ -32,7 +32,7 @@ export default ({
   headerSelectNewValue,
   withInfo = true,
   withPrinter = true,
-  excelView
+  excelView,
 }) => {
   const clickable = !disabled && isThereSelectedRow;
   const isunClickableField = disabled || !isThereSelectedRow;

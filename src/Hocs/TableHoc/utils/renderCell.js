@@ -3,7 +3,7 @@ import CheckBoxCell from "../../../components/Table/columnsComponents/checkBoxCe
 import SelectCell from "../../../components/Table/columnsComponents/SelectCell";
 import InputNumber from "../../../components/Table/columnsComponents/numberInput";
 import InputPercent from "../../../components/Table/columnsComponents/percentageInput";
-import DateInput from "../../../components/Table/columnsComponents/dataCell";
+import DateInput from "../../../components/Table/columnsComponents/dateCell";
 import ImageView from "../../../components/Table/columnsComponents/ImageCell";
 
 const CELLS = {
@@ -13,7 +13,7 @@ const CELLS = {
   inputnumber: InputNumber,
   inputpercent: InputPercent,
   date: DateInput,
-  image: ImageView
+  image: ImageView,
 };
 
 export default ({
@@ -37,8 +37,8 @@ export default ({
           onChange,
           errors,
           renderCell,
-          ...others
-        })
+          ...others,
+        }),
       };
     }
   } else return null;

@@ -1,4 +1,4 @@
-import { isObjHasData } from "../../../utlities/isThereData";
+import { isObjHasData } from "../../../utils/isThereData";
 
 /**
  * @param {Object} labels

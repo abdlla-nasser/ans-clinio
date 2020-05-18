@@ -1,24 +1,24 @@
 import React from "react";
 import { getPageNumbers, PAGE_SIZE_OPTIONS } from "./utils";
-import { isArrayHasData } from "../../utlities/isThereData";
+import { isArrayHasData } from "../../utils/isThereData";
 
 const { memo, useState, useMemo, lazy, Suspense, useCallback } = React;
 const Pagination = lazy(() => import("./partials/index"));
 
 export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
-  const WrapperComponent = props => {
+  const WrapperComponent = (props) => {
     const {
       dataSource,
       onfetchMoreData,
       recordsPerPage,
-      withPagination = true
+      withPagination = true,
     } = props;
 
     const [pageSize, updatePageSize] = useState(recordsPerPage || 20);
     const [currentPage, updateCurrentPage] = useState(1);
 
     const isDataSourceExsist = useMemo(() => isArrayHasData(dataSource), [
-      dataSource
+      dataSource,
     ]);
 
     const pagesNumbers = useMemo(() => {
@@ -37,7 +37,7 @@ export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
     }, [isDataSourceExsist, dataSource, currentPage, pageSize]);
 
     const onUpdatePageSize = useCallback(
-      value => {
+      (value) => {
         const size =
           typeof value === "number"
             ? value
@@ -61,9 +61,7 @@ export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
     const forceHidePagination = useMemo(() => {
       const disable =
         !pagesNumbers || (pagesNumbers && pagesNumbers.length === 1);
-      return (
-        disable && (dataSource && disableNextIcon && dataSource.length <= 5)
-      );
+      return disable && dataSource && disableNextIcon && dataSource.length <= 5;
     }, [pagesNumbers, disableNextIcon, dataSource]);
 
     return (

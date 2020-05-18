@@ -4,11 +4,11 @@ import { TableContainer } from "./styled";
 import "./index.css";
 import getFilters from "./getFilters";
 import WithPagination from "../../Hocs/withPagination";
-import { isObjHasData, isArrayHasData } from "../../utlities/isThereData";
+import { isObjHasData, isArrayHasData } from "../../utils/isThereData";
 
 const { useCallback, useState } = React;
 
-const TableView = function({
+const TableView = function ({
   columns,
   rowKey,
   selectedId,
@@ -40,7 +40,7 @@ const TableView = function({
       const { checkPropName } = rowSelctionProps;
       if (isDsExsist && checkPropName) {
         let keys = [];
-        dataSource.forEach(item => {
+        dataSource.forEach((item) => {
           if (item[checkPropName] === "Y") {
             keys = [...keys, item[rowKey]];
           }
@@ -53,7 +53,7 @@ const TableView = function({
     updateSelectedKeys,
     shouldUseSelection,
     rowSelctionProps,
-    rowKey
+    rowKey,
   ]);
 
   function renderRowClassName(rec, id) {
@@ -77,7 +77,7 @@ const TableView = function({
   function onRow(rec) {
     return {
       onClick: onSelectRow && onSelectRow(rec),
-      onDoubleClick: onDoubleClick && onDoubleClick(rec)
+      onDoubleClick: onDoubleClick && onDoubleClick(rec),
     };
   }
 
@@ -99,7 +99,7 @@ const TableView = function({
   };
 
   const handleSelectCheckbox = useCallback(
-    selectedRowKeys => {
+    (selectedRowKeys) => {
       if (shouldUseSelection) {
         if (rowSelctionProps.onSelect) {
           rowSelctionProps.onSelect(selectedRowKeys);
@@ -113,7 +113,7 @@ const TableView = function({
   const rowSelection = shouldUseSelection
     ? {
         onChange: handleSelectCheckbox,
-        selectedRowKeys
+        selectedRowKeys,
       }
     : null;
 
@@ -146,9 +146,9 @@ const TableView = function({
 };
 
 TableView.defaultProps = {
-  withPagination: true
+  withPagination: true,
 };
 
 export default WithPagination({
-  WrappedComponent: TableView
+  WrappedComponent: TableView,
 });

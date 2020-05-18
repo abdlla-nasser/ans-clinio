@@ -1,9 +1,9 @@
 import React from "react";
 import Tiptool from "antd/lib/tooltip";
 import { ActionContainer, StyledIcon } from "./styled";
-import DetailsIcon from "../../../assets/images/details.svg";
+import DetailsIcon from "../../../assets/svgs/details.svg";
 
-export default (openModal, rowKey) => props => {
+export default (openModal, rowKey) => (props) => {
   function onPressInfoIcon() {
     openModal(props[rowKey]);
   }
