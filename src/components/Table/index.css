@@ -1,0 +1,72 @@
+.ant-table-thead > tr > th {
+  color: #fff;
+  background-color: #006fbb;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 9px 0px;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.ant-table-thead > tr > th:last-child,
+.ant-table-tbody > tr > td:last-child {
+  border-right: 0px;
+}
+
+.ant-table-bordered .ant-table-header > table,
+.ant-table-bordered .ant-table-body > table,
+.ant-table-bordered .ant-table-fixed-left table,
+.ant-table-bordered .ant-table-fixed-right table {
+  border: 0;
+}
+
+.ant-table-thead
+  > tr
+  > th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
+  background: #006fbb !important;
+}
+
+.ant-table-thead
+  > tr
+  > th.ant-table-column-has-actions.ant-table-column-has-filters {
+  padding-right: 27px !important;
+}
+
+.ant-table-thead > tr > th.ant-table-column-sort {
+  background: #006fbb;
+}
+
+.edit-td-input {
+  text-align: center;
+}
+
+.selected-row {
+  /* height: 30px; */
+  background-color: #b0e4ff !important;
+}
+
+.error-row {
+  height: 30px;
+  background-color: red;
+}
+
+.darkBlue-row {
+  color: #3333ff;
+}
+
+.flag-2-row {
+  color: #f30808;
+}
+.flag-3-row {
+  color: #1316be;
+}
+
+.hideColumn {
+  display: none;
+}
