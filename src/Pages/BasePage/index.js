@@ -32,7 +32,7 @@ const BasePage = ({
         {!isLogin && <AppHeader selectedLanguage={selectedLanguage} />}
         <StyledContent height={height}>{children}</StyledContent>
       </StyledLayout>
-      {!isLogin && <AppFooter />}
+      <AppFooter isLogin={isLogin} />
     </>
   );
 };

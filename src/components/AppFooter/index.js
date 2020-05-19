@@ -4,16 +4,20 @@ import Text from "../Text";
 import footerImg from "../../assets/images/footerLogo.png";
 import { FooterLogo, StyledFooter } from "./styled";
 
-export default ({ applybluestyle }) => (
-  <StyledFooter applybluestyle={applybluestyle ? "true" : ""}>
-    <Flex justify="space-between">
-      <FooterLogo src={footerImg} />
+const { memo } = React;
+
+const AppFooter = ({ isLogin }) => (
+  <StyledFooter isLogin={isLogin}>
+    <Flex justify={isLogin ? "center" : "space-between"}>
+      {!isLogin && <FooterLogo src={footerImg} />}
       <Text
-        size={12.5}
+        size={13}
         letterSpacing={0.5}
-        fontweight="unset"
+        fontweight={isLogin ? "bold" : "unset"}
         children="All Copyrights Reserved Exsys Solutions inc."
       />
     </Flex>
   </StyledFooter>
 );
+
+export default memo(AppFooter);

@@ -5,14 +5,13 @@ import validateForm from "../utils/validation";
 import { setToStorage } from "../../../utils/localStorage";
 
 import { ON_LOGIN } from "./types";
-
 import { onLoginSuccess, onLoginFailure } from "./actions";
 
 const loginSelector = ({ loginReducer }) => loginReducer;
 
 function* requestLogin({ actionToNavigate }) {
   try {
-    const { username, password, formError } = yield select(loginSelector);
+    const { username, password } = yield select(loginSelector);
 
     const formErrors = validateForm({
       username,
@@ -47,13 +46,19 @@ function* requestLogin({ actionToNavigate }) {
             })
           );
         } else {
-          yield setToStorage("userData", response);
+          yield setToStorage("userData", response.data);
+          yield setToStorage("userToken", response.token);
           yield put(onLoginSuccess(response.data));
           return actionToNavigate("/empty");
         }
       }
     }
   } catch (error) {
+    yield put(
+      onLoginFailure({
+        formError: "Something went wrong.",
+      })
+    );
     console.log("Error in requestLogin => ", error);
   }
 }
