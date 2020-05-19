@@ -1,15 +1,11 @@
 import styled from "styled-components";
-import Layout from "antd/lib/layout";
 import { colors } from "../../utils/theme";
 
-const { Content } = Layout;
-
-export const StyledLayout = styled(Layout)`
+export const Layout = styled.div`
   background-color: ${colors.appBackground};
-  padding: 0 1.5rem;
 `;
 
-export const StyledContent = styled(Content)`
-  width: 100%;
+export const Content = styled.div`
+  padding: 10px 50px;
   min-height: ${({ height }) => `${height}px`};
 `;

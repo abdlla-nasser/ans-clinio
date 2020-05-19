@@ -1,32 +1,29 @@
 import styled from "styled-components";
 import Flex from "../Flex";
 import Menu from "antd/lib/menu";
-import Layout from "antd/lib/layout";
 import Badge from "antd/lib/badge";
 
-const { Header } = Layout;
-
-export const MainHeader = styled(Header)`
-  display: flex;
-  flex-direction: column;
+export const MainHeader = styled.header`
   height: min-content;
-  background-color: inherit;
-  padding: 5px 0;
+  background-color: transparent;
+  padding: 0px 50px;
 `;
 
 export const LogoSettingsContainer = styled(Flex)`
   justify-content: space-between;
-  margin-block-start: 5px;
-  margin-block-end: 20px;
+  margin-block-end: 15px;
 `;
 
 export const Logo = styled.img`
   height: 55px;
-  object-fit: contain;
+  position: relative;
+  top: 5px;
 `;
 
 export const SettingsContainer = styled.div`
   display: inline-block;
+  position: relative;
+  top: 10px;
 `;
 
 export const HeaderSvg = styled.img`
@@ -56,7 +53,6 @@ export const StyledBadge = styled(Badge)`
 `;
 
 export const OptionsContainer = styled(Flex)`
-  padding-block-end: 5px;
   justify-content: space-between;
   border-bottom: 1px solid #87cefa;
 `;

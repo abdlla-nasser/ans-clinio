@@ -52,13 +52,14 @@ const AppHeader = ({ selectedLanguage }) => {
   const getOtherLanguages = useCallback(() => {
     let otherLanguagList = [];
     let tempArr = userLangList.filter((lang) => lang !== selectedLanguage);
-    tempArr.map((lang) => {
+    tempArr.map((lang) =>
       otherLanguagList.push({
         label: <FlagListImg src={getLanguageFlag(lang)} />,
         onClick: () => dispatch(changeAppLanguage(lang)),
-      });
-    });
+      })
+    );
     return otherLanguagList;
+    //eslint-disable-next-line
   }, [selectedLanguage]);
 
   return (

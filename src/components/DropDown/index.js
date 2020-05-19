@@ -1,7 +1,6 @@
 import React from "react";
 import BaseDropDown from "antd/lib/dropdown/dropdown";
 import Menu from "antd/lib/menu";
-import Button from "../Button";
 
 const { Item: MenuItem } = Menu;
 
