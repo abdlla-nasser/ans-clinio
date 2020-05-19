@@ -21,9 +21,9 @@ export const ImageComponent = styled.img`
 
 export const ErrorView = styled.span`
   height: 15px;
-  display: block;
+  display: inline-block;
   color: red;
-  font-size: 13px;
+  font-size: 14.5px;
   font-family: Roboto;
-  margin: 13px 25px;
+  width: 415px;
 `;

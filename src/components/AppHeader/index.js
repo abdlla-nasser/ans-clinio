@@ -1,11 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Menu from "./menu";
 import Text from "../Text";
 import Flex from "../Flex";
 import { colors } from "../../utils/theme";
 import CountriesDropdown from "./countryDropdown";
-import { langList, getLanguageFlag } from "../../utils/getCountry";
+import { getLanguageFlag } from "../../utils/getCountry";
 import { changeAppLanguage } from "../../Pages/BasePage/modules/actions";
 import {
   MainHeader,
@@ -43,18 +43,15 @@ const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
   </Flex>
 );
 
-const AppHeader = ({
-  pushToPath,
-  onSwitchLang,
-  countryFlag,
-  isRtl,
-  selectedLanguage,
-}) => {
+const AppHeader = ({ selectedLanguage }) => {
   const dispatch = useDispatch();
+  const userLangList = useSelector(
+    ({ appBaseReducer }) => appBaseReducer.languages
+  );
 
   const getOtherLanguages = useCallback(() => {
     let otherLanguagList = [];
-    let tempArr = langList.filter((lang) => lang !== selectedLanguage);
+    let tempArr = userLangList.filter((lang) => lang !== selectedLanguage);
     tempArr.map((lang) => {
       otherLanguagList.push({
         label: <FlagListImg src={getLanguageFlag(lang)} />,

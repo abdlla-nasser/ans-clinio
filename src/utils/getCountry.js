@@ -3,8 +3,6 @@ import { GOOGLE_API_KEY } from "./constants.js";
 
 // reference "https://github.com/onury/geolocator"
 
-export const langList = ["en", "ar", "fr", "es", "it"];
-
 export const getLanguageFlag = (langShortCode) => {
   if (langShortCode) {
     langShortCode = langShortCode.toLowerCase();

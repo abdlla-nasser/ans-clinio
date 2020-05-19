@@ -1,4 +1,9 @@
-import { ON_LOGIN_INPUT_CHANGED, ON_LOGIN, ON_LOGIN_FINISHED } from "./types";
+import {
+  ON_LOGIN_INPUT_CHANGED,
+  ON_LOGIN,
+  ON_LOGIN_SUCCESS,
+  ON_LOGIN_FAILURE,
+} from "./types";
 
 export const onInputChange = ({ name, value }) => ({
   type: ON_LOGIN_INPUT_CHANGED,
@@ -6,12 +11,17 @@ export const onInputChange = ({ name, value }) => ({
   value,
 });
 
-export const onClickLogin = (navigateTo) => ({
+export const onLogin = (actionToNavigate) => ({
   type: ON_LOGIN,
-  navigateTo,
+  actionToNavigate,
 });
 
-export const onClickLoginFinished = (newStateValues) => ({
-  type: ON_LOGIN_FINISHED,
-  newStateValues,
+export const onLoginSuccess = (userData) => ({
+  type: ON_LOGIN_SUCCESS,
+  userData,
+});
+
+export const onLoginFailure = (errorValues) => ({
+  type: ON_LOGIN_FAILURE,
+  errorValues,
 });

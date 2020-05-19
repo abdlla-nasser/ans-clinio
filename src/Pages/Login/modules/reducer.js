@@ -1,4 +1,9 @@
-import { ON_LOGIN_INPUT_CHANGED, ON_LOGIN, ON_LOGIN_FINISHED } from "./types";
+import {
+  ON_LOGIN_INPUT_CHANGED,
+  ON_LOGIN,
+  ON_LOGIN_SUCCESS,
+  ON_LOGIN_FAILURE,
+} from "./types";
 
 const initialState = {
   username: "",
@@ -26,11 +31,17 @@ export default (state = initialState, action) => {
         isSubmittingLogin: true,
       };
 
-    case ON_LOGIN_FINISHED:
+    case ON_LOGIN_SUCCESS:
       return {
         ...state,
         isSubmittingLogin: false,
-        ...action.newStateValues,
+      };
+
+    case ON_LOGIN_FAILURE:
+      return {
+        ...state,
+        isSubmittingLogin: false,
+        ...action.errorValues,
       };
 
     default:

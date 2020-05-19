@@ -28,15 +28,15 @@ const LoginForm = ({
   passwordError,
   onInputChange,
   formError,
-  schemaError,
   isSubmittingLogin,
+  push,
 }) => {
   const handleLogin = useCallback(
     (e) => {
       e.preventDefault();
-      return onLogin();
+      return onLogin(push);
     },
-    [onLogin]
+    [onLogin, push]
   );
 
   return (
@@ -48,6 +48,7 @@ const LoginForm = ({
         autofocus
         error={usernameError}
         value={username}
+        autocomplete="email"
         onChange={onInputChange("username")}
       />
 
@@ -58,12 +59,11 @@ const LoginForm = ({
         error={passwordError}
         type="password"
         value={password}
-        autocomplete="new-password"
+        autocomplete="current-password"
         onChange={onInputChange("password")}
       />
 
-      {formError ||
-        (schemaError && <ErrorView children={formError || schemaError} />)}
+      {formError && <ErrorView children={formError} />}
 
       <Flex
         align="flex-end"
