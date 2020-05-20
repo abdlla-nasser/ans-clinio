@@ -1,24 +1,22 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.div`
   background-image: ${({ image }) => `url(${image})`};
   background-size: cover;
-  background-position-x: 100%;
   background-repeat: no-repeat;
-  width: 100%;
   min-height: inherit;
-  margin-top: 47px;
-  object-fit: contain;
+  margin-top: 50px;
   border-radius: 5px;
   box-shadow: 10.5px 18.2px 39.6px 6.4px rgba(17, 81, 125, 0.15);
   background-color: #fff;
   box-sizing: border-box;
+  padding: 10rem;
 `;
 
-export const Wrapper = styled.section`
-  margin: 0px 142px;
-  min-width: 80%;
-  padding: 108px 0px;
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
 `;
 
 export const Text = styled.p`
@@ -44,10 +42,6 @@ export const FormContainer = styled.form`
 `;
 
 export const LogoImg = styled.img`
-  width: 115px;
-  height: 50px;
-  transform: scale(1.5);
-  transform-origin: left;
-  margin-block-end: 100px;
-  object-fit: contain;
+  width: 190px;
+  margin-bottom: 60px;
 `;

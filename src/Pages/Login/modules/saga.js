@@ -39,7 +39,7 @@ function* requestLogin({ actionToNavigate }) {
         yield put(onLoginFailure({ formError: "Incorrect password" }));
       } else {
         const { Active_Flag } = response.data;
-        if (!Active_Flag) {
+        if (Active_Flag && Active_Flag === false) {
           yield put(
             onLoginFailure({
               formError: "Your account is inactive, please contact admin.",

@@ -4,8 +4,8 @@ export const getRequest = async (url, headers = null) => {
   return await fetch(BASE_URL + url, {
     method: "GET",
     header: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
       "content-type": "application/json",
-      "x-access-token": localStorage.getItem("token"),
       ...headers,
     },
   });
@@ -15,8 +15,8 @@ export const postRequest = async (url, body) => {
   return await fetch(BASE_URL + url, {
     method: "POST",
     headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
       "content-type": "application/json",
-      "x-access-token": localStorage.getItem("token"),
     },
     body: !body ? null : JSON.stringify(body),
   });
@@ -27,8 +27,8 @@ export const putRequest = async (url, body) => {
     method: "PUT",
     header: {
       Accept: "appliation/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
       "content-type": "application/json",
-      "x-access-token": localStorage.getItem("token"),
     },
     body: !body ? null : JSON.stringify(body),
   });
@@ -39,8 +39,8 @@ export const deleteRequest = async (url, body) => {
     method: "DELETE",
     headers: {
       Accept: "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
       "content-type": "application/json",
-      "x-access-token": localStorage.getItem("token"),
     },
     body: !body ? null : JSON.stringify(body),
   });

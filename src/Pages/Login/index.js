@@ -5,12 +5,13 @@ import { Container, Wrapper, Text, LogoImg } from "./utils/styled";
 
 import mainImageUrl from "../../assets/images/main.jpg";
 import logo from "../../assets/svgs/mainLogo.svg";
+import pngLogo from "../../assets/images/pngLogo.png";
 
 const LoginPage = ({ history: { push } }) => {
   return (
     <Container image={mainImageUrl}>
       <Wrapper>
-        <LogoImg src={logo} alt="Clinio_Logo" />
+        <LogoImg src={pngLogo} alt="Clinio_Logo" />
         <Text children="Sign in to your account" />
         <Form push={push} />
       </Wrapper>
