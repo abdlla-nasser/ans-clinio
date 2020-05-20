@@ -37,7 +37,8 @@ export const HeaderSvg = styled.img`
 export const FlagImg = styled(HeaderSvg)`
   width: 30px;
   height: 20px;
-  margin-block-start: -5px;
+  margin-inline-end: 10px;
+  margin-block-start: -2px;
 `;
 
 export const FlagListImg = styled(FlagImg)`

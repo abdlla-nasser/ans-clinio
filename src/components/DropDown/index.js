@@ -1,6 +1,9 @@
 import React from "react";
 import BaseDropDown from "antd/lib/dropdown/dropdown";
 import Menu from "antd/lib/menu";
+import Button from "antd/lib/button";
+import Icon from "antd/lib/icon";
+import styled from "styled-components";
 
 const { Item: MenuItem } = Menu;
 
@@ -75,10 +78,20 @@ function DropDown({
       placement="bottomCenter"
       disabled={disabled}
     >
-      {button}
+      <StyledButton>
+        {button}
+        <Icon type="down" />
+      </StyledButton>
     </BaseDropDown>
   );
 }
 
 export const MenuView = Menu;
 export default DropDown;
+
+const StyledButton = styled(Button)`
+  padding: 0 5px;
+  margin-inline-end: 15px;
+  height: 30px;
+  font-size: 17px;
+`;

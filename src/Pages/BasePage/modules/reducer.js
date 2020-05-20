@@ -6,7 +6,7 @@ const initialState = {
   Active_Flag: undefined,
   Role: undefined,
   email: undefined,
-  languages: [],
+  languages: ["en", "ar", "fr", "es"],
   privileges: [],
   _id: undefined,
 };
