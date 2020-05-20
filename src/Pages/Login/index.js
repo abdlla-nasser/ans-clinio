@@ -4,42 +4,20 @@ import Form from "./partials/form";
 import Flex from "../../components/Flex";
 import { mapStateToProps, mapDispatchToProps } from "./utils/selectors";
 import { Container, Wrapper, Text, LogoImg } from "./utils/styled";
-import CountriesDropdown from "../../components/AppHeader/countryDropdown";
-import { FlagListImg } from "../../components/AppHeader/styled";
-import { getLanguageFlag } from "../../utils/getCountry";
+import LanguageDropdown from "../../components/LanguageDropdown";
 
 import mainImageUrl from "../../assets/images/main.jpg";
 import logo from "../../assets/images/clinioLogo.png";
 
-const { useCallback } = React;
-
-const LoginPage = ({
-  history: { push },
-  language,
-  languages,
-  changeAppLanguage,
-}) => {
-  const getOtherLanguages = useCallback(() => {
-    let otherLanguagList = [];
-    let tempArr = languages.filter((lang) => lang !== language);
-    tempArr.map((lang) =>
-      otherLanguagList.push({
-        label: <FlagListImg src={getLanguageFlag(lang)} />,
-        onClick: () => changeAppLanguage(lang),
-      })
-    );
-    return otherLanguagList;
-    //eslint-disable-next-line
-  }, [language]);
-
+const LoginPage = ({ history: { push }, language, languages }) => {
   return (
     <Container image={mainImageUrl}>
-      <Wrapper>
+      <Wrapper dir={language.dir}>
         <Flex justify="space-between">
           <LogoImg src={logo} alt="Clinio_Logo" />
-          <CountriesDropdown
-            selectedLanguage={language}
-            otherLanguages={getOtherLanguages()}
+          <LanguageDropdown
+            userSelectedLanguage={language}
+            allOtherUserLanguages={languages}
           />
         </Flex>
         <Text children="Sign in to your account" />

@@ -2,11 +2,31 @@ import { CHANGE_APP_LANGUAGE } from "./types";
 import { ON_LOGIN_SUCCESS } from "../../Login/modules/types";
 
 const initialState = {
-  language: "en",
+  language: {
+    flag: "en",
+    label: "English",
+    dir: "ltr",
+  },
   Active_Flag: undefined,
   Role: undefined,
   email: undefined,
-  languages: ["en", "ar", "fr", "es"],
+  languages: [
+    {
+      flag: "en",
+      label: "English",
+      dir: "ltr",
+    },
+    {
+      flag: "ar",
+      label: "العربية",
+      dir: "rtl",
+    },
+    {
+      flag: "fr",
+      label: "Français",
+      dir: "ltr",
+    },
+  ],
   privileges: [],
   _id: undefined,
 };

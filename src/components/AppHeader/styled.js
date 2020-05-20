@@ -34,17 +34,6 @@ export const HeaderSvg = styled.img`
   margin-top: ${({ marginTop }) => marginTop};
 `;
 
-export const FlagImg = styled(HeaderSvg)`
-  width: 30px;
-  height: 20px;
-  margin-inline-end: 10px;
-  margin-block-start: -2px;
-`;
-
-export const FlagListImg = styled(FlagImg)`
-  margin-inline-end: 0;
-`;
-
 export const StyledBadge = styled(Badge)`
   margin-top: 10px;
   margin-inline-end: 40px;

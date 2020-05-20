@@ -14,8 +14,6 @@ const BasePage = ({
   language,
   history: {
     location: { pathname },
-    push,
-    goBack,
   },
 }) => {
   let selectedLanguage = useSelector(
@@ -26,7 +24,7 @@ const BasePage = ({
 
   return (
     <>
-      <Layout dir="ltr">
+      <Layout dir={language.dir}>
         {!isLogin && <AppHeader selectedLanguage={selectedLanguage} />}
         <Content height={height}>{children}</Content>
         <AppFooter isLogin={isLogin} />

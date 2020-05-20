@@ -15,6 +15,7 @@ function createMenu({
   multiple,
   lastItem,
 }) {
+  console.log("items are: ", items);
   return (
     <Menu
       onClick={handleClick}
@@ -51,7 +52,6 @@ function DropDown({
   valuePropName,
   onSelect,
   renderMenu,
-  buttonProps = null,
   multiple,
   disabled,
   lastItem,

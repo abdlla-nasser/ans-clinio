@@ -1,12 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Menu from "./menu";
 import Text from "../Text";
 import Flex from "../Flex";
 import { colors } from "../../utils/theme";
-import CountriesDropdown from "./countryDropdown";
-import { getLanguageFlag } from "../../utils/getCountry";
-import { changeAppLanguage } from "../../Pages/BasePage/modules/actions";
+import LanguageDropdown from "../LanguageDropdown";
 import {
   MainHeader,
   LogoSettingsContainer,
@@ -15,7 +13,6 @@ import {
   SettingsContainer,
   HeaderSvg,
   StyledBadge,
-  FlagListImg,
 } from "./styled";
 
 import bellSvg from "../../assets/svgs/bell.svg";
@@ -25,7 +22,7 @@ import clinioLogo from "../../assets/svgs/mainLogo.svg";
 import messagesSvg from "../../assets/svgs/messages.svg";
 import settingsSvg from "../../assets/svgs/settings.svg";
 
-const { memo, useCallback } = React;
+const { memo } = React;
 
 const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
   <Flex column>
@@ -43,24 +40,11 @@ const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
   </Flex>
 );
 
-const AppHeader = ({ selectedLanguage }) => {
-  const dispatch = useDispatch();
-  const userLangList = useSelector(
+const AppHeader = () => {
+  const language = useSelector(({ appBaseReducer }) => appBaseReducer.language);
+  const languages = useSelector(
     ({ appBaseReducer }) => appBaseReducer.languages
   );
-
-  const getOtherLanguages = useCallback(() => {
-    let otherLanguagList = [];
-    let tempArr = userLangList.filter((lang) => lang !== selectedLanguage);
-    tempArr.map((lang) =>
-      otherLanguagList.push({
-        label: <FlagListImg src={getLanguageFlag(lang)} />,
-        onClick: () => dispatch(changeAppLanguage(lang)),
-      })
-    );
-    return otherLanguagList;
-    //eslint-disable-next-line
-  }, [selectedLanguage]);
 
   return (
     <MainHeader>
@@ -79,9 +63,9 @@ const AppHeader = ({ selectedLanguage }) => {
             marginTop="-7px"
           />
           <HeaderSvg src={searchSvg} alt="search" marginEnd="15px" />
-          <CountriesDropdown
-            selectedLanguage={selectedLanguage}
-            otherLanguages={getOtherLanguages()}
+          <LanguageDropdown
+            userSelectedLanguage={language}
+            allOtherUserLanguages={languages}
           />
           <HeaderSvg src={logoutSvg} alt="logout" marginEnd="0px" />
         </SettingsContainer>
