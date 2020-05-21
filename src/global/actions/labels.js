@@ -1,9 +1,9 @@
 import { GET_PAGE_LABELS, GET_PAGE_LABELS_FINISHED } from "../types/labels";
 
-export const requestPageLabels = (page, pageAlias) => ({
+export const requestPageLabels = (page, langCode) => ({
   type: GET_PAGE_LABELS,
   page,
-  pageAlias,
+  langCode,
 });
 
 export const requestPageLabelsFinished = (pageLabels) => ({

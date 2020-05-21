@@ -9,7 +9,19 @@ import LanguageDropdown from "../../components/LanguageDropdown";
 import mainImageUrl from "../../assets/images/main.jpg";
 import logo from "../../assets/images/clinioLogo.png";
 
-const LoginPage = ({ history: { push }, language, languages }) => {
+const { useEffect } = React;
+
+const LoginPage = ({
+  history: { push },
+  language,
+  languages,
+  getloginLabels,
+  labels,
+}) => {
+  useEffect(() => {
+    getloginLabels(language.flag);
+  }, []);
+
   return (
     <Container image={mainImageUrl}>
       <Wrapper dir={language.dir}>

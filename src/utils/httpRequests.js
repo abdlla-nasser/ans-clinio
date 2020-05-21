@@ -22,9 +22,9 @@ export const postRequest = async (url, body) => {
   });
 };
 
-export const putRequest = async (url, body) => {
+export const patchRequest = async (url, body) => {
   return await fetch(BASE_URL + url, {
-    method: "PUT",
+    method: "PATCH",
     header: {
       Accept: "appliation/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
