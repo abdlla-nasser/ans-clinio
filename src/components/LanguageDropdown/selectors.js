@@ -3,8 +3,8 @@ import { changeAppLanguage } from "../../Pages/BasePage/modules/actions";
 export const mapStateToProps = ({
   appBaseReducer: { language, languages },
 }) => ({
-  userSelectedLanguage: language,
-  allOtherUserLanguages: languages,
+  currentLanguage: language,
+  allLanguages: languages,
 });
 
 export const mapDispatchToProps = (dispatch) => ({

@@ -11,20 +11,20 @@ const { memo, useCallback } = React;
 
 const LangItem = (listItem) => (
   <Flex>
-    <Flag src={getLanguageFlag(listItem.flag)} />
-    <Text>{listItem.label}</Text>
+    <Flag src={getLanguageFlag(listItem.language_code)} />
+    <Text>{listItem.name}</Text>
   </Flex>
 );
 
 const LanguageDropdown = ({
-  userSelectedLanguage,
-  allOtherUserLanguages,
+  currentLanguage,
+  allLanguages,
   changeAppLanguage,
 }) => {
   const unselectedLanguages = useCallback(() => {
     let otherLanguagList = [];
-    let tempArr = allOtherUserLanguages.filter(
-      (lang) => lang.flag !== userSelectedLanguage.flag
+    let tempArr = allLanguages.filter(
+      (lang) => lang.language_code !== currentLanguage.language_code
     );
     tempArr.map((lang) =>
       otherLanguagList.push({
@@ -34,11 +34,11 @@ const LanguageDropdown = ({
     );
     return otherLanguagList;
     //eslint-disable-next-line
-  }, [userSelectedLanguage]);
+  }, [allLanguages, currentLanguage]);
 
   return (
     <CountriesDropdown
-      selectedLanguage={userSelectedLanguage}
+      selectedLanguage={currentLanguage}
       otherLanguages={unselectedLanguages()}
     />
   );

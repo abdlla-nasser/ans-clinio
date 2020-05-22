@@ -41,7 +41,9 @@ const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
 );
 
 const AppHeader = () => {
-  const language = useSelector(({ appBaseReducer }) => appBaseReducer.language);
+  const language = useSelector(
+    ({ appBaseReducer }) => appBaseReducer.language.language_code
+  );
   const languages = useSelector(
     ({ appBaseReducer }) => appBaseReducer.languages
   );

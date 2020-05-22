@@ -22,9 +22,10 @@ const LoginPage = ({
     getloginLabels(language.flag);
   }, []);
 
+  const dir = language.r2l ? "rtl" : "ltr";
   return (
     <Container image={mainImageUrl}>
-      <Wrapper dir={language.dir}>
+      <Wrapper dir={dir}>
         <Flex justify="space-between">
           <LogoImg src={logo} alt="Clinio_Logo" />
           <LanguageDropdown

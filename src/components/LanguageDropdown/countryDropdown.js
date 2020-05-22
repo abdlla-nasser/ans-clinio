@@ -7,7 +7,12 @@ const { memo } = React;
 
 const CountriesDropdown = ({ selectedLanguage, otherLanguages }) => {
   return DropDown({
-    button: <Flag src={getLanguageFlag(selectedLanguage.flag)} alt="country" />,
+    button: (
+      <Flag
+        src={getLanguageFlag(selectedLanguage.language_code)}
+        alt="country"
+      />
+    ),
     dataSource: otherLanguages,
     valuePropName: "item",
     buttonProps: {
