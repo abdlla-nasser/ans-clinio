@@ -1,7 +1,20 @@
 import geolocator from "geolocator";
 import { GOOGLE_API_KEY } from "./constants.js";
 
-// reference "https://github.com/onury/geolocator"
+//refrence https://www.loc.gov/standards/iso639-2/php/code_list.php
+export const rtl_languages_shortcode = [
+  "ar",
+  "arc",
+  "az",
+  "dv",
+  "ff",
+  "he",
+  "ku",
+  "nqo",
+  "fa",
+  "syr",
+  "ur",
+];
 
 export const getLanguageFlag = (langShortCode) => {
   if (langShortCode) {

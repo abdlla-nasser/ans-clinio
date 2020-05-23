@@ -19,7 +19,8 @@ const LoginPage = ({
   labels,
 }) => {
   useEffect(() => {
-    getloginLabels(language.flag);
+    getloginLabels(language.language_code);
+    //eslint-disable-next-line
   }, []);
 
   const dir = language.r2l ? "rtl" : "ltr";

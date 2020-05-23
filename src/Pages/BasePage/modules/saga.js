@@ -1,4 +1,4 @@
-import { takeEvery, put, all, select } from "redux-saga/effects";
+import { takeEvery, put, all } from "redux-saga/effects";
 import { getRequest } from "../../../utils/httpRequests";
 import createApiUrl from "../../../utils/createApiUrl";
 

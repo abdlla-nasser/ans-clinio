@@ -16,6 +16,7 @@ const BasePage = ({
   language,
   languages,
   getAppLanguages,
+  setDefaultLangToBrowserLang,
   history: {
     location: { pathname },
   },
@@ -24,14 +25,20 @@ const BasePage = ({
     if (languages.length === 0) {
       getAppLanguages();
     }
+
+    if (!language) {
+      setDefaultLangToBrowserLang();
+    }
+    //eslint-disable-next-line
   }, []);
 
   const isLogin = pathname === "/";
   const height = getHeightAfterOffset(isLogin ? 110 : 154);
+  const dir = language && language.r2l ? "rtl" : "ltr";
 
   return (
     <>
-      <Layout dir={language.dir}>
+      <Layout dir={dir}>
         {!isLogin && <AppHeader selectedLanguage={language} />}
         <Content height={height}>{children}</Content>
         <AppFooter isLogin={isLogin} />

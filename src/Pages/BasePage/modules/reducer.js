@@ -1,12 +1,13 @@
-import { GET_LANGUAGES_FINISHED, CHANGE_APP_LANGUAGE } from "./types";
+import { rtl_languages_shortcode } from "../../../utils/getCountry";
+import {
+  GET_LANGUAGES_FINISHED,
+  SET_DEFAULT_LANGUAGE_TO_BROWSER_LANGUAGE,
+  CHANGE_APP_LANGUAGE,
+} from "./types";
 import { ON_LOGIN_SUCCESS } from "../../Login/modules/types";
 
 const initialState = {
-  language: {
-    r2l: false,
-    language_code: "en",
-    name: "English",
-  },
+  language: undefined,
   Active_Flag: undefined,
   Role: undefined,
   email: undefined,
@@ -28,6 +29,19 @@ export default (state = initialState, action) => {
       return {
         ...state,
         languages: langs,
+      };
+
+    case SET_DEFAULT_LANGUAGE_TO_BROWSER_LANGUAGE:
+      const browserLang = navigator.language.slice(0, 2);
+      const isR2l = rtl_languages_shortcode.includes(browserLang);
+      const langObj = {
+        r2l: isR2l,
+        language_code: browserLang,
+        name: "Default",
+      };
+      return {
+        ...state,
+        language: langObj,
       };
 
     case CHANGE_APP_LANGUAGE:
