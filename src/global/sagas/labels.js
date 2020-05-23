@@ -5,21 +5,17 @@ import { getRequest } from "../../utils/httpRequests";
 import createApiUrl from "../../utils/createApiUrl";
 
 function* requestPageLabels({ page, langCode }) {
-  // console.log("got into requestPageLabels");
   try {
     const apiUrl = createApiUrl({
       url: `PageLabels/${page}/${langCode}`,
     });
-    const response = yield getRequest(apiUrl);
-    const result = yield response.json();
-
-    // console.log("requestPageLabels response: ", response);
-    // console.log("requestPageLabels result: ", result);
+    let response = yield getRequest(apiUrl);
+    response = yield response.json();
     const labelPageName = page + "Labels";
 
     yield put(
       requestPageLabelsFinished({
-        [labelPageName]: result,
+        [labelPageName]: response,
       })
     );
   } catch (error) {

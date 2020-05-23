@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Form from "./partials/form";
 import Flex from "../../components/Flex";
+import { usePrevious } from "../../utils/customUseHooks";
 import { mapStateToProps, mapDispatchToProps } from "./utils/selectors";
 import { Container, Wrapper, Text, LogoImg } from "./utils/styled";
 import LanguageDropdown from "../../components/LanguageDropdown";
@@ -15,13 +16,22 @@ const LoginPage = ({
   history: { push },
   language,
   languages,
-  getloginLabels,
-  labels,
+  requestPageLabels,
+  labels: { signintoyouraccount },
 }) => {
+  const prevLang = usePrevious(language.language_code);
+  const isLangChanged =
+    language.language_code && language.language_code !== prevLang;
+
   useEffect(() => {
-    getloginLabels(language.language_code);
+    requestPageLabels(language.language_code);
     //eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (isLangChanged) requestPageLabels(language.language_code);
+    //eslint-disable-next-line
+  }, [isLangChanged]);
 
   const dir = language.r2l ? "rtl" : "ltr";
   return (
@@ -34,7 +44,7 @@ const LoginPage = ({
             allOtherUserLanguages={languages}
           />
         </Flex>
-        <Text children="Sign in to your account" />
+        <Text children={signintoyouraccount} />
         <Form push={push} />
       </Wrapper>
     </Container>

@@ -1,7 +1,7 @@
 import { GET_PAGE_LABELS_FINISHED } from "../types/labels";
 
 const initialState = {
-  loginLabels: {},
+  loginLabels: undefined,
 };
 
 export default (state = initialState, action) => {

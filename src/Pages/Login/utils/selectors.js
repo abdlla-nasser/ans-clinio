@@ -5,16 +5,20 @@ import { changeAppLanguage } from "../../BasePage/modules/actions";
 export const mapStateToProps = ({
   loginReducer,
   appBaseReducer: { language, languages },
-  // labelsReducer: { loginLabels },
+  labelsReducer: { loginLabels },
 }) => ({
   language,
   languages,
-  // labels: loginLabels,
   ...loginReducer,
+  labels: {
+    signintoyouraccount:
+      (loginLabels && loginLabels.signintoyouraccount) || "signintoyouraccount",
+  },
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  getloginLabels: (langCode) => dispatch(requestPageLabels("login", langCode)),
+  requestPageLabels: (langCode) =>
+    dispatch(requestPageLabels("login", langCode)),
   onInputChange: (name) => ({ target: { value } }) =>
     dispatch(onInputChange({ name, value })),
   onLogin: (pushAction) => dispatch(onLogin(pushAction)),
