@@ -13,6 +13,15 @@ export const mapStateToProps = ({
   labels: {
     signintoyouraccount:
       (loginLabels && loginLabels.signintoyouraccount) || "signintoyouraccount",
+    emailorphoneno:
+      (loginLabels && loginLabels.emailorphoneno) || "emailorphoneno",
+    pass: (loginLabels && loginLabels.password) || "password",
+    signin: (loginLabels && loginLabels.signin) || "signin",
+    exit: (loginLabels && loginLabels.exit) || "exit",
+    donthaveaccount:
+      (loginLabels && loginLabels.donthaveaccount) || "donthaveaccount",
+    createaccount:
+      (loginLabels && loginLabels.createaccount) || "createaccount",
   },
 });
 

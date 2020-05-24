@@ -20,13 +20,7 @@ const LoginPage = ({
   labels: { signintoyouraccount },
 }) => {
   const prevLang = usePrevious(language.language_code);
-  const isLangChanged =
-    language.language_code && language.language_code !== prevLang;
-
-  useEffect(() => {
-    requestPageLabels(language.language_code);
-    //eslint-disable-next-line
-  }, []);
+  const isLangChanged = language && language.language_code !== prevLang;
 
   useEffect(() => {
     if (isLangChanged) requestPageLabels(language.language_code);

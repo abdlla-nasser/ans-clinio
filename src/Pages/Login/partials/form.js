@@ -30,6 +30,14 @@ const LoginForm = ({
   formError,
   isSubmittingLogin,
   push,
+  labels: {
+    emailorphoneno,
+    pass,
+    signin,
+    exit,
+    donthaveaccount,
+    createaccount,
+  },
 }) => {
   const handleLogin = useCallback(
     (e) => {
@@ -44,7 +52,7 @@ const LoginForm = ({
       <Input
         image={userSvg}
         imageAlt="user"
-        placeholder="Email or Phone no."
+        placeholder={emailorphoneno}
         autofocus
         error={usernameError}
         value={username}
@@ -55,7 +63,7 @@ const LoginForm = ({
       <Input
         image={lockSvg}
         imageAlt="password"
-        placeholder="Password"
+        placeholder={pass}
         error={passwordError}
         type="password"
         value={password}
@@ -72,25 +80,25 @@ const LoginForm = ({
         {...flexProps}
       >
         <Button
-          title="Sign in"
+          title={signin}
           loading={isSubmittingLogin}
           disabled={isSubmittingLogin}
           type="primary"
           htmlType="submit"
         />
 
-        <Button title="Exit" type="warning" />
+        <Button title={exit} type="warning" />
       </Flex>
 
       <Flex justify="center" height="22px" {...flexProps} margin="20px 0px">
         <Text size={14} lineHeight="25px">
-          Don't have an account?{" "}
+          {donthaveaccount}{" "}
           <Link
             to="/"
             fontSize={14}
             lineheight={25}
             color={colors.appPrimiry}
-            children="Create Account"
+            children={createaccount}
             nohover="true"
           />
         </Text>
