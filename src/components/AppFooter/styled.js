@@ -6,6 +6,8 @@ export const StyledFooter = styled.footer`
   height: 2.2rem;
   background-color: rgb(50, 109, 187);
   color: #fff;
+  position: absolute;
+  bottom: 0px;
   padding: 10px 6.5rem;
   ${({ isLogin }) =>
     isLogin &&

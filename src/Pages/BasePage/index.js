@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "./utils/selectors";
-import { getHeightAfterOffset } from "../../utils/getPageContentHeight";
 import { Layout, Content } from "./styled";
 import loadable from "../../components/Loadable";
 
@@ -33,14 +32,13 @@ const BasePage = ({
   }, []);
 
   const isLogin = pathname === "/";
-  const height = getHeightAfterOffset(isLogin ? 110 : 154);
   const dir = language && language.r2l ? "rtl" : "ltr";
 
   return (
     <>
       <Layout dir={dir}>
         {!isLogin && <AppHeader selectedLanguage={language} />}
-        <Content height={height}>{children}</Content>
+        <Content>{children}</Content>
         <AppFooter isLogin={isLogin} />
       </Layout>
     </>

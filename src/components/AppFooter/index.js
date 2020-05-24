@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Flex from "../Flex";
 import Text from "../Text";
 import footerImg from "../../assets/images/footerLogo.png";

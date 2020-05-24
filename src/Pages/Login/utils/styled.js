@@ -10,12 +10,13 @@ export const Container = styled.div`
   box-shadow: 10.5px 18.2px 39.6px 6.4px rgba(17, 81, 125, 0.15);
   background-color: #fff;
   box-sizing: border-box;
+  height: 89vh;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   top: 15rem;
   left: 15rem;
 `;
