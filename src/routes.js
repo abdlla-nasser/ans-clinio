@@ -13,11 +13,6 @@ const LoginPage = Loadable({
   ...loadableProps,
 });
 
-const EmptyPage = Loadable({
-  loader: () => import("./Pages/EmptyPage"),
-  ...loadableProps,
-});
-
 const ClinicalSpecialitiesSetup = Loadable({
   loader: () => import("./Pages/ClinicalSpecialitiesSetup"),
   ...loadableProps,
@@ -26,7 +21,6 @@ const ClinicalSpecialitiesSetup = Loadable({
 export default () => (
   <Switch>
     <Route path="/" exact component={LoginPage} />
-    <Route path="/empty" exact component={EmptyPage} />
     <Route
       path="/clinicalSpecialitiesSetup"
       exact

@@ -49,7 +49,7 @@ function* requestLogin({ actionToNavigate }) {
           yield setToStorage("userData", response.data);
           yield setToStorage("userToken", response.token);
           yield put(onLoginSuccess(response.data));
-          return actionToNavigate("/empty");
+          return actionToNavigate("/home");
         }
       }
     }

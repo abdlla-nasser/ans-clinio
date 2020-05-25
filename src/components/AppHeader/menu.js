@@ -1,13 +1,24 @@
 import React from "react";
 import Menu from "antd/lib/menu";
-import SettingOutlined from "@ant-design/icons/SettingOutlined";
-import FileTextOutlined from "@ant-design/icons/FileTextOutlined";
-import StockOutlined from "@ant-design/icons/StockOutlined";
-import UserOutlined from "@ant-design/icons/UserOutlined";
+import Icon from "../Icon";
 import "./index.css";
 import { StyledMenu } from "./styled";
 
+const { memo } = React;
 const { SubMenu, ItemGroup, Item } = Menu;
+
+const SubmenuTitle = ({ title }) => (
+  <span>
+    {title}
+    <Icon
+      type="down"
+      marginend="0"
+      marginstart="10px"
+      color="unset"
+      marginright={1}
+    />
+  </span>
+);
 
 const HeaderMenu = () => {
   //   state = {
@@ -20,14 +31,13 @@ const HeaderMenu = () => {
   //       current: e.key,
   //     });
   //   };
-
   return (
     <StyledMenu
       //   onClick={this.handleClick}
       //   selectedKeys={[this.state.current]}
       mode="horizontal"
     >
-      <SubMenu icon={<SettingOutlined />} title="Setup">
+      <SubMenu title={<SubmenuTitle title="Setup" />}>
         <Item key="setting:1">Option 1</Item>
         <Item key="setting:2">Option 2</Item>
         <ItemGroup title="Item 2">
@@ -35,8 +45,7 @@ const HeaderMenu = () => {
           <Item key="setting:4">Option 4</Item>
         </ItemGroup>
       </SubMenu>
-
-      <SubMenu icon={<StockOutlined />} title="Transactions">
+      <SubMenu title={<SubmenuTitle title="Transactions" />}>
         <ItemGroup title="Item 1">
           <Item key="setting:1">Option 1</Item>
           <Item key="setting:2">Option 2</Item>
@@ -46,8 +55,7 @@ const HeaderMenu = () => {
           <Item key="setting:4">Option 4</Item>
         </ItemGroup>
       </SubMenu>
-
-      <SubMenu icon={<FileTextOutlined />} title="Financial Reports">
+      <SubMenu title={<SubmenuTitle title="Financial Reports" />}>
         <ItemGroup title="Item 1">
           <Item key="setting:1">Option 1</Item>
           <Item key="setting:2">Option 2</Item>
@@ -57,8 +65,7 @@ const HeaderMenu = () => {
           <Item key="setting:4">Option 4</Item>
         </ItemGroup>
       </SubMenu>
-
-      <SubMenu icon={<UserOutlined />} title="Admin">
+      <SubMenu title={<SubmenuTitle title="Admin" />}>
         <ItemGroup title="Item 1">
           <Item key="setting:1">Option 1</Item>
           <Item key="setting:2">Option 2</Item>
@@ -72,4 +79,4 @@ const HeaderMenu = () => {
   );
 };
 
-export default HeaderMenu;
+export default memo(HeaderMenu);

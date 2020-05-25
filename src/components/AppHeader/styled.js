@@ -50,5 +50,4 @@ export const OptionsContainer = styled(Flex)`
 export const StyledMenu = styled(Menu)`
   background-color: inherit;
   font-size: 15.5px;
-  line-height: 46px !important;
 `;

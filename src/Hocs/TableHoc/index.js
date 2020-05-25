@@ -21,7 +21,7 @@ export default ({
   WrappedComponent,
   mapStateToProps,
   actions,
-  getDispacthToProps,
+  getDispatchToProps,
   rowKey,
   width = "80%",
   renderColumns,
@@ -315,7 +315,7 @@ export default ({
   return connect(
     stateHandler(mapStateToProps),
     handlerDispatchers({
-      getDispacthToProps,
+      getDispatchToProps,
       createDisptacher: createDisptacher({
         rowKey,
         pageName,

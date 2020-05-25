@@ -2,3 +2,8 @@
 .ant-dropdown-menu-submenu-title:hover {
   background-color: #326dbb6b;
 }
+
+.ant-menu-item .anticon,
+.ant-menu-submenu-title .anticon {
+  margin-right: 0;
+}
