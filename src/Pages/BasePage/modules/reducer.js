@@ -3,6 +3,7 @@ import {
   GET_LANGUAGES_FINISHED,
   SET_DEFAULT_LANGUAGE_TO_BROWSER_LANGUAGE,
   CHANGE_APP_LANGUAGE,
+  SET_USER_TOKEN,
 } from "./types";
 import { ON_LOGIN_SUCCESS } from "../../Login/modules/types";
 
@@ -14,6 +15,7 @@ const initialState = {
   languages: [],
   privileges: [],
   _id: undefined,
+  token: undefined,
 };
 
 export default (state = initialState, action) => {
@@ -22,6 +24,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         ...action.userData,
+      };
+
+    case SET_USER_TOKEN:
+      return {
+        ...state,
+        token: action.token,
       };
 
     case GET_LANGUAGES_FINISHED:

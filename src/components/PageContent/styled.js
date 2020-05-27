@@ -11,7 +11,7 @@ export const PageContentWrapper = styled.div`
     border: solid 1px #d7d7d7;
     border-radius: 10px;
   `};
-  padding: 1rem;
+  /* padding: 1rem; */
   margin: ${({ margin }) => margin};
   /* ${({ padding }) => padding && `padding: ${padding}`} */
   /* overflow-y: auto; */

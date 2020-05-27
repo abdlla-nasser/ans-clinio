@@ -27,7 +27,6 @@ export default ({
   renderColumns,
   itemsPropNamesToValidate = [],
   useModalState,
-  AnthorView,
   submitToPrivigeContainer,
   pageName = "",
   requiredProps = defaultRequiredProps,
@@ -296,7 +295,6 @@ export default ({
           onDoubleClickRecord={onDoubleClickRecord}
           rowSelctionProps={rowSelctionProps}
           width={width}
-          AnthorView={AnthorView}
           tableScroll={tableScroll}
           onfetchMoreData={fetchData}
           onPressSearch={onPressSearch}

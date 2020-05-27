@@ -1,10 +1,15 @@
 import { put, select } from "redux-saga/effects";
 import notification from "antd/lib/notification";
-import createApiUrl from "../../../utlities/getApiUrl";
-import { get, post, deleteReq, putReq } from "../../../utlities/requests";
+import createApiUrl from "../../../utils/createApiUrl";
+import {
+  getRequest,
+  postRequest,
+  deleteRequest,
+  patchRequest,
+} from "../../../utils/httpRequests";
 import getCodeError from "../../../utlities/oracle-Errors";
 import deleteDsRow from "../../../utlities/deleteRow";
-import strangeSelector from "../../../utlities/selectStrangeReducer";
+import strangeSelector from "../../../utils/selectStrangeReducer";
 import getPropValues from "./getFileds";
 
 export const loginSelector = ({ loginReducer }) => loginReducer.privData;
@@ -29,52 +34,19 @@ export function* requestTableData({
   QUERY_URL,
   finishedAction,
   sorter,
-  componentUsesHeaderSelect,
-  headerSelectPropName,
-  addtionalParams = null,
-  addtionalParamsFields,
 }) {
   try {
-    const {
-      dbUser,
-      authorization,
-      language_id,
-      [headerSelectPropName]: selectPropValue,
-    } = yield select(loginSelector);
-
-    const {
-      dataSource,
-      [headerSelectPropName]: newSelectPropValue,
-      ...reducerValues
-    } = yield select(strangeSelector(reducerName));
-
-    let addtionalParamsFieldsValues = null;
-
-    if (addtionalParamsFields) {
-      addtionalParamsFieldsValues = getPropValues(
-        addtionalParamsFields,
-        reducerValues
-      );
-    }
+    const { dataSource } = yield select(strangeSelector(reducerName));
 
     const apiUrl = createApiUrl({
-      userdb: dbUser,
       url: QUERY_URL,
       params: {
-        authorization,
-        planguageid: language_id,
-        ...addtionalParams,
-        ...addtionalParamsFieldsValues,
-        poffset: dataSource && !sorter ? dataSource.length : 0,
-        ...(sorter ? { orderby: sorter } : null),
-        ...(componentUsesHeaderSelect
-          ? { [headerSelectPropName]: newSelectPropValue || selectPropValue }
-          : null),
+        poffset: dataSource ? dataSource.length : 0,
       },
     });
-    const response = yield get(apiUrl);
+    const response = yield getRequest(apiUrl);
     const result = yield response.json();
-    yield put(finishedAction(result, !!sorter || componentUsesHeaderSelect));
+    yield put(finishedAction(result, !!sorter));
   } catch (error) {
     console.log("fetching table data error =>", error);
     yield put(finishedAction());

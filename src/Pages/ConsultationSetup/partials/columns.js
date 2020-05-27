@@ -15,7 +15,7 @@ export const columns = () => [
     renderView: {
       type: "checkbox",
       renderCell: {
-        dIdxs: "id",
+        dIdxs: "followUp",
       },
     },
   },

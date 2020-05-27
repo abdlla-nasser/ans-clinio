@@ -2,8 +2,9 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import labelsReducer from "../../../global/reducers/labels";
 import appBaseReducer from "../../../Pages/BasePage/modules/reducer";
+import consultationSetupReducer from "../../../Pages/ConsultationSetup/modules/reducer";
+import labelsReducer from "../../../global/reducers/labels";
 import loginReducer from "../../../Pages/Login/modules/reducer";
 
 const persistConfig = {
@@ -14,6 +15,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   appBaseReducer,
+  consultationSetupReducer,
   labelsReducer,
   loginReducer,
 });

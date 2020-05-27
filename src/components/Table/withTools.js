@@ -7,7 +7,6 @@ import Flex from "../Flex";
 const { memo } = React;
 
 function TableWithToolsContainer({
-  AnthorView,
   width,
   dataSource,
   columns,
@@ -47,22 +46,24 @@ function TableWithToolsContainer({
 
   function renderChildren({ mainHeight }) {
     const headerTools = (
-      <HeaderTools
-        canInsert={canInsert}
-        canDelete={canDelete}
-        hideEditSaveIcon={hideEditSaveIcon}
-        hidePrinterInformationIcon={hidePrinterInformationIcon}
-        onPressAdd={onAdd}
-        onPressDelete={onDelete}
-        onPressSaveOrEdit={handleInsertOrUpdate}
-        isEditing={isEditing}
-        isThereSelectedRow={isThereSelectedRow}
-        disabled={isActionLoading || loading}
-        headerSelectOptions={headerSelectOptions}
-        onChangeHeaderSelect={onChangeHeaderSelect}
-        headerSelectNewValue={headerSelectNewValue}
-        excelView={excelView}
-      />
+      <>
+        <HeaderTools
+          canInsert={canInsert}
+          canDelete={canDelete}
+          hideEditSaveIcon={hideEditSaveIcon}
+          hidePrinterInformationIcon={hidePrinterInformationIcon}
+          onPressAdd={onAdd}
+          onPressDelete={onDelete}
+          onPressSaveOrEdit={handleInsertOrUpdate}
+          isEditing={isEditing}
+          isThereSelectedRow={isThereSelectedRow}
+          disabled={isActionLoading || loading}
+          headerSelectOptions={headerSelectOptions}
+          onChangeHeaderSelect={onChangeHeaderSelect}
+          headerSelectNewValue={headerSelectNewValue}
+          excelView={excelView}
+        />
+      </>
     );
 
     return (
@@ -75,7 +76,7 @@ function TableWithToolsContainer({
           onSelectRow={onSelect}
           headerTools={headerTools}
           selectedId={selectedRow}
-          margin="10px auto 5px auto"
+          // margin="10px auto 5px auto"
           width={width}
           rowSelctionProps={rowSelctionProps}
           onfetchMoreData={onfetchMoreData}
@@ -87,16 +88,15 @@ function TableWithToolsContainer({
             x,
           }}
         />
-        {AnthorView && <AnthorView />}
       </Flex>
     );
   }
   return (
     <>
       <PageContent
-        applyBorders
+        // applyBorders
         offset={140}
-        margin="10px 0px auto 0px"
+        // margin="10px 0px auto 0px"
         useHeight
         children={renderChildren}
       />
