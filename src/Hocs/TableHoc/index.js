@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createDisptacher } from "./utils/createDisptacher";
+import { createDispatcher } from "./utils/createDisptacher";
 import validateForm from "./utils/validateFields";
 import isModalVisible from "./utils/isModalVisible";
 import getFields from "./utils/getFileds";
 import getTitle from "./utils/getTitle";
 import SearchInjector from "./utils/injectSearchWithColumns";
-import { handlerDispatchers, stateHandler } from "../../utils/reduxHandlers";
+import { dispatchHandler, stateHandler } from "../../utils/reduxHandlers";
 import { isArrayHasData } from "../../utils/isThereData";
 import CommonView from "../../components/Table/withTools";
 import { usePrevious } from "../../utils/customUseHooks";
@@ -21,7 +21,7 @@ export default ({
   WrappedComponent,
   mapStateToProps,
   actions,
-  getDispatchToProps,
+  mapDispatchToProps,
   rowKey,
   width = "80%",
   renderColumns,
@@ -312,13 +312,9 @@ export default ({
 
   return connect(
     stateHandler(mapStateToProps),
-    handlerDispatchers({
-      getDispatchToProps,
-      createDisptacher: createDisptacher({
-        rowKey,
-        pageName,
-        actions,
-      }),
+    dispatchHandler({
+      mapDispatchToProps,
+      createDispatcher: createDispatcher({ rowKey, pageName, actions }),
     })
   )(memo(TableHoc));
 };

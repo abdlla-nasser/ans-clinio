@@ -43,6 +43,6 @@ export default WithTableHoc({
   mapStateToProps,
   renderColumns: columns,
   noFetchData: true,
-  width: "100%",
   pageName: "consultationSetup",
+  rowKey: "id",
 });

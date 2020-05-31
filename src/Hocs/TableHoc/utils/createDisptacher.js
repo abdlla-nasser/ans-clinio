@@ -1,6 +1,6 @@
 import { requestPageLabels } from "../../../global/actions/labels";
 
-export const createDisptacher = ({ rowKey, pageName, actions = {} }) => (
+export const createDispatcher = ({ rowKey, pageName, actions = {} }) => (
   dispatch
 ) => ({
   fetchData: (sorter) => dispatch(actions.fetchData(sorter)),

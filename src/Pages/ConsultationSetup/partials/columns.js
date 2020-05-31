@@ -2,6 +2,7 @@ export const columns = () => [
   {
     titleLabel: "ID",
     width: 20,
+    key: "id",
     renderView: {
       type: "popover",
       renderCell: {
