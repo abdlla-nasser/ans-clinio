@@ -1,23 +1,22 @@
-export const handlerDispatchers = ({
-  getDispacthToProps,
-  createDisptacher
-}) => dispatch => {
-  let disptachedActions = createDisptacher(dispatch);
-  if (getDispacthToProps) {
-    const newDispatcher = getDispacthToProps(dispatch);
-    disptachedActions = { ...disptachedActions, ...newDispatcher };
+export const dispatchHandler = ({ getDispatchToProps, createDispatcher }) => (
+  dispatch
+) => {
+  let dispatchedActions = createDispatcher(dispatch);
+  if (getDispatchToProps) {
+    const newDispatcher = getDispatchToProps(dispatch);
+    dispatchedActions = { ...dispatchedActions, ...newDispatcher };
   }
-  return disptachedActions;
+  return dispatchedActions;
 };
 
-export const stateHandler = getState => state => {
+export const stateHandler = (getState) => (state) => {
   const {
-    loginReducer: { privData }
+    appBaseReducer: { language },
   } = state;
   const newDataState = getState ? getState(state) : null;
 
   return {
-    langId: privData && privData.language_id,
-    ...newDataState
+    language,
+    ...newDataState,
   };
 };
