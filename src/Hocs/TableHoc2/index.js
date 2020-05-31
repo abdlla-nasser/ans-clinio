@@ -142,9 +142,9 @@ export default ({
       } else return false;
     }, [otherProps]);
 
-    const getLabelTitle = useCallback(
-      (title) => getTitle(labels, title)[labels]
-    );
+    const getLabelTitle = useCallback((title) => getTitle(labels, title), [
+      labels,
+    ]);
 
     const columnsWithSearch = useMemo(() => {
       let columns;
@@ -176,7 +176,6 @@ export default ({
       selectedRow,
       getLabelTitle,
       isEditing,
-      editabletable,
     ]);
 
     const parentProps = useMemo(() => {

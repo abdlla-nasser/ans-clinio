@@ -1,5 +1,5 @@
 import React from "react";
-import WithTableHoc from "../../Hocs/TableHoc";
+import WithTableHoc from "../../Hocs/TableHoc2";
 import { columns } from "./partials/columns";
 import { mapStateToProps } from "./utils/selectors";
 

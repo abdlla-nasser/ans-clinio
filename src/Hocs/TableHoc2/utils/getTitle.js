@@ -3,7 +3,7 @@ import { isObjHasData } from "../../../utils/isThereData";
 /**
  * @param {Object} labels
  * @param {String} label
- * @returns {String}
+ * @return {String}
  */
 
 export default (labels, label = "") =>

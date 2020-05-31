@@ -22,10 +22,10 @@ export default ({
     const getSearchOpt = SearchOptions({
       isRtl,
       clearFilter,
-      fetchData
+      fetchData,
     });
 
-    const setupView = renderView =>
+    const setupView = (renderView) =>
       getRenderView({
         renderView,
         errors,
@@ -33,7 +33,7 @@ export default ({
         onChange,
         rowKey,
         selectedRow,
-        ...others
+        ...others,
       });
 
     result = columns.map(
@@ -62,14 +62,14 @@ export default ({
                 align: "center",
                 title: getTitle(titleLabel),
                 ...getSearchOpt,
-                ...render
+                ...render,
               };
             }),
           ...col,
           dataIndex,
           key: dataIdxSearch || dataIndex || key,
           ...search,
-          ...render
+          ...render,
         };
       }
     );
@@ -81,8 +81,8 @@ export default ({
           title: getTitle("action"),
           align: "center",
           width: 70,
-          render: ActionColumn(openModal, rowKey)
-        }
+          render: ActionColumn(openModal, rowKey),
+        },
       ];
     }
   }
