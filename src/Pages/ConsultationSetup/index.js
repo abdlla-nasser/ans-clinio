@@ -1,5 +1,5 @@
 import React from "react";
-import WithTableHoc from "../../Hocs/TableHoc2";
+import WithTableHoc from "../../Hocs/TableHoc";
 import { columns } from "./partials/columns";
 import { mapStateToProps, actions } from "./utils/selectors";
 
@@ -43,7 +43,6 @@ export default WithTableHoc({
   mapStateToProps,
   actions,
   renderColumns: columns,
-  noFetchData: true,
   pageName: "consultationSetup",
   rowKey: "id",
 });

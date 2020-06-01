@@ -16,6 +16,9 @@ function onClick(clickable, callback) {
 }
 
 export default ({
+  onPressEditOrCancel,
+  isAddingRecord,
+  isUpdatingRecord,
   onPressSaveOrEdit,
   onPressPrint,
   onPressAdd,
@@ -54,13 +57,31 @@ export default ({
       )}
 
       <div>
-        {!hideEditSaveIcon && (
+        {(isAddingRecord || isUpdatingRecord) && (
           <Icon
-            type={isEditing ? "save" : "edit"}
+            type="save"
             size={SIZE}
             disabled={isunClickableField}
             marginend={MARGIN_END}
             onClick={onClick(clickable, onPressSaveOrEdit)}
+          />
+        )}
+
+        <Icon
+          type={isUpdatingRecord || isAddingRecord ? "close-circle" : "edit"}
+          size={SIZE}
+          disabled={isunClickableField}
+          marginend={MARGIN_END}
+          onClick={onClick(clickable, onPressEditOrCancel)}
+        />
+
+        {canInsert && (
+          <Icon
+            type="plus-circle"
+            disabled={disabled}
+            marginend={MARGIN_END}
+            size={SIZE}
+            onClick={onPressAdd}
           />
         )}
 
@@ -71,16 +92,6 @@ export default ({
             size={SIZE}
             type="delete"
             onClick={onClick(clickable, onPressDelete)}
-          />
-        )}
-
-        {canInsert && (
-          <Icon
-            disabled={disabled}
-            marginend={MARGIN_END}
-            size={SIZE}
-            type="plus-circle"
-            onClick={onPressAdd}
           />
         )}
 

@@ -13,14 +13,12 @@ export default ({
   isEditing,
   onChange,
   errors,
-  isRtl,
   getTitle,
   ...others
 }) => {
   let result = [];
   if (columns) {
     const getSearchOpt = SearchOptions({
-      isRtl,
       clearFilter,
       fetchData,
     });

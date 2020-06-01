@@ -7,6 +7,9 @@ import Flex from "../Flex";
 const { memo } = React;
 
 function TableWithToolsContainer({
+  onPressEditOrCancel,
+  isAddingRecord,
+  isUpdatingRecord,
   width,
   dataSource,
   columns,
@@ -48,6 +51,9 @@ function TableWithToolsContainer({
     const headerTools = (
       <>
         <HeaderTools
+          onPressEditOrCancel={onPressEditOrCancel}
+          isAddingRecord={isAddingRecord}
+          isUpdatingRecord={isUpdatingRecord}
           canInsert={canInsert}
           canDelete={canDelete}
           hideEditSaveIcon={hideEditSaveIcon}

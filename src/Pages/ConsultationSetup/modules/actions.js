@@ -4,8 +4,10 @@ import {
   ON_SELECT_CONSULTATION_SETUP_ROW,
   ON_PRESS_CONSULTATION_SETUP_EDIT,
   ON_PRESS_CONSULTATION_SETUP_ADD,
+  ON_PRESS_CONSULTATION_SETUP_CANCEL,
   ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA,
   ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD,
+  ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED,
   ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD,
   ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD_FINISHED,
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD,
@@ -45,6 +47,11 @@ export const onPressEdit = () => ({
   type: ON_PRESS_CONSULTATION_SETUP_EDIT,
 });
 
+// On click cancel icon
+export const onPressCancel = () => ({
+  type: ON_PRESS_CONSULTATION_SETUP_CANCEL,
+});
+
 // On change row input value
 export const onChangeRowData = (inputValue, key) => ({
   type: ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA,
@@ -77,5 +84,20 @@ export const requestUpdateRecord = (recordData) => ({
 });
 export const requestUpdateRecordFinished = (newState) => ({
   type: ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
+  newState,
+});
+
+// On Delete record
+export const onDeleteRecord = (record) => ({
+  type: ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD,
+  record,
+  reducerName,
+  rowKey,
+  API_URL: `consultation/${record.id}`,
+  finishedAction: onDeleteRecordFinshed,
+});
+
+const onDeleteRecordFinshed = (newState) => ({
+  type: ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED,
   newState,
 });

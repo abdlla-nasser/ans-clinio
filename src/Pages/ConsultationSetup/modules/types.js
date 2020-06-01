@@ -19,6 +19,8 @@ export const ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED =
 // Delete record from dataSource request (DELETE)
 export const ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD =
   "ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD";
+export const ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED =
+  "ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED";
 // ------------------------------------------------------------------------------------
 
 // On click record
@@ -32,6 +34,10 @@ export const ON_PRESS_CONSULTATION_SETUP_EDIT =
 // On press add icon
 export const ON_PRESS_CONSULTATION_SETUP_ADD =
   "ON_PRESS_CONSULTATION_SETUP_ADD";
+
+// On press cancel icon
+export const ON_PRESS_CONSULTATION_SETUP_CANCEL =
+  "ON_PRESS_CONSULTATION_SETUP_CANCEL";
 
 // While change input value for react controlled input
 export const ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA =

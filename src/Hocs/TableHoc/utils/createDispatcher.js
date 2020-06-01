@@ -4,15 +4,18 @@ export const createDispatcher = ({ rowKey, pageName, actions = {} }) => (
   dispatch
 ) => ({
   fetchData: (sorter) => dispatch(actions.fetchData(sorter)),
-  onPressEdit: () => dispatch(actions.onPressEdit),
+  onPressEdit: () => dispatch(actions.onPressEdit()),
   onAdd: () => dispatch(actions.onAdd()),
+  onPressCancel: () => dispatch(actions.onPressCancel()),
   onPressItem: ({ [rowKey]: recordKey }) => () =>
     dispatch(actions.onSelectRecord(recordKey)),
   onPressSearch: (filters) => dispatch(actions.onPressSearch(filters)),
   onChangeData: (inputData, key, rest) =>
     dispatch(actions.onChangePopOverData(inputData, key, rest)),
-  requestInsertAndUpdate: (recordData) =>
-    dispatch(actions.requestInsertAndUpdate(recordData)),
+  requestInsertRecord: (recordData) =>
+    dispatch(actions.requestInsertRecord(recordData)),
+  requestUpdateRecord: (recordData) =>
+    dispatch(actions.requestUpdateRecord(recordData)),
   onDelete: (item) => dispatch(actions.onDeleteRecord(item)),
   clearFilter: () => dispatch(actions.resetFilter),
   getPageLabels: () => dispatch(requestPageLabels(pageName)),

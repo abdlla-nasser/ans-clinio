@@ -3,7 +3,7 @@ import { StyledButton, RenderView } from "./styled";
 import Icon from "../../../components/Icon";
 import Input from "../../../components/Input";
 
-export default ({ clearFilter, fetchData, isRtl }) => {
+export default ({ clearFilter, fetchData }) => {
   const onChange = (setSelectedKeys) => (value) =>
     setSelectedKeys(value ? [value] : []);
 
@@ -40,12 +40,12 @@ export default ({ clearFilter, fetchData, isRtl }) => {
           onClick={handleSearch(selectedKeys, confirm)}
           icon="search"
           size="small"
-          children={isRtl ? "بحث" : "Search"}
+          children="Search"
         />
 
         <StyledButton
           onClick={handleReset(clearFilters)}
-          children={isRtl ? "اعادة" : "Reset"}
+          children="Reset"
           size="small"
         />
       </RenderView>

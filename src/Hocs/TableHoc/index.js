@@ -1,33 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createDispatcher } from "./utils/createDisptacher";
+import { createDispatcher } from "./utils/createDispatcher";
 import validateForm from "./utils/validateFields";
 import isModalVisible from "./utils/isModalVisible";
-import getFields from "./utils/getFileds";
+import getFields from "./utils/getFields";
 import getTitle from "./utils/getTitle";
 import SearchInjector from "./utils/injectSearchWithColumns";
-import { dispatchHandler, stateHandler } from "../../utils/reduxHandlers";
+import { stateHandler, dispatchHandler } from "../../utils/reduxHandlers";
 import { isArrayHasData } from "../../utils/isThereData";
 import CommonView from "../../components/Table/withTools";
 import { usePrevious } from "../../utils/customUseHooks";
 import loadable from "../../components/Loadable";
-const DownloadExcel = loadable(() => import("../../components/DownloadExcel"));
 
+const DownloadExcel = loadable(() => import("../../components/DownloadExcel"));
 const { useEffect, useState, useMemo, memo, useCallback } = React;
 
-const defaultRequiredProps = ["isPrevEquelCurrentlang"];
+const defaultRequiredProps = ["isPrevEqualCurrentlang"];
 
 export default ({
   WrappedComponent,
   mapStateToProps,
-  actions,
   mapDispatchToProps,
+  actions,
   rowKey,
-  width = "80%",
+  width = "100%",
   renderColumns,
   itemsPropNamesToValidate = [],
   useModalState,
-  submitToPrivigeContainer,
   pageName = "",
   requiredProps = defaultRequiredProps,
   tableScroll,
@@ -37,8 +36,14 @@ export default ({
 }) => {
   const TableHoc = (props) => {
     const {
-      selectedRow,
+      onPressCancel,
       isEditing,
+      isAddingRecord,
+      isUpdatingRecord,
+      requestInsertRecord,
+      requestUpdateRecord,
+      selectedRow,
+      updatingRecord,
       loading,
       isActionLoading,
       dataSource,
@@ -53,42 +58,36 @@ export default ({
       onChangeData,
       onPressSearch,
       clearFilter,
-      requestInsertAndUpdate,
       onPressEdit,
       children,
       editabletable,
-      langId,
-      itemsPriviliges,
+      language,
       labels,
       getPageLabels,
-      headerSelectOptions,
-      onChangeHeaderSelect,
-      headerSelectNewValue,
       onRowSelection,
       onDoubleClickRecord,
-      authorization_type,
       withPagination,
       ...otherProps
     } = props;
 
-    const [formError, updateState] = useState(undefined);
-    const [isVisible, updateModalState] = useState(false);
-    const isRtl = langId === 2;
+    const [formError, setFormError] = useState(undefined);
+    const [ismodalVisible, setIsModalVisible] = useState(false);
 
-    const prevLang = usePrevious(langId);
-    const isPrevEquelCurrentlang = langId === prevLang;
+    const prevLang = usePrevious(language);
+    const isPrevEqualCurrentlang = language === prevLang;
 
     useEffect(() => {
-      if (langId && !isPrevEquelCurrentlang) {
+      if (language && !isPrevEqualCurrentlang) {
         getPageLabels();
         if (!noFetchData) {
           fetchData();
         }
       }
-    }, [fetchData, prevLang, isPrevEquelCurrentlang, langId, getPageLabels]);
+    }, [fetchData, prevLang, isPrevEqualCurrentlang, language, getPageLabels]);
 
     const currentRecord = useMemo(() => {
       if (dataSource) {
+        console.log("dataSource: ", dataSource);
         return dataSource.find((item) => item[rowKey] === selectedRow);
       }
       return false;
@@ -96,38 +95,48 @@ export default ({
 
     const toggleModal = useCallback(
       (rowId) => {
-        const isOpen = isModalVisible(rowId) && rowId;
-        updateModalState(isOpen);
+        const isModalOpen = isModalVisible(rowId) && rowId;
+        setIsModalVisible(isModalOpen);
       },
-      [updateModalState]
+      [setIsModalVisible]
     );
 
     const onInsertOrUpdate = useCallback(() => {
-      if (!isEditing) {
-        return onPressEdit();
-      }
       const fields = getFields(itemsPropNamesToValidate, currentRecord);
       const errors = validateForm(fields);
 
       if (errors) {
-        return updateState({
+        return setFormError({
           ...formError,
           ...errors,
         });
       }
-      return requestInsertAndUpdate(currentRecord);
+      if (isAddingRecord) {
+        return requestInsertRecord(currentRecord);
+      } else if (isUpdatingRecord) {
+        return requestUpdateRecord(currentRecord);
+      }
     }, [
-      isEditing,
+      isAddingRecord,
+      isUpdatingRecord,
       formError,
-      requestInsertAndUpdate,
-      onPressEdit,
+      requestInsertRecord,
+      requestUpdateRecord,
       currentRecord,
     ]);
+
+    const onPressEditOrCancel = useCallback(() => {
+      if (isUpdatingRecord || isAddingRecord) {
+        return onPressCancel();
+      } else {
+        return onPressEdit();
+      }
+    }, [isAddingRecord, isUpdatingRecord, onPressCancel, onPressEdit]);
 
     const onInputChanged = useCallback(
       ({ name, value, key, ...rest }) => {
         if (formError) {
-          updateState({
+          setFormError({
             ...formError,
             [name]: undefined,
           });
@@ -142,55 +151,48 @@ export default ({
       currentRecord,
     ]);
 
-    const memorizedCols = useMemo(() => {
+    const memoizedColumns = useMemo(() => {
       if (renderColumns) {
         return renderColumns({
-          isRtl,
           onChangeModalShow: otherProps.onChangeModalShow,
-          authorization_type,
         });
       } else return false;
-    }, [isRtl, otherProps, authorization_type]);
+    }, [otherProps]);
 
     const getLabelTitle = useCallback((title) => getTitle(labels, title), [
       labels,
     ]);
 
-    const injectedColumns = useMemo(() => {
+    const columnsWithSearch = useMemo(() => {
       let columns;
-      if (memorizedCols) {
+      if (memoizedColumns) {
         columns = SearchInjector({
-          isRtl,
+          columns: memoizedColumns,
           clearFilter,
+          fetchData,
+          useModalState,
           openModal: toggleModal,
           rowKey,
-          useModalState,
-          fetchData,
           selectedRow,
-          getTitle: getLabelTitle,
-          isEditing: submitToPrivigeContainer
-            ? isEditing && editabletable
-            : isEditing,
+          isEditing,
           onChange: onInputChanged,
           errors: formError,
-          columns: memorizedCols,
+          getTitle: getLabelTitle,
           ...otherProps,
         });
       }
       return columns;
     }, [
       otherProps,
-      memorizedCols,
+      memoizedColumns,
       formError,
       onInputChanged,
-      isRtl,
       clearFilter,
       toggleModal,
       fetchData,
       selectedRow,
       getLabelTitle,
       isEditing,
-      editabletable,
     ]);
 
     const parentProps = useMemo(() => {
@@ -199,18 +201,17 @@ export default ({
         fields = getFields([...defaultRequiredProps, ...requiredProps], {
           ...props,
           currentRecord,
-          isPrevEquelCurrentlang,
+          isPrevEqualCurrentlang,
         });
       }
       if (useModalState) {
         fields = {
           ...fields,
-          isVisible,
+          ismodalVisible,
           toggleModal,
           labels,
           modalData: currentRecord,
           onModalInputsChanged: onChangeData,
-          itemsPrivs: itemsPriviliges,
         };
       }
       return fields;
@@ -218,11 +219,10 @@ export default ({
       props,
       toggleModal,
       labels,
-      isPrevEquelCurrentlang,
-      isVisible,
+      isPrevEqualCurrentlang,
+      ismodalVisible,
       currentRecord,
       onChangeData,
-      itemsPriviliges,
     ]);
 
     const renderExcelView = useMemo(() => {
@@ -265,7 +265,7 @@ export default ({
       return null;
     }, [dataSource, otherProps, getLabelTitle]);
 
-    const rowSelctionProps = useMemo(() => {
+    const rowSelectionProps = useMemo(() => {
       if (rowSelectionPropName && onRowSelection) {
         return {
           onSelect: onRowSelection,
@@ -277,12 +277,15 @@ export default ({
     return (
       <WrappedComponent {...parentProps}>
         <CommonView
+          onPressEditOrCancel={onPressEditOrCancel}
+          isAddingRecord={isAddingRecord}
+          isUpdatingRecord={isUpdatingRecord}
           canInsert={canInsert}
           canDelete={canDelete}
           hideEditSaveIcon={hideEditSaveIcon}
           hidePrinterInformationIcon={hidePrinterInformationIcon}
           dataSource={dataSource}
-          columns={injectedColumns}
+          columns={columnsWithSearch}
           onAdd={onAdd && onAdd}
           onDelete={handleDeleteAction}
           rowKey={rowKey}
@@ -293,14 +296,11 @@ export default ({
           loading={loading}
           onSelect={onPressItem}
           onDoubleClickRecord={onDoubleClickRecord}
-          rowSelctionProps={rowSelctionProps}
+          rowSelctionProps={rowSelectionProps}
           width={width}
           tableScroll={tableScroll}
           onfetchMoreData={fetchData}
           onPressSearch={onPressSearch}
-          headerSelectOptions={headerSelectOptions}
-          onChangeHeaderSelect={onChangeHeaderSelect}
-          headerSelectNewValue={headerSelectNewValue}
           excelView={renderExcelView}
           withPagination={withPagination}
         >
