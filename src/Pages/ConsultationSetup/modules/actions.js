@@ -65,3 +65,17 @@ export const requestInsertRecordFinished = (newState) => ({
   type: ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD_FINISHED,
   newState,
 });
+
+// On Update existing record
+export const requestUpdateRecord = (recordData) => ({
+  type: ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD,
+  recordData,
+  rowKey,
+  reducerName,
+  API_URL: `consultation/${recordData.id}`,
+  finishedAction: requestUpdateRecordFinished,
+});
+export const requestUpdateRecordFinished = (newState) => ({
+  type: ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
+  newState,
+});
