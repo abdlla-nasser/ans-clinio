@@ -6,9 +6,28 @@ import {
   ON_PRESS_CONSULTATION_SETUP_ADD,
   ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA,
   ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD,
-  ON_REQUEST_INSERT_UPDATE_CONSULTATION_SETUP_RECORD,
-  ON_REQUEST_INSERT_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
+  ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD,
+  ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD_FINISHED,
+  ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD,
+  ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
 } from "./types";
+
+const reducerName = "consultationSetupReducer";
+const rowKey = "id";
+
+// Fetch initial data
+export const fetchData = (sorter) => ({
+  type: FETCH_CONSULTATION_SETUP_DATA,
+  reducerName,
+  API_URL: "consultation",
+  sorter,
+  finishedAction: fetchDataFinished,
+});
+export const fetchDataFinished = (result, isSorting) => ({
+  type: FETCH_CONSULTATION_SETUP_DATA_FINISHED,
+  data: result,
+  isSorting,
+});
 
 // On select record action
 export const onSelectRecord = (id) => ({
@@ -31,4 +50,18 @@ export const onChangeRowData = (inputValue, key) => ({
   type: ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA,
   inputValue,
   key,
+});
+
+// On Add new record
+export const requestInsertRecord = (recordData) => ({
+  type: ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD,
+  recordData,
+  rowKey,
+  reducerName,
+  API_URL: "consultation",
+  finishedAction: requestInsertRecordFinished,
+});
+export const requestInsertRecordFinished = (newState) => ({
+  type: ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD_FINISHED,
+  newState,
 });

@@ -29,6 +29,12 @@ export default (state = initialState, action) => {
         lastColLang: action.key,
       };
 
+    case ON_SELECT_CONSULTATION_SETUP_ROW:
+      return {
+        ...state,
+        selectedRow: action.id,
+      };
+
     default:
       return state;
   }

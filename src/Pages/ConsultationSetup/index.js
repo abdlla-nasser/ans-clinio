@@ -1,7 +1,7 @@
 import React from "react";
 import WithTableHoc from "../../Hocs/TableHoc2";
 import { columns } from "./partials/columns";
-import { mapStateToProps } from "./utils/selectors";
+import { mapStateToProps, actions } from "./utils/selectors";
 
 import Flex from "../../components/Flex";
 import { useDispatch } from "react-redux";
@@ -41,6 +41,7 @@ const ConsultationSetup = ({ children }) => {
 export default WithTableHoc({
   WrappedComponent: ConsultationSetup,
   mapStateToProps,
+  actions,
   renderColumns: columns,
   noFetchData: true,
   pageName: "consultationSetup",
