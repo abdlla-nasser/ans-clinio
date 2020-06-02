@@ -13,11 +13,11 @@ const PopoverCell = ({
 }) => (record) => {
   const {
     dIdxs,
+    isRtl,
     onInputChanged,
     setValueLowerCase,
-    onChangeUseInputLang,
     textValue,
-    getDeepValuesInSingleDIndx,
+    getDeepValueInSingleDIndx,
     useHover,
     dIXForHover,
     ...popOverProps
@@ -25,34 +25,26 @@ const PopoverCell = ({
   const { [rowKey]: rowKeyValue } = record;
   const isSameEditableRow = isEditing && selectedRow === rowKeyValue;
   const isString = typeof dIdxs === "string";
-  let v1 = "",
-    v2 = "",
-    oneForKey = false;
+  let cellValue = "";
 
-  if (getDeepValuesInSingleDIndx) {
-    const { val1, val2 } = getDeepValuesInSingleDIndx({
+  if (getDeepValueInSingleDIndx) {
+    const { val } = getDeepValueInSingleDIndx({
       values: record[dIdxs],
     });
-
-    v1 = val1 || "";
-    v2 = val2 || "";
+    cellValue = val || "";
   } else if (isString) {
-    v1 = record[dIdxs] || "";
-    oneForKey = true;
+    cellValue = record[dIdxs] || "";
   } else {
-    v1 = record[dIdxs[0]] || "";
-    v2 = record[dIdxs[1]] || "";
+    cellValue = record[dIdxs[0]] || "";
   }
 
   if (isSameEditableRow) {
-    const handleChange = ({ name, value }, langId) => {
+    const handleChange = ({ name, value }) => {
       const params = {
         name,
         value: setValueLowerCase ? value.toLowerCase() : value,
         key: rowKeyValue,
-        ...(onChangeUseInputLang ? { langId } : null),
       };
-
       return onInputChanged
         ? onInputChanged({
             onChange,
@@ -65,15 +57,14 @@ const PopoverCell = ({
 
     return (
       <PopoverLanguage
-        oneForKey={oneForKey}
         disabled={
           isString && (dIdxs === rowKey || dIdxs === "idValue") && !record.isNew
         }
-        values={[v1, v2]}
+        isRtl={isRtl}
+        value={cellValue}
         names={isString ? [dIdxs] : dIdxs}
         error={errs}
         onChange={handleChange}
-        onChangeUseInputLang={onChangeUseInputLang}
         {...popOverProps}
       />
     );
@@ -87,6 +78,6 @@ const PopoverCell = ({
       })(record)
     : textValue
     ? textValue
-    : `${v1} ${v2 ? `/ ${v2}` : ""}`;
+    : cellValue;
 };
 export default PopoverCell;

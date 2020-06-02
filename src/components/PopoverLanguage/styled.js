@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import Flex from '../Flex';
-import Icon from 'antd/lib/icon';
+import styled from "styled-components";
+import Flex from "../Flex";
+import Icon from "antd/lib/icon";
 
 export const ButtonContainer = styled(Flex)`
   justify-content: space-between;
@@ -30,15 +30,13 @@ export const StyledIcon = styled(Icon)`
   opacity: 0.6;
 `;
 
-export const ClearButton = styled.span`
+export const ConfirmButton = styled.span`
   font-size: 16px;
   color: #006fbb;
   cursor: pointer;
   display: block;
   text-align: center;
-  border-top: 1px solid #ecd8d8;
-  padding-top: 5px;
-  margin-top: 4px;
+  margin-top: 10px;
 `;
 
 export const ErrorView = styled.span`

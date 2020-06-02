@@ -42,7 +42,8 @@ export default WithTableHoc({
   WrappedComponent: ConsultationSetup,
   mapStateToProps,
   actions,
+  noFetchData: false,
   renderColumns: columns,
   pageName: "consultationSetup",
-  rowKey: "id",
+  rowKey: "_id",
 });

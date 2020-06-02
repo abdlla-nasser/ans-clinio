@@ -15,7 +15,7 @@ import {
 } from "./types";
 
 const reducerName = "consultationSetupReducer";
-const rowKey = "id";
+const rowKey = "_id";
 
 // Fetch initial data
 export const fetchData = (sorter) => ({

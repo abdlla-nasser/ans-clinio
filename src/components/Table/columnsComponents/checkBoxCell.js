@@ -6,7 +6,7 @@ const CheckBoxView = ({
   selectedRow,
   isEditing,
   onChange,
-  renderCell
+  renderCell,
 }) => ({ [rowKey]: rowKeyValue, ...record }) => {
   const { dIdxs, checkedValue, getValueForChangedInput } = renderCell;
   const value = record[dIdxs];
@@ -18,7 +18,7 @@ const CheckBoxView = ({
       onChange({
         name: dIdxs,
         value: checkValue ? checkValue : checked ? "Y" : "N",
-        key: rowKeyValue
+        key: rowKeyValue,
       });
     }
   };

@@ -2,6 +2,7 @@ import { all, select, put, takeLatest } from "redux-saga/effects";
 import createApiUrl from "../../../utils/createApiUrl";
 import { postRequest } from "../../../utils/httpRequests";
 import validateForm from "../utils/validation";
+import { setToStorage } from "../../../utils/localStorage";
 
 import { ON_LOGIN } from "./types";
 import { onLoginSuccess, onLoginFailure } from "./actions";
@@ -46,6 +47,7 @@ function* requestLogin({ actionToNavigate }) {
             })
           );
         } else {
+          yield setToStorage("token", response.token);
           yield put(onLoginSuccess(response.data));
           yield put(setUserToken(response.token));
           return actionToNavigate("/home");

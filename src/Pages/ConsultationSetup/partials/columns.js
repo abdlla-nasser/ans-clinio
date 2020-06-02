@@ -2,7 +2,7 @@ export const columns = () => [
   {
     titleLabel: "ID",
     width: 20,
-    key: "id",
+    key: "_id",
     renderView: {
       type: "popover",
       renderCell: {
@@ -16,7 +16,9 @@ export const columns = () => [
     renderView: {
       type: "checkbox",
       renderCell: {
-        dIdxs: "followUp",
+        dIdxs: "followup",
+        checkedValue: true,
+        getValueForChangedInput: (checked) => (checked ? true : false),
       },
     },
   },
@@ -26,7 +28,10 @@ export const columns = () => [
     renderView: {
       type: "popover",
       renderCell: {
-        dIdxs: "english",
+        dIdxs: "name",
+        getDeepValueInSingleDIndx: ({ values }) => ({
+          val: values["en"],
+        }),
       },
     },
   },
@@ -36,7 +41,11 @@ export const columns = () => [
     renderView: {
       type: "popover",
       renderCell: {
-        dIdxs: "arabic",
+        dIdxs: "name",
+        isRtl: true,
+        getDeepValueInSingleDIndx: ({ values }) => ({
+          val: values["ar"],
+        }),
       },
     },
   },

@@ -35,7 +35,6 @@ export function* requestTableData({
   finishedAction,
   addtionalParams = null,
 }) {
-  console.log("got in requestTableData");
   try {
     // const { token } = yield select(appBaseSelector);
     const { dataSource } = yield select(strangeSelector(reducerName));
@@ -50,10 +49,6 @@ export function* requestTableData({
     });
     const response = yield getRequest(apiUrl);
     const result = yield response.json();
-
-    console.log("apiUrl: ", apiUrl);
-    console.log("response: ", response);
-    console.log("result: ", result);
 
     yield put(finishedAction(result));
   } catch (error) {

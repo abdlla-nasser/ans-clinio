@@ -3,9 +3,9 @@ import { BASE_URL } from "../utils/constants";
 export const getRequest = async (url, headers = null) => {
   return await fetch(BASE_URL + url, {
     method: "GET",
-    header: {
+    headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
-      "content-type": "application/json",
+      "Content-Type": "application/json",
       ...headers,
     },
   });
@@ -16,7 +16,7 @@ export const postRequest = async (url, body) => {
     method: "POST",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
     body: !body ? null : JSON.stringify(body),
   });
@@ -25,10 +25,10 @@ export const postRequest = async (url, body) => {
 export const patchRequest = async (url, body) => {
   return await fetch(BASE_URL + url, {
     method: "PATCH",
-    header: {
+    headers: {
       Accept: "appliation/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
     body: !body ? null : JSON.stringify(body),
   });
@@ -40,7 +40,7 @@ export const deleteRequest = async (url, body) => {
     headers: {
       Accept: "application/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
-      "content-type": "application/json",
+      "Content-Type": "application/json",
     },
     body: !body ? null : JSON.stringify(body),
   });

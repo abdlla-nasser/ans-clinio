@@ -1,3 +1,4 @@
+import initialRowData from "./rowProps";
 import {
   FETCH_CONSULTATION_SETUP_DATA,
   FETCH_CONSULTATION_SETUP_DATA_FINISHED,
@@ -11,7 +12,44 @@ import {
   ON_PRESS_CONSULTATION_SETUP_CANCEL,
 } from "./types";
 
-import dummyData from "./dummyData";
+const dummData = [
+  {
+    followup: true,
+    _id: "5ed4d12348c39f0da42a6a8c",
+    name: {
+      en: "Normal consultation",
+      ar: "كشف عادي",
+      tr: "kashf 3ady",
+    },
+    createdAt: "2020-06-01T09:57:55.876Z",
+    updatedAt: "2020-06-01T12:08:23.852Z",
+    __v: 0,
+  },
+  {
+    followup: false,
+    _id: "5ed4d15548c39f0da42a6a8d",
+    name: {
+      en: "Follow Up",
+      ar: "مراجعه",
+      tr: "morag3a",
+    },
+    createdAt: "2020-06-01T09:58:45.769Z",
+    updatedAt: "2020-06-01T12:13:06.498Z",
+    __v: 0,
+  },
+  {
+    followup: false,
+    _id: "5ed4d1ac48c39f0da42a6a8e",
+    name: {
+      en: "Urgent consultation",
+      ar: "كشف مستعجل",
+      tr: "kashf mst3gl",
+    },
+    createdAt: "2020-06-01T10:00:12.855Z",
+    updatedAt: "2020-06-01T10:00:12.855Z",
+    __v: 0,
+  },
+];
 
 const initialState = {
   loading: false,
@@ -61,6 +99,13 @@ export default (state = initialState, action) => {
         isEditing: true,
         isAddingRecord: true,
         selectedRow: key,
+        dataSource: [
+          {
+            _id: key,
+            ...initialRowData,
+          },
+          ...ds,
+        ],
       };
 
     case ON_PRESS_CONSULTATION_SETUP_EDIT:
@@ -68,6 +113,15 @@ export default (state = initialState, action) => {
         ...state,
         isEditing: true,
         isUpdatingRecord: true,
+      };
+
+    case ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA:
+      return {
+        ...state,
+        dataSource: state.dataSource.map((record) => {
+          const isSameRow = record._id === action.key;
+          return isSameRow ? { ...record, ...action.inputValue } : record;
+        }),
       };
 
     case ON_PRESS_CONSULTATION_SETUP_CANCEL:

@@ -87,7 +87,6 @@ export default ({
 
     const currentRecord = useMemo(() => {
       if (dataSource) {
-        console.log("dataSource: ", dataSource);
         return dataSource.find((item) => item[rowKey] === selectedRow);
       }
       return false;
