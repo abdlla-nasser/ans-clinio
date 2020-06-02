@@ -1,3 +1,4 @@
+import normalizer from "../utils/normalizer";
 import {
   FETCH_CONSULTATION_SETUP_DATA,
   FETCH_CONSULTATION_SETUP_DATA_FINISHED,
@@ -15,7 +16,7 @@ import {
 } from "./types";
 
 const reducerName = "consultationSetupReducer";
-const rowKey = "_id";
+const rowKey = "idValue";
 
 // Fetch initial data
 export const fetchData = (sorter) => ({
@@ -27,7 +28,7 @@ export const fetchData = (sorter) => ({
 });
 export const fetchDataFinished = (result, isSorting) => ({
   type: FETCH_CONSULTATION_SETUP_DATA_FINISHED,
-  data: result,
+  data: result && normalizer(result),
   isSorting,
 });
 
@@ -53,11 +54,14 @@ export const onPressCancel = () => ({
 });
 
 // On change row input value
-export const onChangeRowData = (inputValue, key) => ({
-  type: ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA,
-  inputValue,
-  key,
-});
+export const onChangeRowData = (inputData, key, { langCode }) => {
+  return {
+    type: ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA,
+    inputData,
+    key,
+    langCode,
+  };
+};
 
 // On Add new record
 export const requestInsertRecord = (recordData) => ({

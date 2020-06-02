@@ -27,3 +27,8 @@ export const actions = {
   requestUpdateRecord,
   onDeleteRecord,
 };
+
+export const mapDispatchToProps = (dispatch) => ({
+  onChangeData: (inputData, key, restData) =>
+    dispatch(onChangeRowData(inputData, key, restData)),
+});

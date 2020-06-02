@@ -1,7 +1,11 @@
 import React from "react";
 import WithTableHoc from "../../Hocs/TableHoc";
 import { columns } from "./partials/columns";
-import { mapStateToProps, actions } from "./utils/selectors";
+import {
+  mapStateToProps,
+  mapDispatchToProps,
+  actions,
+} from "./utils/selectors";
 
 import Flex from "../../components/Flex";
 import { useDispatch } from "react-redux";
@@ -41,9 +45,10 @@ const ConsultationSetup = ({ children }) => {
 export default WithTableHoc({
   WrappedComponent: ConsultationSetup,
   mapStateToProps,
+  mapDispatchToProps,
   actions,
   noFetchData: false,
   renderColumns: columns,
   pageName: "consultationSetup",
-  rowKey: "_id",
+  rowKey: "idValue",
 });

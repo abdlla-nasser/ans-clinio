@@ -1,9 +1,9 @@
-export const dispatchHandler = ({ getDispatchToProps, createDispatcher }) => (
+export const dispatchHandler = ({ mapDispatchToProps, createDispatcher }) => (
   dispatch
 ) => {
   let dispatchedActions = createDispatcher(dispatch);
-  if (getDispatchToProps) {
-    const newDispatcher = getDispatchToProps(dispatch);
+  if (mapDispatchToProps) {
+    const newDispatcher = mapDispatchToProps(dispatch);
     dispatchedActions = { ...dispatchedActions, ...newDispatcher };
   }
   return dispatchedActions;

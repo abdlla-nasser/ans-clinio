@@ -16,6 +16,7 @@ const PopoverCell = ({
     isRtl,
     onInputChanged,
     setValueLowerCase,
+    onChangeUseInputLang,
     textValue,
     getDeepValueInSingleDIndx,
     useHover,
@@ -29,7 +30,7 @@ const PopoverCell = ({
 
   if (getDeepValueInSingleDIndx) {
     const { val } = getDeepValueInSingleDIndx({
-      values: record[dIdxs],
+      values: record[dIdxs] || "",
     });
     cellValue = val || "";
   } else if (isString) {
@@ -39,11 +40,13 @@ const PopoverCell = ({
   }
 
   if (isSameEditableRow) {
-    const handleChange = ({ name, value }) => {
+    const handleChange = ({ name, value }, langCode) => {
+      console.log("lang code: ", langCode);
       const params = {
         name,
         value: setValueLowerCase ? value.toLowerCase() : value,
         key: rowKeyValue,
+        ...(onChangeUseInputLang ? { langCode } : null),
       };
       return onInputChanged
         ? onInputChanged({

@@ -93,15 +93,15 @@ export default (state = initialState, action) => {
 
     case ON_PRESS_CONSULTATION_SETUP_ADD:
       const ds = state.dataSource;
-      const key = ds.length + 1;
+      const recordKey = ds.length + 1;
       return {
         ...state,
         isEditing: true,
         isAddingRecord: true,
-        selectedRow: key,
+        selectedRow: recordKey,
         dataSource: [
           {
-            _id: key,
+            idValue: recordKey,
             ...initialRowData,
           },
           ...ds,
@@ -116,11 +116,21 @@ export default (state = initialState, action) => {
       };
 
     case ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA:
+      const { inputData, key, langCode } = action;
+      const name = Object.keys(inputData)[0];
+      const value = inputData[name];
+
+      // console.log("inputData: ", inputData);
+      // console.log("key: ", key);
+      // console.log("langCode: ", langCode);
+      // console.log("name: ", name);
+      // console.log("value: ", value);
+
       return {
         ...state,
-        dataSource: state.dataSource.map((record) => {
-          const isSameRow = record._id === action.key;
-          return isSameRow ? { ...record, ...action.inputValue } : record;
+        dataSource: state.dataSource.map((rec) => {
+          const isSameRow = rec.idValue === key;
+          return isSameRow ? { ...rec, ...action.inputData } : rec;
         }),
       };
 

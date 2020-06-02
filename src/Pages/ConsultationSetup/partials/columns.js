@@ -29,6 +29,7 @@ export const columns = () => [
       type: "popover",
       renderCell: {
         dIdxs: "name",
+        onChangeUseInputLang: true,
         getDeepValueInSingleDIndx: ({ values }) => ({
           val: values["en"],
         }),
@@ -42,6 +43,7 @@ export const columns = () => [
       type: "popover",
       renderCell: {
         dIdxs: "name",
+        onChangeUseInputLang: true,
         isRtl: true,
         getDeepValueInSingleDIndx: ({ values }) => ({
           val: values["ar"],
