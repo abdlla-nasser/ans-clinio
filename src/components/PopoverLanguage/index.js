@@ -22,7 +22,6 @@ const PopoverLanguage = ({
   isRtl,
   error,
   userErrorSpace,
-  onChangeUseInputLang,
 }) => {
   const [visible, updateHandler] = useState(false);
   const mainValue = value ? value : placeholder;
@@ -32,9 +31,7 @@ const PopoverLanguage = ({
     <Fragment>
       <Input
         inputProps={{
-          // onChange: (e) =>
-          //   onChangeUseInputLang ? onChange(e, "en") : onChange(e),
-          onChange: (e) => onChange(e, langCode),
+          onChange: (e) => (langCode ? onChange(e, langCode) : onChange(e)),
           name: names,
           value: value,
           style: { textAlign: isRtl ? "right" : "left" },

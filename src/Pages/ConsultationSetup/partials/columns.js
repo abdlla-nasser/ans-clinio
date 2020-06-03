@@ -1,17 +1,7 @@
 export const columns = () => [
   {
-    titleLabel: "ID",
-    width: 20,
-    key: "_id",
-    renderView: {
-      type: "popover",
-      renderCell: {
-        dIdxs: "id",
-      },
-    },
-  },
-  {
     titleLabel: "Follow Up",
+    key: "idValue",
     width: 80,
     renderView: {
       type: "checkbox",
@@ -19,16 +9,6 @@ export const columns = () => [
         dIdxs: "followup",
         checkedValue: true,
         getValueForChangedInput: (checked) => (checked ? true : false),
-      },
-    },
-  },
-  {
-    titleLabel: "Follow Up",
-    width: 100,
-    renderView: {
-      type: "popover",
-      renderCell: {
-        dIdxs: "player",
       },
     },
   },

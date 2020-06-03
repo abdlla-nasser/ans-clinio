@@ -123,18 +123,16 @@ export default (state = initialState, action) => {
 
     case ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA:
       const { inputData, key, langCode } = action;
-      const { langCode: sara } = langCode;
       const name = Object.keys(inputData)[0];
       const value = inputData[name];
 
-      // console.log("sara:: ", sara);
       return {
         ...state,
         dataSource: state.dataSource.map((rec) => {
           const isSameRow = rec.idValue === key;
           return isSameRow
             ? langCode
-              ? { ...rec, [name]: { ...rec[name], [sara]: value } }
+              ? { ...rec, [name]: { ...rec[name], [langCode]: value } }
               : { ...rec, [name]: value }
             : rec;
         }),

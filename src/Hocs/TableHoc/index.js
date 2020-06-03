@@ -134,7 +134,6 @@ export default ({
 
     const onInputChanged = useCallback(
       ({ name, value, key, ...rest }) => {
-        // console.log("...rest: ", rest);
         if (formError) {
           setFormError({
             ...formError,

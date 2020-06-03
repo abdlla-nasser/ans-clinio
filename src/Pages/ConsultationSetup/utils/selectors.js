@@ -29,6 +29,6 @@ export const actions = {
 };
 
 export const mapDispatchToProps = (dispatch) => ({
-  onChangeData: (inputData, key, langCode) =>
-    dispatch(onChangeRowData(inputData, key, langCode)),
+  onChangeData: (inputData, key, restData) =>
+    dispatch(onChangeRowData(inputData, key, restData)),
 });
