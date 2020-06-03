@@ -1,5 +1,8 @@
 import { put, select } from "redux-saga/effects";
-import notification from "antd/lib/notification";
+import {
+  notifyUserSuccess,
+  notifyUserError,
+} from "../../../utils/userNotification";
 import createApiUrl from "../../../utils/createApiUrl";
 import {
   getRequest,
@@ -10,23 +13,8 @@ import {
 import deleteDsRow from "../../../utils/deleteRow";
 import strangeSelector from "../../../utils/selectStrangeReducer";
 import getPropValues from "./getFields";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
 
 export const appBaseSelector = ({ appBaseReducer }) => appBaseReducer;
-
-export const notifyProps = (error) => {
-  let message = "Process Done Successfullly",
-    description = "";
-  if (error) {
-    message = "Something went wrong";
-    description = error;
-  }
-  return {
-    message,
-    description,
-    duration: 3,
-  };
-};
 
 // Request Initial Table Data
 export function* requestTableData({
@@ -37,7 +25,6 @@ export function* requestTableData({
   addtionalParams = null,
 }) {
   try {
-    // const { token } = yield select(appBaseSelector);
     const { dataSource } = yield select(strangeSelector(reducerName));
 
     const apiUrl = createApiUrl({
@@ -59,65 +46,87 @@ export function* requestTableData({
 }
 
 // Request Insert Record
-// export function* requestInsertRecord({
-//   recordData,
-//   rowKey,
-//   reducerName,
-//   API_URL,
-//   finishedAction,
-// }) {
-//   try {
-//     const { token } = yield select(appBaseSelector);
-//     const { idValue, ...remainData } = recordData;
-//     const { dataSource } = yield select(strangeSelector(reducerName));
+export function* requestInsertRecord({
+  recordData,
+  rowKey,
+  reducerName,
+  API_URL,
+  finishedAction,
+}) {
+  try {
+    const { idValue, isNew, ...otherRecordData } = recordData;
+    const { dataSource } = yield select(strangeSelector(reducerName));
 
-//     const apiUrl = createApiUrl({
-//       url: API_URL,
-//     });
-//     const response = yield postRequest(apiUrl, {
-//       data: { ...remainData, ...(!!idValue ? { [rowKey]: idValue } : null) },
-//     });
-//     const result = yield response.json();
-//     console.log("Insert result is: ", result);
-//   } catch (error) {
-//     console.log("Inserting table data error => ", error);
-//     yield put(finishedAction());
-//   }
-// }
+    const apiUrl = createApiUrl({
+      url: API_URL,
+    });
+    const response = yield postRequest(apiUrl, {
+      ...otherRecordData,
+    });
+    const result = yield response.json();
+
+    console.log("insert response: ", response);
+    console.log("insert result: ", result);
+
+    if (response && response.status !== 201) {
+      notifyUserError();
+      return yield put(finishedAction());
+    } else {
+      console.log("rowKey: ", rowKey);
+      const newDs = [result, ...dataSource];
+      console.log("newDs: ", newDs);
+
+      notifyUserSuccess();
+      return yield put(
+        finishedAction({
+          dataSource: newDs,
+        })
+      );
+    }
+  } catch (error) {
+    console.log("Inserting table data error => ", error);
+    yield put(finishedAction());
+  }
+}
 
 // Request Update Record
-// export function* requestUpdateRecord({
-//   recordData,
-//   rowKey,
-//   reducerName,
-//   API_URL,
-//   finishedAction,
-// }) {
-//   try {
-//     const { token } = yield select(appBaseSelector);
-//     const { idValue, ...remainData } = recordData;
-//     const { dataSource } = yield select(strangeSelector(reducerName));
+export function* requestUpdateRecord({
+  recordData,
+  rowKey,
+  reducerName,
+  API_URL,
+  finishedAction,
+}) {
+  try {
+    const { idValue, isNew, ...otherRecordData } = recordData;
+    const { dataSource } = yield select(strangeSelector(reducerName));
 
-//     const apiUrl = createApiUrl({
-//       url: API_URL,
-//     });
-//     const response = yield patchRequest(apiUrl, {
-//       data: { ...remainData, ...(!!idValue ? { [rowKey]: idValue } : null) },
-//     });
-//     const result = yield response.json();
-//     console.log("Insert result is: ", result);
-//     return yield put(
-//       finishedAction({
-//         isEditing: false,
-//         selectedRow: undefined,
-//         ...(ds ? { dataSource: ds } : null),
-//       })
-//     );
-//   } catch (error) {
-//     console.log("Inserting table data error => ", error);
-//     yield put(finishedAction());
-//   }
-// }
+    const apiUrl = createApiUrl({
+      url: API_URL,
+    });
+    const response = yield patchRequest(apiUrl, {
+      ...otherRecordData,
+    });
+    const result = yield response.json();
+
+    console.log("patch response: ", response);
+    console.log("patch result: ", result);
+
+    if (response && response.status !== 200) {
+      console.log("bad");
+      notifyUserError();
+      return yield put(finishedAction());
+    } else {
+      // console.log("good!");
+      // const newDs = [result, ...dataSource];
+      notifyUserSuccess();
+      return yield put(finishedAction());
+    }
+  } catch (error) {
+    console.log("Inserting table data error => ", error);
+    yield put(finishedAction());
+  }
+}
 
 // Request Delete Record
 export function* requestDeleteRequest({
@@ -133,7 +142,7 @@ export function* requestDeleteRequest({
 
     if (isNew) {
       const newDs = deleteDsRow(dataSource, rowId, rowKey);
-      notification.open(notifyProps());
+      notifyUserSuccess();
       return yield put(
         finishedAction({
           dataSource: newDs,
@@ -148,12 +157,11 @@ export function* requestDeleteRequest({
     const response = yield deleteRequest(apiUrl);
 
     if (response && response.status !== 200) {
-      let error;
-      notification.open(notifyProps(error));
+      notifyUserError();
       return yield put(finishedAction());
     } else {
       const newDs = deleteDsRow(dataSource, rowId, rowKey);
-      notification.open(notifyProps());
+      notifyUserSuccess();
       return yield put(
         finishedAction({
           dataSource: newDs,

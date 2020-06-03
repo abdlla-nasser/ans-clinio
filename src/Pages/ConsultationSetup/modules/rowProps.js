@@ -5,5 +5,4 @@ export default {
     ar: "",
     tr: "",
   },
-  isNew: true,
 };

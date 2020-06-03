@@ -10,52 +10,11 @@ import {
   ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD,
   ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED,
   ON_PRESS_CONSULTATION_SETUP_CANCEL,
+  ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD,
+  ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD_FINISHED,
+  ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD,
+  ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
 } from "./types";
-
-const dummData = [
-  {
-    followup: true,
-    _id: "5ed4d12348c39f0da42a6a8c",
-    idValue: "5ed4d12348c39f0da42a6a8c",
-    player: "Messi",
-    name: {
-      en: "Normal consultation",
-      ar: "كشف عادي",
-      tr: "kashf 3ady",
-    },
-    createdAt: "2020-06-01T09:57:55.876Z",
-    updatedAt: "2020-06-01T12:08:23.852Z",
-    __v: 0,
-  },
-  {
-    followup: false,
-    _id: "5ed4d15548c39f0da42a6a8d",
-    idValue: "5ed4d15548c39f0da42a6a8d",
-    player: "Villa",
-    name: {
-      en: "Follow Up",
-      ar: "مراجعه",
-      tr: "morag3a",
-    },
-    createdAt: "2020-06-01T09:58:45.769Z",
-    updatedAt: "2020-06-01T12:13:06.498Z",
-    __v: 0,
-  },
-  {
-    followup: false,
-    _id: "5ed4d1ac48c39f0da42a6a8e",
-    idValue: "5ed4d1ac48c39f0da42a6a8e",
-    player: "Suarez",
-    name: {
-      en: "Urgent consultation",
-      ar: "كشف مستعجل",
-      tr: "kashf mst3gl",
-    },
-    createdAt: "2020-06-01T10:00:12.855Z",
-    updatedAt: "2020-06-01T10:00:12.855Z",
-    __v: 0,
-  },
-];
 
 const initialState = {
   loading: false,
@@ -64,7 +23,7 @@ const initialState = {
   isEditing: false,
   isAddingRecord: false,
   isUpdatingRecord: false,
-  dataSource: dummData,
+  dataSource: [],
   lastColLang: undefined,
 };
 
@@ -107,8 +66,9 @@ export default (state = initialState, action) => {
         selectedRow: recordKey,
         dataSource: [
           {
-            idValue: recordKey,
             ...initialRowData,
+            idValue: recordKey,
+            isNew: true,
           },
           ...ds,
         ],
@@ -138,9 +98,34 @@ export default (state = initialState, action) => {
         }),
       };
 
+    case ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD:
+    case ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD:
+      return {
+        ...state,
+        isActionLoading: true,
+      };
+
+    case ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED:
+      return {
+        ...state,
+        isEditing: false,
+        isAddingRecord: false,
+        isUpdatingRecord: false,
+        selectedRow: undefined,
+        isActionLoading: false,
+        ...action.newState,
+      };
+
     case ON_PRESS_CONSULTATION_SETUP_CANCEL:
       return {
-        ...initialState,
+        ...state,
+        isEditing: false,
+        isAddingRecord: false,
+        selectedRow: undefined,
+        dataSource: state.dataSource.filter(
+          (rec) => rec.idValue !== state.selectedRow
+        ),
       };
 
     case ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD:
