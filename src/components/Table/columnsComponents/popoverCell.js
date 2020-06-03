@@ -12,6 +12,7 @@ const PopoverCell = ({
   renderCell,
 }) => (record) => {
   const {
+    pedro,
     dIdxs,
     isRtl,
     onInputChanged,
@@ -41,7 +42,7 @@ const PopoverCell = ({
 
   if (isSameEditableRow) {
     const handleChange = ({ name, value }, langCode) => {
-      console.log("lang code: ", langCode);
+      console.log("langCode: ", langCode);
       const params = {
         name,
         value: setValueLowerCase ? value.toLowerCase() : value,
@@ -64,6 +65,7 @@ const PopoverCell = ({
           isString && (dIdxs === rowKey || dIdxs === "idValue") && !record.isNew
         }
         isRtl={isRtl}
+        pedro={pedro}
         value={cellValue}
         names={isString ? [dIdxs] : dIdxs}
         error={errs}

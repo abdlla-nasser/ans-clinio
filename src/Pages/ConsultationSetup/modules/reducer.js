@@ -1,4 +1,5 @@
 import initialRowData from "./rowProps";
+import idGenerator from "../../../utils/idGenerator";
 import {
   FETCH_CONSULTATION_SETUP_DATA,
   FETCH_CONSULTATION_SETUP_DATA_FINISHED,
@@ -7,8 +8,7 @@ import {
   ON_PRESS_CONSULTATION_SETUP_ADD,
   ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA,
   ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD,
-  ON_REQUEST_INSERT_UPDATE_CONSULTATION_SETUP_RECORD,
-  ON_REQUEST_INSERT_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
+  ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED,
   ON_PRESS_CONSULTATION_SETUP_CANCEL,
 } from "./types";
 
@@ -58,7 +58,7 @@ const initialState = {
   isEditing: false,
   isAddingRecord: false,
   isUpdatingRecord: false,
-  dataSource: undefined,
+  dataSource: [],
   lastColLang: undefined,
 };
 
@@ -93,7 +93,7 @@ export default (state = initialState, action) => {
 
     case ON_PRESS_CONSULTATION_SETUP_ADD:
       const ds = state.dataSource;
-      const recordKey = ds.length + 1;
+      const recordKey = idGenerator();
       return {
         ...state,
         isEditing: true,
@@ -130,13 +130,34 @@ export default (state = initialState, action) => {
         ...state,
         dataSource: state.dataSource.map((rec) => {
           const isSameRow = rec.idValue === key;
-          return isSameRow ? { ...rec, ...action.inputData } : rec;
+          return isSameRow
+            ? langCode
+              ? { ...rec, [name]: { ...rec[name], [langCode]: value } }
+              : { ...rec, [name]: value }
+            : rec;
         }),
       };
 
     case ON_PRESS_CONSULTATION_SETUP_CANCEL:
       return {
         ...initialState,
+      };
+
+    case ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD:
+      const { idValue } = action.record;
+      return {
+        ...state,
+        isEditing: false,
+        isActionLoading: true,
+        selectedRow: idValue,
+      };
+
+    case ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED:
+      return {
+        ...state,
+        isActionLoading: false,
+        selectedRow: undefined,
+        ...action.newState,
       };
 
     default:

@@ -10,6 +10,7 @@ import {
 import deleteDsRow from "../../../utils/deleteRow";
 import strangeSelector from "../../../utils/selectStrangeReducer";
 import getPropValues from "./getFields";
+import { isCompositeComponentWithType } from "react-dom/test-utils";
 
 export const appBaseSelector = ({ appBaseReducer }) => appBaseReducer;
 
@@ -119,13 +120,48 @@ export function* requestTableData({
 // }
 
 // Request Delete Record
-// export function* requestDeleteRequest({
-//   item,
-//   reducerName,
-//   rowKey,
-//   finishedAction,
-//   API_URL,
-// }) {
-//   try {
-//   } catch (error) {}
-// }
+export function* requestDeleteRequest({
+  record,
+  reducerName,
+  rowKey,
+  API_URL,
+  finishedAction,
+}) {
+  try {
+    const { dataSource } = yield select(strangeSelector(reducerName));
+    const { isNew, [rowKey]: rowId, idValue, ...rest } = record;
+
+    if (isNew) {
+      const newDs = deleteDsRow(dataSource, rowId, rowKey);
+      notification.open(notifyProps());
+      return yield put(
+        finishedAction({
+          dataSource: newDs,
+          isAddingRecord: false,
+        })
+      );
+    }
+
+    const apiUrl = createApiUrl({
+      url: API_URL,
+    });
+    const response = yield deleteRequest(apiUrl);
+
+    if (response && response.status !== 200) {
+      let error;
+      notification.open(notifyProps(error));
+      return yield put(finishedAction());
+    } else {
+      const newDs = deleteDsRow(dataSource, rowId, rowKey);
+      notification.open(notifyProps());
+      return yield put(
+        finishedAction({
+          dataSource: newDs,
+        })
+      );
+    }
+  } catch (error) {
+    yield put(finishedAction());
+    console.log("Deleting table record error => ", error);
+  }
+}

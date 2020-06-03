@@ -97,7 +97,7 @@ export const onDeleteRecord = (record) => ({
   record,
   reducerName,
   rowKey,
-  API_URL: `consultation/${record.id}`,
+  API_URL: `consultation/${record._id}`,
   finishedAction: onDeleteRecordFinshed,
 });
 

@@ -75,7 +75,7 @@ export default ({
           onClick={onClick(clickable, onPressEditOrCancel)}
         />
 
-        {canInsert && (
+        {canInsert && !isAddingRecord && (
           <Icon
             type="plus-circle"
             disabled={disabled}
