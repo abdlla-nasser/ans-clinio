@@ -23,13 +23,23 @@ export const columns = () => [
     },
   },
   {
+    titleLabel: "Follow Up",
+    width: 100,
+    renderView: {
+      type: "popover",
+      renderCell: {
+        dIdxs: "player",
+      },
+    },
+  },
+  {
     titleLabel: "English",
     width: 120,
     renderView: {
       type: "popover",
       renderCell: {
         dIdxs: "name",
-        onChangeUseInputLang: true,
+        langCode: "en",
         getDeepValueInSingleDIndx: ({ values }) => ({
           val: values["en"],
         }),
@@ -43,7 +53,7 @@ export const columns = () => [
       type: "popover",
       renderCell: {
         dIdxs: "name",
-        onChangeUseInputLang: true,
+        langCode: "ar",
         isRtl: true,
         getDeepValueInSingleDIndx: ({ values }) => ({
           val: values["ar"],
@@ -52,12 +62,16 @@ export const columns = () => [
     },
   },
   {
-    titleLabel: "French",
+    titleLabel: "Turkish",
     width: 120,
     renderView: {
       type: "popover",
       renderCell: {
-        dIdxs: "french",
+        dIdxs: "name",
+        langCode: "tr",
+        getDeepValueInSingleDIndx: ({ values }) => ({
+          val: values["tr"],
+        }),
       },
     },
   },

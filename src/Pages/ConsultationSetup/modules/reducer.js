@@ -16,6 +16,8 @@ const dummData = [
   {
     followup: true,
     _id: "5ed4d12348c39f0da42a6a8c",
+    idValue: "5ed4d12348c39f0da42a6a8c",
+    player: "Messi",
     name: {
       en: "Normal consultation",
       ar: "كشف عادي",
@@ -28,6 +30,8 @@ const dummData = [
   {
     followup: false,
     _id: "5ed4d15548c39f0da42a6a8d",
+    idValue: "5ed4d15548c39f0da42a6a8d",
+    player: "Villa",
     name: {
       en: "Follow Up",
       ar: "مراجعه",
@@ -40,6 +44,8 @@ const dummData = [
   {
     followup: false,
     _id: "5ed4d1ac48c39f0da42a6a8e",
+    idValue: "5ed4d1ac48c39f0da42a6a8e",
+    player: "Suarez",
     name: {
       en: "Urgent consultation",
       ar: "كشف مستعجل",
@@ -58,7 +64,7 @@ const initialState = {
   isEditing: false,
   isAddingRecord: false,
   isUpdatingRecord: false,
-  dataSource: [],
+  dataSource: dummData,
   lastColLang: undefined,
 };
 
@@ -117,22 +123,18 @@ export default (state = initialState, action) => {
 
     case ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA:
       const { inputData, key, langCode } = action;
+      const { langCode: sara } = langCode;
       const name = Object.keys(inputData)[0];
       const value = inputData[name];
 
-      // console.log("inputData: ", inputData);
-      // console.log("key: ", key);
-      // console.log("langCode: ", langCode);
-      // console.log("name: ", name);
-      // console.log("value: ", value);
-
+      // console.log("sara:: ", sara);
       return {
         ...state,
         dataSource: state.dataSource.map((rec) => {
           const isSameRow = rec.idValue === key;
           return isSameRow
             ? langCode
-              ? { ...rec, [name]: { ...rec[name], [langCode]: value } }
+              ? { ...rec, [name]: { ...rec[name], [sara]: value } }
               : { ...rec, [name]: value }
             : rec;
         }),

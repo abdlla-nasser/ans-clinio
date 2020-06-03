@@ -47,7 +47,7 @@ export default WithTableHoc({
   mapStateToProps,
   mapDispatchToProps,
   actions,
-  noFetchData: false,
+  noFetchData: true,
   renderColumns: columns,
   pageName: "consultationSetup",
   rowKey: "idValue",

@@ -54,7 +54,7 @@ export const onPressCancel = () => ({
 });
 
 // On change row input value
-export const onChangeRowData = (inputData, key, { langCode }) => {
+export const onChangeRowData = (inputData, key, langCode) => {
   return {
     type: ON_CHANGE_CONSULTATION_SETUP_RECORD_DATA,
     inputData,

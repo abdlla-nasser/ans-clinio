@@ -12,6 +12,7 @@ import {
 const { Fragment, useState } = React;
 
 const PopoverLanguage = ({
+  langCode,
   disabled,
   value,
   onChange,
@@ -31,8 +32,9 @@ const PopoverLanguage = ({
     <Fragment>
       <Input
         inputProps={{
-          onChange: (e) =>
-            onChangeUseInputLang ? onChange(e, "en") : onChange(e),
+          // onChange: (e) =>
+          //   onChangeUseInputLang ? onChange(e, "en") : onChange(e),
+          onChange: (e) => onChange(e, langCode),
           name: names,
           value: value,
           style: { textAlign: isRtl ? "right" : "left" },
