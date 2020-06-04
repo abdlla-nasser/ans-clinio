@@ -12,7 +12,7 @@ import {
 } from "../../../utils/httpRequests";
 import deleteDsRow from "../../../utils/deleteRow";
 import strangeSelector from "../../../utils/selectStrangeReducer";
-import getPropValues from "./getFields";
+// import getPropValues from "./getFields";
 
 export const appBaseSelector = ({ appBaseReducer }) => appBaseReducer;
 
@@ -40,6 +40,7 @@ export function* requestTableData({
 
     yield put(finishedAction(result));
   } catch (error) {
+    notifyUserError();
     console.log("Fetching table data error => ", error);
     yield put(finishedAction());
   }
@@ -48,7 +49,6 @@ export function* requestTableData({
 // Request Insert Record
 export function* requestInsertRecord({
   recordData,
-  rowKey,
   reducerName,
   API_URL,
   finishedAction,
@@ -65,16 +65,17 @@ export function* requestInsertRecord({
     });
     const result = yield response.json();
 
-    console.log("insert response: ", response);
-    console.log("insert result: ", result);
-
     if (response && response.status !== 201) {
       notifyUserError();
       return yield put(finishedAction());
     } else {
-      console.log("rowKey: ", rowKey);
-      const newDs = [result, ...dataSource];
-      console.log("newDs: ", newDs);
+      dataSource.shift();
+      const { _id } = result;
+      const newRecord = {
+        idValue: _id,
+        ...result,
+      };
+      const newDs = [newRecord, ...dataSource];
 
       notifyUserSuccess();
       return yield put(
@@ -92,14 +93,19 @@ export function* requestInsertRecord({
 // Request Update Record
 export function* requestUpdateRecord({
   recordData,
-  rowKey,
   reducerName,
   API_URL,
   finishedAction,
 }) {
   try {
-    const { idValue, isNew, ...otherRecordData } = recordData;
-    const { dataSource } = yield select(strangeSelector(reducerName));
+    const {
+      idValue,
+      _id,
+      createdAt,
+      updatedAt,
+      __v,
+      ...otherRecordData
+    } = recordData;
 
     const apiUrl = createApiUrl({
       url: API_URL,
@@ -109,16 +115,10 @@ export function* requestUpdateRecord({
     });
     const result = yield response.json();
 
-    console.log("patch response: ", response);
-    console.log("patch result: ", result);
-
     if (response && response.status !== 200) {
-      console.log("bad");
       notifyUserError();
       return yield put(finishedAction());
     } else {
-      // console.log("good!");
-      // const newDs = [result, ...dataSource];
       notifyUserSuccess();
       return yield put(finishedAction());
     }

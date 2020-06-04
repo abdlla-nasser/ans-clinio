@@ -17,7 +17,7 @@ const CheckBoxView = ({
         getValueForChangedInput && getValueForChangedInput(checked);
       onChange({
         name: dIdxs,
-        value: checkValue ? checkValue : checked ? "Y" : "N",
+        value: checkValue ? checkValue : checked ? true : false,
         key: rowKeyValue,
       });
     }
@@ -26,7 +26,7 @@ const CheckBoxView = ({
   return (
     <Checkbox
       value={dIdxs}
-      checked={value === (checkedValue || "Y")}
+      checked={value === (checkedValue || true)}
       onChange={handleChange}
     />
   );

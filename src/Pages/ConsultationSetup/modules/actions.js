@@ -83,7 +83,7 @@ export const requestUpdateRecord = (recordData) => ({
   recordData,
   rowKey,
   reducerName,
-  API_URL: `consultation/${recordData.id}`,
+  API_URL: `consultation/${recordData.idValue}`,
   finishedAction: requestUpdateRecordFinished,
 });
 export const requestUpdateRecordFinished = (newState) => ({
