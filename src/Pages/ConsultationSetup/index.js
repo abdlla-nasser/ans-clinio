@@ -50,4 +50,5 @@ export default WithTableHoc({
   renderColumns: columns,
   pageName: "consultationSetup",
   rowKey: "idValue",
+  itemsPropNamesToValidate: ["name.en"],
 });

@@ -65,6 +65,9 @@ export function* requestInsertRecord({
     });
     const result = yield response.json();
 
+    console.log("insert response: ", response);
+    console.log("insert result: ", result);
+
     if (response && response.status !== 201) {
       notifyUserError();
       return yield put(finishedAction());

@@ -102,6 +102,7 @@ export default ({
 
     const onInsertOrUpdate = useCallback(() => {
       const fields = getFields(itemsPropNamesToValidate, currentRecord);
+      console.log("fields:", fields);
       const errors = validateForm(fields);
 
       if (errors) {

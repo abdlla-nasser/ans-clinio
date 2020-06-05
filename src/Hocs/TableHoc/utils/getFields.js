@@ -9,6 +9,9 @@ export default (fieldsArray, mainObj) => {
       }
     });
   }
-
   return fields;
+};
+
+export const testGetFields = (fieldsArray, mainOnj) => {
+  let fields;
 };
