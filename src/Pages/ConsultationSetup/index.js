@@ -13,19 +13,37 @@ import { Menu, Dropdown } from "antd";
 
 const ConsultationSetup = ({ children }) => {
   const dispatch = useDispatch();
+
   const onClick = ({ key }) => {
+    dispatch({
+      type: "RESET_COLS",
+    });
     dispatch({
       type: "SELECT_LAST_COLUMN_LANGUAGE",
       key,
+      thirdColumn: {
+        titleLabel: "Dynamic Column",
+        width: 120,
+        renderView: {
+          type: "popover",
+          renderCell: {
+            dIdxs: "name",
+            langCode: key,
+            getDeepValueInSingleDIndx: ({ values }) => ({
+              val: values[key],
+            }),
+          },
+        },
+      },
     });
   };
 
   const menu = (
     <Menu onClick={onClick}>
-      <Menu.Item key="french">French</Menu.Item>
-      <Menu.Item key="spanish">Spanish</Menu.Item>
-      <Menu.Item key="italian">Italian</Menu.Item>
-      <Menu.Item key="german">German</Menu.Item>
+      <Menu.Item key="tr">Turkish</Menu.Item>
+      <Menu.Item key="es">Spanish</Menu.Item>
+      <Menu.Item key="it">Italian</Menu.Item>
+      <Menu.Item key="de">German</Menu.Item>
     </Menu>
   );
 

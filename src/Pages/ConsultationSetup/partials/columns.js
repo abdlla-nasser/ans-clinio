@@ -1,4 +1,4 @@
-export const columns = () => [
+export const columns = [
   {
     titleLabel: "Follow Up",
     key: "idValue",
@@ -41,18 +41,18 @@ export const columns = () => [
       },
     },
   },
-  {
-    titleLabel: "Turkish",
-    width: 120,
-    renderView: {
-      type: "popover",
-      renderCell: {
-        dIdxs: "name",
-        langCode: "tr",
-        getDeepValueInSingleDIndx: ({ values }) => ({
-          val: values["tr"],
-        }),
-      },
-    },
-  },
+  // {
+  //   titleLabel: "Turkish",
+  //   width: 120,
+  //   renderView: {
+  //     type: "popover",
+  //     renderCell: {
+  //       dIdxs: "name",
+  //       langCode: "tr",
+  //       getDeepValueInSingleDIndx: ({ values }) => ({
+  //         val: values["tr"],
+  //       }),
+  //     },
+  //   },
+  // },
 ];

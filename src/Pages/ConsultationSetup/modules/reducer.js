@@ -16,6 +16,8 @@ import {
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
 } from "./types";
 
+import { columns } from "../partials/columns";
+
 const initialState = {
   loading: false,
   isActionLoading: false,
@@ -24,15 +26,22 @@ const initialState = {
   isAddingRecord: false,
   isUpdatingRecord: false,
   dataSource: [],
+  stateColumns: columns,
   lastColLang: undefined,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case "RESET_COLS":
+      return {
+        ...state,
+        stateColumns: columns,
+      };
     case "SELECT_LAST_COLUMN_LANGUAGE":
       return {
         ...state,
         lastColLang: action.key,
+        stateColumns: [...state.stateColumns, action.thirdColumn],
       };
 
     case FETCH_CONSULTATION_SETUP_DATA:

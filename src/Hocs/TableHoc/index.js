@@ -36,6 +36,7 @@ export default ({
 }) => {
   const TableHoc = (props) => {
     const {
+      stateColumns,
       onPressCancel,
       isEditing,
       isAddingRecord,
@@ -102,7 +103,7 @@ export default ({
 
     const onInsertOrUpdate = useCallback(() => {
       const fields = getFields(itemsPropNamesToValidate, currentRecord);
-      console.log("fields:", fields);
+      // console.log("fields:", fields);
       const errors = validateForm(fields);
 
       if (errors) {
@@ -151,13 +152,14 @@ export default ({
       currentRecord,
     ]);
 
-    const memoizedColumns = useMemo(() => {
-      if (renderColumns) {
-        return renderColumns({
-          onChangeModalShow: otherProps.onChangeModalShow,
-        });
-      } else return false;
-    }, [otherProps]);
+    // const memoizedColumns = useMemo(() => {
+    //   if (renderColumns) {
+    //     return renderColumns({
+    //       onChangeModalShow: otherProps.onChangeModalShow,
+    //     });
+    //   } else return false;
+    // }, [otherProps]);
+    const memoizedColumns = useMemo(() => stateColumns, [stateColumns]);
 
     const getLabelTitle = useCallback((title) => getTitle(labels, title), [
       labels,
