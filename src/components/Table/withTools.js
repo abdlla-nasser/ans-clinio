@@ -7,6 +7,9 @@ import Flex from "../Flex";
 const { memo } = React;
 
 function TableWithToolsContainer({
+  onChangeLastColLang,
+  langSelectOptions,
+  langSelectValue,
   onPressEditOrCancel,
   isAddingRecord,
   isUpdatingRecord,
@@ -30,9 +33,6 @@ function TableWithToolsContainer({
   tableScroll,
   onfetchMoreData,
   onPressSearch,
-  headerSelectOptions,
-  onChangeHeaderSelect,
-  headerSelectNewValue,
   excelView,
   rowSelctionProps,
   onDoubleClickRecord,
@@ -51,6 +51,9 @@ function TableWithToolsContainer({
     const headerTools = (
       <>
         <HeaderTools
+          onChangeLastColLang={onChangeLastColLang}
+          langSelectOptions={langSelectOptions}
+          langSelectValue={langSelectValue}
           onPressEditOrCancel={onPressEditOrCancel}
           isAddingRecord={isAddingRecord}
           isUpdatingRecord={isUpdatingRecord}
@@ -64,9 +67,6 @@ function TableWithToolsContainer({
           isEditing={isEditing}
           isThereSelectedRow={isThereSelectedRow}
           disabled={isActionLoading || loading}
-          headerSelectOptions={headerSelectOptions}
-          onChangeHeaderSelect={onChangeHeaderSelect}
-          headerSelectNewValue={headerSelectNewValue}
           excelView={excelView}
         />
       </>
@@ -82,7 +82,6 @@ function TableWithToolsContainer({
           onSelectRow={onSelect}
           headerTools={headerTools}
           selectedId={selectedRow}
-          // margin="10px auto 5px auto"
           width={width}
           rowSelctionProps={rowSelctionProps}
           onfetchMoreData={onfetchMoreData}

@@ -116,7 +116,7 @@ export function* requestUpdateRecord({
     const response = yield patchRequest(apiUrl, {
       ...otherRecordData,
     });
-    const result = yield response.json();
+    // const result = yield response.json();
 
     if (response && response.status !== 200) {
       notifyUserError();
@@ -141,7 +141,7 @@ export function* requestDeleteRequest({
 }) {
   try {
     const { dataSource } = yield select(strangeSelector(reducerName));
-    const { isNew, [rowKey]: rowId, idValue, ...rest } = record;
+    const { isNew, [rowKey]: rowId } = record;
 
     if (isNew) {
       const newDs = deleteDsRow(dataSource, rowId, rowKey);

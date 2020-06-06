@@ -22,4 +22,7 @@ export const createDispatcher = ({ rowKey, pageName, actions = {} }) => (
   onRowSelection: (keys) => {
     if (actions.onRowSelection) return dispatch(actions.onRowSelection(keys));
   },
+  onSelectLastColLang: (langCode, langLabel) =>
+    dispatch(actions.onSelectLastColLang(langCode, langLabel)),
+  resetColValue: () => dispatch(actions.resetColValue()),
 });

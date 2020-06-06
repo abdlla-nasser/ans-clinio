@@ -14,6 +14,8 @@ import {
   ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD_FINISHED,
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD,
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
+  ON_SELECT_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
+  ON_RESET_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
 } from "./types";
 
 import { columns } from "../partials/columns";
@@ -28,20 +30,26 @@ const initialState = {
   dataSource: [],
   stateColumns: columns,
   lastColLang: undefined,
+  lastColLangList: [
+    { key: "tr", value: "Turkish" },
+    { key: "es", value: "Spanish" },
+    { key: "it", value: "Italian" },
+    { key: "de", value: "German" },
+  ],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "RESET_COLS":
+    case ON_RESET_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP:
       return {
         ...state,
         stateColumns: columns,
       };
-    case "SELECT_LAST_COLUMN_LANGUAGE":
+    case ON_SELECT_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP:
       return {
         ...state,
         lastColLang: action.key,
-        stateColumns: [...state.stateColumns, action.thirdColumn],
+        stateColumns: [...state.stateColumns, action.dynamicColumn],
       };
 
     case FETCH_CONSULTATION_SETUP_DATA:

@@ -13,6 +13,8 @@ import {
   ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD_FINISHED,
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD,
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
+  ON_SELECT_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
+  ON_RESET_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
 } from "./types";
 
 const reducerName = "consultationSetupReducer";
@@ -100,8 +102,30 @@ export const onDeleteRecord = (record) => ({
   API_URL: `consultation/${record._id}`,
   finishedAction: onDeleteRecordFinshed,
 });
-
 const onDeleteRecordFinshed = (newState) => ({
   type: ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED,
   newState,
+});
+
+// On Select last language column
+export const onSelectLastColLang = (langCode, langLabel) => ({
+  type: ON_SELECT_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
+  langCode,
+  dynamicColumn: {
+    titleLabel: langLabel,
+    width: 120,
+    renderView: {
+      type: "popover",
+      renderCell: {
+        dIdxs: "name",
+        langCode: langCode,
+        getDeepValueInSingleDIndx: ({ values }) => ({
+          val: values[langCode],
+        }),
+      },
+    },
+  },
+});
+export const resetColValue = () => ({
+  type: ON_RESET_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
 });

@@ -8,12 +8,22 @@ import {
   requestUpdateRecord,
   onDeleteRecord,
   onPressCancel,
+  onSelectLastColLang,
+  resetColValue,
 } from "../modules/actions";
 
-export const mapStateToProps = ({ consultationSetupReducer }) => ({
+export const mapStateToProps = ({
+  consultationSetupReducer: {
+    lastColLang,
+    lastColLangList,
+    ...otherReducerData
+  },
+}) => ({
   canInsert: true,
   canDelete: true,
-  ...consultationSetupReducer,
+  langSelectOptions: lastColLangList,
+  langSelectValue: lastColLang,
+  ...otherReducerData,
 });
 
 export const actions = {
@@ -26,6 +36,8 @@ export const actions = {
   requestInsertRecord,
   requestUpdateRecord,
   onDeleteRecord,
+  onSelectLastColLang,
+  resetColValue,
 };
 
 export const mapDispatchToProps = (dispatch) => ({

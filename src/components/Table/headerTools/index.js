@@ -16,6 +16,9 @@ function onClick(clickable, callback) {
 }
 
 export default ({
+  onChangeLastColLang,
+  langSelectOptions,
+  langSelectValue,
   onPressEditOrCancel,
   isAddingRecord,
   isUpdatingRecord,
@@ -30,9 +33,6 @@ export default ({
   isEditing,
   disabled,
   isThereSelectedRow,
-  headerSelectOptions,
-  onChangeHeaderSelect,
-  headerSelectNewValue,
   withInfo = true,
   withPrinter = true,
   excelView,
@@ -40,22 +40,7 @@ export default ({
   const clickable = !disabled && isThereSelectedRow;
   const isunClickableField = disabled || !isThereSelectedRow;
   return (
-    <ToolsContainer
-      justify={headerSelectOptions ? "space-between" : "center"}
-      padding="0px 10px"
-    >
-      {headerSelectOptions && (
-        <Select
-          width={400}
-          placeholder="Select"
-          size="default"
-          value={headerSelectNewValue === "-" ? "" : headerSelectNewValue}
-          disabled={disabled}
-          options={headerSelectOptions}
-          onChange={onChangeHeaderSelect}
-        />
-      )}
-
+    <ToolsContainer justify={langSelectOptions ? "space-between" : "center"}>
       <div>
         {(isAddingRecord || isUpdatingRecord) && (
           <Icon
@@ -116,6 +101,19 @@ export default ({
           />
         )}
       </div>
+
+      {langSelectOptions && (
+        <Select
+          width={200}
+          placeholder="Last Column Language"
+          size="default"
+          // value={langSelectValue === "-" ? "" : langSelectValue}
+          value={langSelectValue}
+          // disabled={disabled}
+          options={langSelectOptions}
+          onChange={onChangeLastColLang}
+        />
+      )}
     </ToolsContainer>
   );
 };

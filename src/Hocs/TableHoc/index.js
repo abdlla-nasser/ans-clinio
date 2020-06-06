@@ -36,6 +36,11 @@ export default ({
 }) => {
   const TableHoc = (props) => {
     const {
+      onSelectLastColLang,
+      resetColValue,
+      langSelectOptions,
+      langSelectValue,
+      onChangeLangValue,
       stateColumns,
       onPressCancel,
       isEditing,
@@ -276,9 +281,20 @@ export default ({
       }
     }, [onRowSelection]);
 
+    const handleOnSelectLastColLang = useMemo(
+      () => (langCode, { props: { children: langLabel } }) => {
+        resetColValue();
+        onSelectLastColLang(langCode, langLabel);
+      },
+      [onSelectLastColLang, resetColValue]
+    );
+
     return (
       <WrappedComponent {...parentProps}>
         <CommonView
+          onChangeLastColLang={handleOnSelectLastColLang}
+          langSelectOptions={langSelectOptions}
+          langSelectValue={langSelectValue}
           onPressEditOrCancel={onPressEditOrCancel}
           isAddingRecord={isAddingRecord}
           isUpdatingRecord={isUpdatingRecord}
