@@ -1,6 +1,6 @@
 import React from "react";
 import WithTableHoc from "../../Hocs/TableHoc";
-import { columns } from "./partials/columns";
+import { columns, getExcelSheetProps } from "./partials/columns";
 import {
   mapStateToProps,
   mapDispatchToProps,
@@ -20,6 +20,7 @@ export default WithTableHoc({
   WrappedComponent: ConsultationSetup,
   mapStateToProps,
   mapDispatchToProps,
+  getExcelSheetProps,
   actions,
   renderColumns: columns,
   pageName: "consultationSetup",

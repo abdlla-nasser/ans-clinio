@@ -1,3 +1,31 @@
+export const excelColumns = [
+  {
+    label: "Follow Up",
+    value: "followup",
+  },
+  {
+    label: "English",
+    value: "en",
+  },
+  {
+    label: "Arabic",
+    value: "ar",
+  },
+];
+
+export const getExcelSheetProps = ({ dataSource }) => {
+  const dataSet = dataSource.map(({ name, ...item }) => {
+    return {
+      ...item,
+      ...name,
+    };
+  });
+
+  return {
+    dataSet,
+  };
+};
+
 export const columns = [
   {
     titleLabel: "Follow Up",

@@ -35,6 +35,7 @@ export default ({
 }) => {
   const TableHoc = (props) => {
     const {
+      stateExcelColumns,
       onSelectLastColLang,
       resetColValue,
       langSelectOptions,
@@ -234,13 +235,14 @@ export default ({
     const renderExcelView = useMemo(() => {
       const isDsExsist = isArrayHasData(dataSource);
       if (getExcelSheetProps && isDsExsist) {
-        let { columns, dataSet } = getExcelSheetProps({
+        let { dataSet } = getExcelSheetProps({
           dataSource,
           ...otherProps,
         });
+        let finalExcelColumns;
 
-        if (columns && dataSet) {
-          columns = columns.map(({ label, value }) => {
+        if (stateExcelColumns && dataSet) {
+          finalExcelColumns = stateExcelColumns.map(({ label, value }) => {
             let labelValue = "";
             if (label.includes(",")) {
               const labelsArr = label.split(",");
@@ -260,7 +262,7 @@ export default ({
               sheets={[
                 {
                   dataSet,
-                  columns,
+                  columns: finalExcelColumns,
                   sheetName: pageName,
                 },
               ]}

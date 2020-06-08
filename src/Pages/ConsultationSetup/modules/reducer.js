@@ -18,7 +18,7 @@ import {
   ON_RESET_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
 } from "./types";
 
-import { columns } from "../partials/columns";
+import { columns, excelColumns } from "../partials/columns";
 
 const initialState = {
   loading: false,
@@ -36,6 +36,7 @@ const initialState = {
     { key: "it", value: "Italian" },
     { key: "de", value: "German" },
   ],
+  stateExcelColumns: excelColumns,
 };
 
 export default (state = initialState, action) => {
@@ -44,12 +45,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         stateColumns: columns,
+        stateExcelColumns: excelColumns,
       };
     case ON_SELECT_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP:
       return {
         ...state,
         lastColLang: action.key,
         stateColumns: [...state.stateColumns, action.dynamicColumn],
+        stateExcelColumns: [...state.stateExcelColumns, action.excelColumn],
       };
 
     case FETCH_CONSULTATION_SETUP_DATA:

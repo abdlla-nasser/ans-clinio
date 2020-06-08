@@ -125,6 +125,7 @@ export const onSelectLastColLang = (langCode, langLabel) => ({
       },
     },
   },
+  excelColumn: { label: langLabel, value: langCode },
 });
 export const resetColValue = () => ({
   type: ON_RESET_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
