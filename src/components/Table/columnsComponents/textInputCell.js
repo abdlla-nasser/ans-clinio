@@ -18,7 +18,6 @@ const PopoverCell = ({
     langCode,
     onInputChanged,
     setValueLowerCase,
-    onChangeUseInputLang,
     textValue,
     getDeepValueInSingleDIndx,
     useHover,
@@ -56,7 +55,13 @@ const PopoverCell = ({
         : onChange(params);
     };
 
-    const errs = matchErrors(errors, dIdxs, isString);
+    const errs = matchErrors(
+      errors,
+      dIdxs,
+      isString,
+      getDeepValueInSingleDIndx,
+      langCode
+    );
     const names = isString ? [dIdxs] : dIdxs;
     const disabled =
       isString && (dIdxs === rowKey || dIdxs === "idValue") && !record.isNew;

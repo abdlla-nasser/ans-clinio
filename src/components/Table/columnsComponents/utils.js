@@ -2,11 +2,19 @@ import React from "react";
 import Flex from "../../Flex";
 import PopOver from "antd/lib/popover";
 
-export const matchErrors = (errors, dIdxs, isString) => {
+export const matchErrors = (
+  errors,
+  dIdxs,
+  isString,
+  getDeepValueInSingleDIndx,
+  langCode
+) => {
   let result;
   if (errors) {
     if (isString) {
-      result = errors[dIdxs];
+      if (getDeepValueInSingleDIndx) {
+        result = errors[langCode];
+      } else result = errors[dIdxs];
     } else {
       dIdxs.forEach((key) => {
         if (errors.hasOwnProperty(key)) {
@@ -16,6 +24,7 @@ export const matchErrors = (errors, dIdxs, isString) => {
       });
     }
   }
+  console.log("result is: ", result);
   return result;
 };
 

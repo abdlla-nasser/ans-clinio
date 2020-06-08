@@ -5,7 +5,7 @@ export default (obj) => {
     keys.forEach((key) => {
       const value = obj[key];
       if (!value) {
-        errors = { ...errors, [key]: `Please set ${key} value` };
+        errors = { ...errors, [key]: `* Required field` };
       }
     });
 
