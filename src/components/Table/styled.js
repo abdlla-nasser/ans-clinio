@@ -14,4 +14,5 @@ export const ToolsContainer = styled(TableContainer)`
   justify-content: ${({ justify }) => justify || "center"};
   align-items: center;
   padding-inline-start: 45%;
+  padding-inline-end: 1%;
 `;

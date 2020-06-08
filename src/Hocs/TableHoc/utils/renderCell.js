@@ -1,4 +1,4 @@
-import PopOver from "../../../components/Table/columnsComponents/popoverCell";
+import TextInput from "../../../components/Table/columnsComponents/textInputCell";
 import CheckBoxCell from "../../../components/Table/columnsComponents/checkBoxCell";
 import SelectCell from "../../../components/Table/columnsComponents/SelectCell";
 import InputNumber from "../../../components/Table/columnsComponents/numberInput";
@@ -7,7 +7,7 @@ import DateInput from "../../../components/Table/columnsComponents/dateCell";
 import ImageView from "../../../components/Table/columnsComponents/ImageCell";
 
 const CELLS = {
-  popover: PopOver,
+  text: TextInput,
   checkbox: CheckBoxCell,
   list: SelectCell,
   inputnumber: InputNumber,

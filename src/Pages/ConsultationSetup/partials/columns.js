@@ -2,7 +2,7 @@ export const columns = [
   {
     titleLabel: "Follow Up",
     key: "idValue",
-    width: 80,
+    width: 50,
     renderView: {
       type: "checkbox",
       renderCell: {
@@ -16,7 +16,7 @@ export const columns = [
     titleLabel: "English",
     width: 120,
     renderView: {
-      type: "popover",
+      type: "text",
       renderCell: {
         dIdxs: "name",
         langCode: "en",
@@ -30,7 +30,7 @@ export const columns = [
     titleLabel: "Arabic",
     width: 120,
     renderView: {
-      type: "popover",
+      type: "text",
       renderCell: {
         dIdxs: "name",
         langCode: "ar",
@@ -41,18 +41,4 @@ export const columns = [
       },
     },
   },
-  // {
-  //   titleLabel: "Turkish",
-  //   width: 120,
-  //   renderView: {
-  //     type: "popover",
-  //     renderCell: {
-  //       dIdxs: "name",
-  //       langCode: "tr",
-  //       getDeepValueInSingleDIndx: ({ values }) => ({
-  //         val: values["tr"],
-  //       }),
-  //     },
-  //   },
-  // },
 ];

@@ -1,7 +1,8 @@
 import React from "react";
 import { matchErrors } from "./utils";
-import PopoverLanguage from "../../PopoverLanguage";
 import { renderPopover } from "./utils";
+import Input from "../../Input";
+import styled from "styled-components";
 
 const PopoverCell = ({
   rowKey,
@@ -22,7 +23,6 @@ const PopoverCell = ({
     getDeepValueInSingleDIndx,
     useHover,
     dIXForHover,
-    ...popOverProps
   } = renderCell;
   const { [rowKey]: rowKeyValue } = record;
   const isSameEditableRow = isEditing && selectedRow === rowKeyValue;
@@ -57,20 +57,26 @@ const PopoverCell = ({
     };
 
     const errs = matchErrors(errors, dIdxs, isString);
+    const names = isString ? [dIdxs] : dIdxs;
+    const disabled =
+      isString && (dIdxs === rowKey || dIdxs === "idValue") && !record.isNew;
 
     return (
-      <PopoverLanguage
-        disabled={
-          isString && (dIdxs === rowKey || dIdxs === "idValue") && !record.isNew
-        }
-        langCode={langCode}
-        isRtl={isRtl}
-        value={cellValue}
-        names={isString ? [dIdxs] : dIdxs}
-        error={errs}
-        onChange={handleChange}
-        {...popOverProps}
-      />
+      <>
+        <Input
+          width="100%"
+          containerStyle={{ padding: "0 40px" }}
+          inputProps={{
+            onChange: (e) =>
+              langCode ? handleChange(e, langCode) : handleChange(e),
+            name: names,
+            value: cellValue,
+            style: { textAlign: isRtl ? "right" : "left" },
+            disabled,
+          }}
+        />
+        {errs && <ErrorView children={errs} />}
+      </>
     );
   }
   return useHover
@@ -85,3 +91,12 @@ const PopoverCell = ({
     : cellValue;
 };
 export default PopoverCell;
+
+const ErrorView = styled.span`
+  height: 13px;
+  display: block;
+  color: red;
+  font-size: 13px;
+  font-family: Roboto;
+  margin: 3px 0px;
+`;
