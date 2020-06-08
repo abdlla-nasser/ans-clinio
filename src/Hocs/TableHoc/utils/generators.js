@@ -50,6 +50,7 @@ export function* requestTableData({
 export function* requestInsertRecord({
   recordData,
   reducerName,
+  rowKey,
   API_URL,
   finishedAction,
 }) {
@@ -65,20 +66,22 @@ export function* requestInsertRecord({
     });
     const result = yield response.json();
 
-    console.log("insert response: ", response);
-    console.log("insert result: ", result);
-
     if (response && response.status !== 201) {
+      const newDs = deleteDsRow(dataSource, idValue, rowKey);
       notifyUserError();
-      return yield put(finishedAction());
+      return yield put(
+        finishedAction({
+          dataSource: newDs,
+        })
+      );
     } else {
-      dataSource.shift();
+      const datasource = deleteDsRow(dataSource, idValue, rowKey);
       const { _id } = result;
       const newRecord = {
         idValue: _id,
         ...result,
       };
-      const newDs = [newRecord, ...dataSource];
+      const newDs = [newRecord, ...datasource];
 
       notifyUserSuccess();
       return yield put(

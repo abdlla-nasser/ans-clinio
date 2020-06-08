@@ -24,7 +24,6 @@ export default ({
   actions,
   rowKey,
   width = "100%",
-  renderColumns,
   itemsPropNamesToValidate = [],
   useModalState,
   pageName = "",
@@ -107,8 +106,8 @@ export default ({
     );
 
     const onInsertOrUpdate = useCallback(() => {
-      const fields = getFields(itemsPropNamesToValidate, currentRecord);
-      // console.log("fields:", fields);
+      // const fields = getFields(itemsPropNamesToValidate, currentRecord);
+      const fields = getFields(itemsPropNamesToValidate, currentRecord.name);
       const errors = validateForm(fields);
 
       if (errors) {
