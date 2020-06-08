@@ -115,7 +115,7 @@ export const onSelectLastColLang = (langCode, langLabel) => ({
     titleLabel: langLabel,
     width: 120,
     renderView: {
-      type: "popover",
+      type: "text",
       renderCell: {
         dIdxs: "name",
         langCode: langCode,
