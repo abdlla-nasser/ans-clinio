@@ -43,6 +43,7 @@ export const columns = [
   {
     titleLabel: "English",
     width: 120,
+    sorter: true,
     dataIdxSearch: "en",
     renderView: {
       type: "text",
@@ -58,6 +59,7 @@ export const columns = [
   {
     titleLabel: "Arabic",
     width: 120,
+    sorter: true,
     dataIdxSearch: "ar",
     renderView: {
       type: "text",

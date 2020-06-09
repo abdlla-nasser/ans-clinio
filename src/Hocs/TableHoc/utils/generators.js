@@ -38,7 +38,7 @@ export function* requestTableData({
     const response = yield getRequest(apiUrl);
     const result = yield response.json();
 
-    yield put(finishedAction(result));
+    yield put(finishedAction(result, !!sorter));
   } catch (error) {
     notifyUserError();
     console.log("Fetching table data error => ", error);

@@ -87,7 +87,7 @@ const TableView = function ({
     if (isObjHasData(sorter) && onfetchMoreData) {
       let { columnKey, field, order } = sorter;
       order = order === "ascend" ? "ASC" : "DESC";
-      onfetchMoreData(`${columnKey || field}, ${order}`);
+      onfetchMoreData(`${columnKey || field},${order}`);
     }
 
     if (isObjHasData(filters) && onPressSearch) {
