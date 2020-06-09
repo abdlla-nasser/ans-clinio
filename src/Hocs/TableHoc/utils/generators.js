@@ -179,3 +179,31 @@ export function* requestDeleteRequest({
     console.log("Deleting table record error => ", error);
   }
 }
+
+// Search Table Data
+export function* requestSearchTableData({ API_URL, finishedAction, filters }) {
+  try {
+    if (Boolean(filters)) {
+      const apiUrl = createApiUrl({
+        url: API_URL,
+        params: {
+          ...filters,
+        },
+      });
+
+      const response = yield getRequest(apiUrl);
+      const result = yield response.json();
+
+      console.log("search apiUrl: ", apiUrl);
+      console.log("search response: ", response);
+      console.log("search result: ", result);
+
+      return yield put(finishedAction(result));
+    }
+
+    yield put(finishedAction());
+  } catch (error) {
+    console.log("Error while Searching Table Data => ", error);
+    yield put(finishedAction());
+  }
+}

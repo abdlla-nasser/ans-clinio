@@ -271,7 +271,7 @@ export default ({
         }
       }
       return null;
-    }, [dataSource, otherProps, getLabelTitle]);
+    }, [dataSource, otherProps, getLabelTitle, stateExcelColumns]);
 
     const rowSelectionProps = useMemo(() => {
       if (rowSelectionPropName && onRowSelection) {

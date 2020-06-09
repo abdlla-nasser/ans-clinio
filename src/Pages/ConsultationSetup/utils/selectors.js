@@ -10,6 +10,8 @@ import {
   onPressCancel,
   onSelectLastColLang,
   resetColValue,
+  onPressSearch,
+  resetFilter,
 } from "../modules/actions";
 
 export const mapStateToProps = ({
@@ -32,12 +34,14 @@ export const actions = {
   onPressCancel,
   onAdd: onAddNewRecord,
   onSelectRecord,
+  onPressSearch,
   onChangePopOverData: onChangeRowData,
   requestInsertRecord,
   requestUpdateRecord,
   onDeleteRecord,
   onSelectLastColLang,
   resetColValue,
+  resetFilter,
 };
 
 export const mapDispatchToProps = (dispatch) => ({

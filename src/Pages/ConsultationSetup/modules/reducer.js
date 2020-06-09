@@ -16,9 +16,79 @@ import {
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
   ON_SELECT_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
   ON_RESET_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
+  ON_PRESS_SEARCH_CONSULTATION_SETUP,
+  ON_PRESS_SEARCH_CONSULTATION_SETUP_FINISHED,
+  ON_RESET_FILTER_CONSULTATION_SETUP,
 } from "./types";
 
 import { columns, excelColumns } from "../partials/columns";
+
+const dummyData = [
+  {
+    followup: false,
+    _id: "5eda8c5c4d02034b44363f8a",
+    idValue: "5eda8c5c4d02034b44363f8a",
+    name: {
+      en: "English 1",
+      ar: "Arabic 1",
+      tr: "Turkish 1 test",
+      es: "Spanish 1",
+      it: "Italian 1",
+      de: "German 1",
+    },
+    createdAt: "2020-06-05T18:18:04.337Z",
+    updatedAt: "2020-06-08T19:29:06.772Z",
+    __v: 0,
+  },
+  {
+    followup: false,
+    _id: "5eda8cae4d02034b44363f8b",
+    idValue: "5eda8cae4d02034b44363f8b",
+    name: {
+      en: "English 2",
+      ar: "Arabic 2",
+      tr: "Turkish 2",
+      es: "Spanish 2",
+      it: "Italian 2",
+      de: "German 2",
+    },
+    createdAt: "2020-06-05T18:19:26.201Z",
+    updatedAt: "2020-06-05T18:19:26.201Z",
+    __v: 0,
+  },
+  {
+    followup: false,
+    _id: "5eda8cd14d02034b44363f8c",
+    idValue: "5eda8cd14d02034b44363f8c",
+    name: {
+      en: "English 3",
+      ar: "Arabic 3",
+      tr: "Turkish 3",
+      es: "Spanish 3",
+      it: "Italian 3",
+      de: "German 3",
+    },
+    createdAt: "2020-06-05T18:20:01.580Z",
+    updatedAt: "2020-06-05T18:20:01.580Z",
+    __v: 0,
+  },
+  {
+    followup: false,
+    _id: "5eda8cdd4d02034b44363f8d",
+    idValue: "5eda8cdd4d02034b44363f8d",
+    name: {
+      en: "English 4",
+      ar: "Arabic 4",
+      tr: "Turkish 4",
+      es: "Spanish 4",
+      it: "Italian 4",
+      de: "German 4",
+    },
+    createdAt: "2020-06-05T18:20:13.618Z",
+    updatedAt: "2020-06-05T18:20:13.618Z",
+    __v: 0,
+  },
+];
 
 const initialState = {
   loading: false,
@@ -27,7 +97,7 @@ const initialState = {
   isEditing: false,
   isAddingRecord: false,
   isUpdatingRecord: false,
-  dataSource: [],
+  dataSource: dummyData,
   stateColumns: columns,
   lastColLang: undefined,
   lastColLangList: [
@@ -56,6 +126,7 @@ export default (state = initialState, action) => {
       };
 
     case FETCH_CONSULTATION_SETUP_DATA:
+    case ON_PRESS_SEARCH_CONSULTATION_SETUP:
       return {
         ...state,
         loading: true,
@@ -68,6 +139,19 @@ export default (state = initialState, action) => {
         // dataSource: action.isSorting ? newDs : [...(state.dataSource || []), ...newDs],
         dataSource: newDs,
         loading: false,
+      };
+
+    case ON_PRESS_SEARCH_CONSULTATION_SETUP_FINISHED:
+      return {
+        ...state,
+        dataSource: action.data,
+        loading: false,
+      };
+
+    case ON_RESET_FILTER_CONSULTATION_SETUP:
+      return {
+        ...state,
+        dataSource: null,
       };
 
     case ON_SELECT_CONSULTATION_SETUP_ROW:

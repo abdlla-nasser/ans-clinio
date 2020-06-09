@@ -17,7 +17,7 @@ export const createDispatcher = ({ rowKey, pageName, actions = {} }) => (
   requestUpdateRecord: (recordData) =>
     dispatch(actions.requestUpdateRecord(recordData)),
   onDelete: (item) => dispatch(actions.onDeleteRecord(item)),
-  clearFilter: () => dispatch(actions.resetFilter),
+  clearFilter: () => dispatch(actions.resetFilter()),
   getPageLabels: () => dispatch(requestPageLabels(pageName)),
   onRowSelection: (keys) => {
     if (actions.onRowSelection) return dispatch(actions.onRowSelection(keys));

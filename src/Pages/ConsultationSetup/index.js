@@ -22,6 +22,7 @@ export default WithTableHoc({
   mapDispatchToProps,
   getExcelSheetProps,
   actions,
+  noFetchData: true,
   renderColumns: columns,
   pageName: "consultationSetup",
   rowKey: "idValue",

@@ -15,6 +15,9 @@ import {
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD_FINISHED,
   ON_SELECT_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
   ON_RESET_LAST_COLUMN_LANGUAGE_CONSULTATION_SETUP,
+  ON_PRESS_SEARCH_CONSULTATION_SETUP,
+  ON_PRESS_SEARCH_CONSULTATION_SETUP_FINISHED,
+  ON_RESET_FILTER_CONSULTATION_SETUP,
 } from "./types";
 
 const reducerName = "consultationSetupReducer";
@@ -105,6 +108,21 @@ export const onDeleteRecord = (record) => ({
 const onDeleteRecordFinshed = (newState) => ({
   type: ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD_FINISHED,
   newState,
+});
+
+// On press search button
+export const onPressSearch = (filters) => ({
+  type: ON_PRESS_SEARCH_CONSULTATION_SETUP,
+  API_URL: "consultation",
+  filters,
+  finishedAction: onRequestSearchFinished,
+});
+export const onRequestSearchFinished = (result) => ({
+  type: ON_PRESS_SEARCH_CONSULTATION_SETUP_FINISHED,
+  data: result && normalizer(result),
+});
+export const resetFilter = () => ({
+  type: ON_RESET_FILTER_CONSULTATION_SETUP,
 });
 
 // On Select last language column

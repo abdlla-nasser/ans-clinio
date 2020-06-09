@@ -43,6 +43,7 @@ export const columns = [
   {
     titleLabel: "English",
     width: 120,
+    dataIdxSearch: "en",
     renderView: {
       type: "text",
       renderCell: {
@@ -57,6 +58,7 @@ export const columns = [
   {
     titleLabel: "Arabic",
     width: 120,
+    dataIdxSearch: "ar",
     renderView: {
       type: "text",
       renderCell: {

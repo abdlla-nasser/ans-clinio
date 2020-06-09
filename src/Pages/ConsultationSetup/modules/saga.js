@@ -4,6 +4,7 @@ import {
   requestTableData,
   requestUpdateRecord,
   requestDeleteRequest,
+  requestSearchTableData,
 } from "../../../Hocs/TableHoc/utils/generators";
 
 import {
@@ -11,6 +12,7 @@ import {
   ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD,
   ON_REQUEST_INSERT_CONSULTATION_SETUP_RECORD,
   ON_REQUEST_UPDATE_CONSULTATION_SETUP_RECORD,
+  ON_PRESS_SEARCH_CONSULTATION_SETUP,
 } from "./types";
 
 export default function* ConsultationSetupSaga() {
@@ -32,5 +34,8 @@ export default function* ConsultationSetupSaga() {
       ON_REQUEST_DELETE_CONSULTATION_SETUP_RECORD,
       requestDeleteRequest
     ),
+  ]);
+  yield all([
+    takeLatest(ON_PRESS_SEARCH_CONSULTATION_SETUP, requestSearchTableData),
   ]);
 }
