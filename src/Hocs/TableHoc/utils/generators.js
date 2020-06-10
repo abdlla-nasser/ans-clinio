@@ -21,6 +21,7 @@ export function* requestTableData({
   reducerName,
   API_URL,
   sorter,
+  filters,
   finishedAction,
   addtionalParams = null,
 }) {
@@ -33,12 +34,13 @@ export function* requestTableData({
         ...addtionalParams,
         poffset: dataSource && !sorter ? dataSource.length : 0,
         ...(sorter ? { orderby: sorter } : null),
+        ...(filters ? filters : null),
       },
     });
     const response = yield getRequest(apiUrl);
     const result = yield response.json();
 
-    yield put(finishedAction(result, !!sorter));
+    yield put(finishedAction(result, !!sorter, !!filters));
   } catch (error) {
     notifyUserError();
     console.log("Fetching table data error => ", error);

@@ -3,7 +3,7 @@ import { requestPageLabels } from "../../../global/actions/labels";
 export const createDispatcher = ({ rowKey, pageName, actions = {} }) => (
   dispatch
 ) => ({
-  fetchData: (sorter) => dispatch(actions.fetchData(sorter)),
+  fetchData: (sorter, filters) => dispatch(actions.fetchData(sorter, filters)),
   onPressEdit: () => dispatch(actions.onPressEdit()),
   onAdd: () => dispatch(actions.onAdd()),
   onPressCancel: () => dispatch(actions.onPressCancel()),

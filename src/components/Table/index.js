@@ -84,18 +84,19 @@ const TableView = function ({
   const formatFilters = useCallback(getFilters, [getFilters]);
 
   const handleTableChange = (pagination, filters, sorter) => {
+    let finalSorter;
+    let finalFilters;
+
     if (isObjHasData(sorter) && onfetchMoreData) {
       let { columnKey, field, order } = sorter;
       order = order === "ascend" ? "asc" : "desc";
-      onfetchMoreData(`${columnKey || field},${order}`);
+      finalSorter = `${columnKey || field},${order}`;
+    }
+    if (isObjHasData(filters) && onfetchMoreData) {
+      finalFilters = formatFilters(filters);
     }
 
-    if (isObjHasData(filters) && onPressSearch) {
-      const filtersObj = formatFilters(filters);
-      if (isObjHasData(filtersObj)) {
-        onPressSearch(filtersObj);
-      }
-    }
+    onfetchMoreData(finalSorter, finalFilters);
   };
 
   const handleSelectCheckbox = useCallback(

@@ -24,19 +24,21 @@ const reducerName = "consultationSetupReducer";
 const rowKey = "idValue";
 
 // Fetch initial data
-export const fetchData = (sorter) => {
+export const fetchData = (sorter, filters) => {
   return {
     type: FETCH_CONSULTATION_SETUP_DATA,
     reducerName,
     API_URL: "consultation",
     sorter,
+    filters,
     finishedAction: fetchDataFinished,
   };
 };
-export const fetchDataFinished = (result, isSorting) => ({
+export const fetchDataFinished = (result, isSorted, isFiltered) => ({
   type: FETCH_CONSULTATION_SETUP_DATA_FINISHED,
   data: result && normalizer(result),
-  isSorting,
+  isSorted,
+  isFiltered,
 });
 
 // On select record action

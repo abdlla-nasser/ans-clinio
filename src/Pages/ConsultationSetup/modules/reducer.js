@@ -69,9 +69,10 @@ export default (state = initialState, action) => {
       const newDs = action.data || [];
       return {
         ...state,
-        dataSource: action.isSorting
-          ? newDs
-          : [...(state.dataSource || []), ...newDs],
+        dataSource:
+          action.isSorted || action.isFiltered
+            ? newDs
+            : [...(state.dataSource || []), ...newDs],
         // dataSource: newDs,
         loading: false,
       };
