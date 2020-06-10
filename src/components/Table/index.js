@@ -86,7 +86,7 @@ const TableView = function ({
   const handleTableChange = (pagination, filters, sorter) => {
     if (isObjHasData(sorter) && onfetchMoreData) {
       let { columnKey, field, order } = sorter;
-      order = order === "ascend" ? "ASC" : "DESC";
+      order = order === "ascend" ? "asc" : "desc";
       onfetchMoreData(`${columnKey || field},${order}`);
     }
 
