@@ -95,8 +95,11 @@ const TableView = function ({
     if (isObjHasData(filters) && onfetchMoreData) {
       finalFilters = formatFilters(filters);
     }
-
-    onfetchMoreData(finalSorter, finalFilters);
+    if (!finalSorter && !finalFilters) {
+      return;
+    } else {
+      return onfetchMoreData(finalSorter, finalFilters);
+    }
   };
 
   const handleSelectCheckbox = useCallback(
