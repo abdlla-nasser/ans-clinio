@@ -66,14 +66,19 @@ export default (state = initialState, action) => {
       };
 
     case FETCH_CONSULTATION_SETUP_DATA_FINISHED:
-      const newDs = action.data || [];
+      const dataFromServer = action.data || [];
+      const isDataSortedOrFiltered = action.isSorted || action.isFiltered;
+
       return {
         ...state,
-        dataSource:
-          action.isSorted || action.isFiltered
-            ? newDs
-            : [...(state.dataSource || []), ...newDs],
-        // dataSource: newDs,
+        dataSource: isDataSortedOrFiltered
+          ? dataFromServer
+          : [...(state.dataSource || []), ...dataFromServer],
+        // dataSource:
+        //   action.isSorted || action.isFiltered
+        //     ? newDs
+        //     : [...(state.dataSource || []), ...dataFromServer],
+        // dataSource: dataFromServer,
         loading: false,
       };
 
