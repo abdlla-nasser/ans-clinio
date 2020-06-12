@@ -1,7 +1,7 @@
 export const excelColumns = [
   {
-    label: "Follow Up",
-    value: "followup",
+    label: "Codes",
+    value: "sys_country_code3",
   },
   {
     label: "English",
@@ -28,21 +28,19 @@ export const getExcelSheetProps = ({ dataSource }) => {
 
 export const columns = [
   {
-    titleLabel: "Follow Up",
+    titleLabel: "Code",
     key: "idValue",
-    width: "5%",
+    width: 50,
     renderView: {
-      type: "checkbox",
+      type: "text",
       renderCell: {
-        dIdxs: "followup",
-        checkedValue: true,
-        getValueForChangedInput: (checked) => (checked ? true : false),
+        dIdxs: "sys_country_code3",
       },
     },
   },
   {
     titleLabel: "English",
-    width: "30%",
+    width: 300,
     sorter: true,
     dataIdxSearch: "en",
     renderView: {
@@ -58,7 +56,7 @@ export const columns = [
   },
   {
     titleLabel: "Arabic",
-    width: "30%",
+    width: 300,
     sorter: true,
     dataIdxSearch: "ar",
     renderView: {

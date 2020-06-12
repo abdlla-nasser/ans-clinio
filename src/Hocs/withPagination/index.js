@@ -14,7 +14,7 @@ export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
       withPagination = true,
     } = props;
 
-    const [pageSize, updatePageSize] = useState(recordsPerPage || 20);
+    const [pageSize, updatePageSize] = useState(recordsPerPage || 5);
     const [currentPage, updateCurrentPage] = useState(1);
 
     const isDataSourceExsist = useMemo(() => isArrayHasData(dataSource), [
