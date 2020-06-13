@@ -1,4 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
+import { getRequest } from "./httpRequests";
+import createApiUrl from "./createApiUrl";
 
 export function usePrevious(value) {
   const ref = useRef();
@@ -8,6 +11,9 @@ export function usePrevious(value) {
   return ref.current;
 }
 
+/**
+ *  Custom Hook to watch user activity
+ */
 function watchUserActivity({ startTimer, resetTimer }) {
   window.addEventListener("mousemove", resetTimer, false);
   window.addEventListener("mousedown", resetTimer, false);
@@ -56,3 +62,32 @@ export function useIdleTimer(action, timeInterval) {
     //eslint-disable-next-line
   }, [startTimer, resetTimer]);
 }
+
+/**
+ *  Custom hook to retrieve labels
+ */
+export const useRequestLabels = (pageName) => {
+  const [labels, setLabels] = useState({});
+  const language = useSelector(
+    ({ appBaseReducer }) => appBaseReducer.language.language_code
+  );
+  const prevLang = usePrevious(language);
+  const isLangChanged = language !== prevLang;
+
+  const fetchPageLabel = useCallback(async () => {
+    let response = await getRequest(
+      createApiUrl({ url: `PageLabels/${pageName}/${language}` })
+    );
+    response = await response.json();
+    setLabels(response);
+  }, [language, pageName]);
+
+  useEffect(() => {
+    if (isLangChanged) {
+      fetchPageLabel();
+    }
+    //eslint-disable-next-line
+  }, [isLangChanged]);
+
+  return { labels };
+};

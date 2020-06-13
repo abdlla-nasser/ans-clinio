@@ -1,12 +1,13 @@
 export const PAGE_SIZE_OPTIONS = ["5", "10", "20", "50", "100", "all"];
 
-export const createSelectOptions = sizes => {
+export const createSelectOptions = (sizes) => {
   sizes = sizes || PAGE_SIZE_OPTIONS;
-  return sizes.map(item => {
+  return sizes.map((item) => {
     const canBeNumber = !isNaN(+item);
     return {
       key: canBeNumber ? +item : item,
-      value: canBeNumber ? `${item} / page` : item
+      value: canBeNumber ? item : item,
+      // value: canBeNumber ? `${item} / page` : item,
     };
   });
 };
@@ -22,7 +23,7 @@ export const getPageNumbers = (total, recordsPerPage) => {
 
 export const SIDES = {
   LEFT_PAGE: "LEFT",
-  RIGHT_PAGE: "RIGHT"
+  RIGHT_PAGE: "RIGHT",
 };
 
 const range = (from, to, step = 1) => {
@@ -39,7 +40,7 @@ const range = (from, to, step = 1) => {
 export const fetchPageNumbers = ({
   pageNeighbours,
   totalPages,
-  currentPage
+  currentPage,
 }) => {
   const totalNumbers = pageNeighbours * 2 + 2;
   if (totalPages > totalNumbers) {

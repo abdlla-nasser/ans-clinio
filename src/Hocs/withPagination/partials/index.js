@@ -27,6 +27,7 @@ export default ({
   const isRTL = useSelector(
     ({ appBaseReducer }) => appBaseReducer.language.r2l
   );
+
   const pageNeighbours = Math.max(0, Math.min(1, 2));
   const totalPages = pagesNumbers.length;
 
@@ -115,7 +116,7 @@ export default ({
             height={40}
             options={options}
             size="default"
-            width={120}
+            width={60}
             onChange={onUpdatePageSize}
             value={pageSize}
           />

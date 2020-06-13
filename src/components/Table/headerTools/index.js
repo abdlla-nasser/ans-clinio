@@ -2,6 +2,7 @@ import React from "react";
 import { ToolsContainer } from "../styled";
 import Icon from "../../Icon";
 import loadable from "../../Loadable";
+import { useRequestLabels } from "../../../utils/customUseHooks";
 
 const Select = loadable(() => import("../../Select"));
 
@@ -40,6 +41,8 @@ export default ({
 }) => {
   const clickable = !disabled && isThereSelectedRow;
   const isunClickableField = disabled || !isThereSelectedRow;
+  const { labels } = useRequestLabels("tableHoc");
+
   return (
     <ToolsContainer justify={langSelectOptions ? "space-between" : "center"}>
       <div>
@@ -106,7 +109,7 @@ export default ({
       {langSelectOptions && (
         <Select
           width={200}
-          placeholder="Last Column Language"
+          placeholder={labels && labels.lstcollang}
           size="default"
           value={langSelectValue}
           // disabled={disabled}

@@ -6,11 +6,13 @@ import {
   mapDispatchToProps,
   actions,
 } from "./utils/selectors";
+import PageTitle from "../../components/Text/PageTitle";
 
-const ConsultationSetup = ({ children }) => {
+const ConsultationSetup = ({ children, labels }) => {
+  const pageTitle = labels && labels.cnsltstup;
   return (
     <>
-      <h1>Consultation Setup</h1>
+      <PageTitle children={pageTitle} />
       {children}
     </>
   );
@@ -25,5 +27,6 @@ export default WithTableHoc({
   renderColumns: columns,
   pageName: "consultationSetup",
   rowKey: "idValue",
+  requiredProps: ["labels"],
   itemsPropNamesToValidate: ["en", "ar"],
 });
