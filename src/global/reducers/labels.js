@@ -2,6 +2,7 @@ import { GET_PAGE_LABELS_FINISHED } from "../types/labels";
 
 const initialState = {
   loginLabels: undefined,
+  consultationSetupLabels: undefined,
 };
 
 export default (state = initialState, action) => {

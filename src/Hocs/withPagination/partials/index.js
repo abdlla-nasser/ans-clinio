@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Container, PageItem } from "./styled";
 import Flex from "../../../components/Flex";
 import Icon from "../../../components/Icon";
@@ -23,6 +24,9 @@ export default ({
   currentPage,
   disableNextIcon,
 }) => {
+  const isRTL = useSelector(
+    ({ appBaseReducer }) => appBaseReducer.language.r2l
+  );
   const pageNeighbours = Math.max(0, Math.min(1, 2));
   const totalPages = pagesNumbers.length;
 
@@ -64,7 +68,7 @@ export default ({
         <PaginationItem
           disabled={currentPage === 1}
           onClick={onSelectPage(currentPage === 1 ? 1 : currentPage - 1)}
-          type="left"
+          type={isRTL ? "right" : "left"}
         />
 
         {pages.map((page, index) => {
@@ -101,7 +105,7 @@ export default ({
         <PaginationItem
           onClick={!disableNextIcon ? onClickNextIcon : undefined}
           disabled={disableNextIcon}
-          type="right"
+          type={isRTL ? "left" : "right"}
         />
 
         <PageItem noBorder>

@@ -2,6 +2,7 @@ import React from "react";
 import { ToolsContainer } from "../styled";
 import Icon from "../../Icon";
 import loadable from "../../Loadable";
+
 const Select = loadable(() => import("../../Select"));
 
 const MARGIN_END = 7;
@@ -107,7 +108,6 @@ export default ({
           width={200}
           placeholder="Last Column Language"
           size="default"
-          // value={langSelectValue === "-" ? "" : langSelectValue}
           value={langSelectValue}
           // disabled={disabled}
           options={langSelectOptions}

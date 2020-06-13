@@ -79,12 +79,12 @@ export default ({
     const [formError, setFormError] = useState(undefined);
     const [ismodalVisible, setIsModalVisible] = useState(false);
 
-    const prevLang = usePrevious(language);
-    const isPrevEqualCurrentlang = language === prevLang;
+    const prevLang = usePrevious(language.language_code);
+    const isPrevEqualCurrentlang = language.language_code === prevLang;
 
     useEffect(() => {
-      if (language && !isPrevEqualCurrentlang) {
-        getPageLabels();
+      if (language && language.language_code && !isPrevEqualCurrentlang) {
+        getPageLabels(pageName, language.language_code);
         if (!noFetchData) {
           fetchData();
         }

@@ -28,7 +28,7 @@ export const getExcelSheetProps = ({ dataSource }) => {
 
 export const columns = [
   {
-    titleLabel: "Follow Up",
+    titleLabel: "followup",
     key: "idValue",
     width: "5%",
     renderView: {
@@ -41,7 +41,7 @@ export const columns = [
     },
   },
   {
-    titleLabel: "English",
+    titleLabel: "english",
     width: "30%",
     sorter: true,
     dataIdxSearch: "en",
@@ -57,7 +57,7 @@ export const columns = [
     },
   },
   {
-    titleLabel: "Arabic",
+    titleLabel: "arabic",
     width: "30%",
     sorter: true,
     dataIdxSearch: "ar",
