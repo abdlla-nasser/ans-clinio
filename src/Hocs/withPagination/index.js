@@ -8,6 +8,7 @@ const Pagination = lazy(() => import("./partials/index"));
 export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
   const WrapperComponent = (props) => {
     const {
+      total,
       dataSource,
       onfetchMoreData,
       recordsPerPage,
@@ -52,14 +53,20 @@ export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
 
     const disableNextIcon = useMemo(() => {
       if (isDataSourceExsist) {
-        const { total } = dataSource[dataSource.length - 1];
         const len = pagesNumbers.length;
         if (currentPage !== len) {
           return false;
         }
         return len * pageSize >= total;
       } else return false;
-    }, [dataSource, isDataSourceExsist, pagesNumbers, pageSize, currentPage]);
+    }, [
+      dataSource,
+      isDataSourceExsist,
+      pagesNumbers,
+      pageSize,
+      currentPage,
+      total,
+    ]);
 
     const forceHidePagination = useMemo(() => {
       const disable =

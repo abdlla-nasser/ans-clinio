@@ -31,6 +31,7 @@ const initialState = {
   isAddingRecord: false,
   isUpdatingRecord: false,
   dataSource: [],
+  total: undefined,
   stateColumns: columns,
   lastColLang: undefined,
   lastColLangList: [
@@ -79,6 +80,7 @@ export default (state = initialState, action) => {
         //     ? newDs
         //     : [...(state.dataSource || []), ...dataFromServer],
         // dataSource: dataFromServer,
+        total: action.totalRecords,
         loading: false,
       };
 

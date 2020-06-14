@@ -73,6 +73,7 @@ export default ({
       onRowSelection,
       onDoubleClickRecord,
       withPagination,
+      total,
       ...otherProps
     } = props;
 
@@ -293,6 +294,7 @@ export default ({
     return (
       <WrappedComponent {...parentProps}>
         <CommonView
+          total={total}
           onChangeLastColLang={handleOnSelectLastColLang}
           langSelectOptions={langSelectOptions}
           langSelectValue={langSelectValue}

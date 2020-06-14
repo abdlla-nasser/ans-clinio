@@ -24,19 +24,18 @@ const reducerName = "insuranceCompaniesSetupReducer";
 const rowKey = "idValue";
 
 // Fetch initial data
-export const fetchData = (sorter, filters) => {
-  return {
-    type: FETCH_INSURANCE_COMPANIES_SETUP_DATA,
-    reducerName,
-    API_URL: "insurance",
-    sorter,
-    filters,
-    finishedAction: fetchDataFinished,
-  };
-};
+export const fetchData = (sorter, filters) => ({
+  type: FETCH_INSURANCE_COMPANIES_SETUP_DATA,
+  reducerName,
+  API_URL: "insurance",
+  sorter,
+  filters,
+  finishedAction: fetchDataFinished,
+});
 export const fetchDataFinished = (result, isSorted, isFiltered) => ({
   type: FETCH_INSURANCE_COMPANIES_SETUP_DATA_FINISHED,
-  data: result && normalizer(result),
+  data: result && result.data && normalizer(result.data),
+  totalRecords: result.total,
   isSorted,
   isFiltered,
 });

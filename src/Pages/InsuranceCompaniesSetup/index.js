@@ -6,11 +6,13 @@ import {
   mapDispatchToProps,
   actions,
 } from "./utils/selectors";
+import PageTitle from "../../components/Text/PageTitle";
 
-const InsuranceCompaniesSetup = ({ children }) => {
+const InsuranceCompaniesSetup = ({ children, labels }) => {
+  const pageTitle = labels && labels.insurcompstp;
   return (
     <>
-      <h1>Insurance Companies Setup</h1>
+      <PageTitle children={pageTitle} />
       {children}
     </>
   );
@@ -25,5 +27,6 @@ export default WithTableHoc({
   renderColumns: columns,
   pageName: "insuranceCompaniesSetup",
   rowKey: "idValue",
+  requiredProps: ["labels"],
   itemsPropNamesToValidate: ["en", "ar"],
 });

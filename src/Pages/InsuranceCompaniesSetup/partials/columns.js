@@ -1,14 +1,14 @@
 export const excelColumns = [
   {
-    label: "Codes",
+    label: "code",
     value: "sys_country_code3",
   },
   {
-    label: "English",
+    label: "english",
     value: "en",
   },
   {
-    label: "Arabic",
+    label: "arabic",
     value: "ar",
   },
 ];
@@ -28,7 +28,7 @@ export const getExcelSheetProps = ({ dataSource }) => {
 
 export const columns = [
   {
-    titleLabel: "Code",
+    titleLabel: "code",
     key: "idValue",
     width: 50,
     renderView: {
@@ -39,7 +39,7 @@ export const columns = [
     },
   },
   {
-    titleLabel: "English",
+    titleLabel: "english",
     width: 300,
     sorter: true,
     dataIdxSearch: "en",
@@ -55,7 +55,7 @@ export const columns = [
     },
   },
   {
-    titleLabel: "Arabic",
+    titleLabel: "arabic",
     width: 300,
     sorter: true,
     dataIdxSearch: "ar",

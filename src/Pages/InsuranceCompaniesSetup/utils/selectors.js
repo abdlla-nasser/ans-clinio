@@ -20,11 +20,13 @@ export const mapStateToProps = ({
     lastColLangList,
     ...otherReducerData
   },
+  labelsReducer: { insuranceCompaniesSetupLabels: labels },
 }) => ({
   canInsert: true,
   canDelete: true,
   langSelectOptions: lastColLangList,
   langSelectValue: lastColLang,
+  labels,
   ...otherReducerData,
 });
 

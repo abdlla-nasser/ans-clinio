@@ -31,6 +31,7 @@ const initialState = {
   isAddingRecord: false,
   isUpdatingRecord: false,
   dataSource: [],
+  total: undefined,
   stateColumns: columns,
   lastColLang: undefined,
   lastColLangList: [
@@ -74,11 +75,7 @@ export default (state = initialState, action) => {
         dataSource: isDataSortedOrFiltered
           ? dataFromServer
           : [...(state.dataSource || []), ...dataFromServer],
-        // dataSource:
-        //   action.isSorted || action.isFiltered
-        //     ? newDs
-        //     : [...(state.dataSource || []), ...dataFromServer],
-        // dataSource: dataFromServer,
+        total: action.totalRecords,
         loading: false,
       };
 

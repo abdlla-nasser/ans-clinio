@@ -36,7 +36,8 @@ export const fetchData = (sorter, filters) => {
 };
 export const fetchDataFinished = (result, isSorted, isFiltered) => ({
   type: FETCH_CONSULTATION_SETUP_DATA_FINISHED,
-  data: result && normalizer(result),
+  data: result && result.data && normalizer(result.data),
+  totalRecords: result.total,
   isSorted,
   isFiltered,
 });

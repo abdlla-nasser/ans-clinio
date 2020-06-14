@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 
 import appBaseReducer from "../../../Pages/BasePage/modules/reducer";
 import consultationSetupReducer from "../../../Pages/ConsultationSetup/modules/reducer";
+import insuranceCompaniesSetupReducer from "../../../Pages/InsuranceCompaniesSetup/modules/reducer";
 import labelsReducer from "../../../global/reducers/labels";
 import loginReducer from "../../../Pages/Login/modules/reducer";
 
@@ -16,6 +17,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   appBaseReducer,
   consultationSetupReducer,
+  insuranceCompaniesSetupReducer,
   labelsReducer,
   loginReducer,
 });

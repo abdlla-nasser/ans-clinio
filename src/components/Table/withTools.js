@@ -7,6 +7,7 @@ import Flex from "../Flex";
 const { memo } = React;
 
 function TableWithToolsContainer({
+  total,
   onChangeLastColLang,
   langSelectOptions,
   langSelectValue,
@@ -75,6 +76,7 @@ function TableWithToolsContainer({
     return (
       <Flex width="100%" height="100%">
         <Table
+          total={total}
           columns={columns}
           dataSource={dataSource}
           rowKey={rowKey}
