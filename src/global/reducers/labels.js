@@ -4,6 +4,7 @@ const initialState = {
   loginLabels: undefined,
   consultationSetupLabels: undefined,
   insuranceCompaniesSetupLabels: undefined,
+  allergiesSetupLabels: undefined,
 };
 
 export default (state = initialState, action) => {

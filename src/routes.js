@@ -18,8 +18,13 @@ const ConsultationSetup = Loadable({
   ...loadableProps,
 });
 
-const insuranceCompaniesSetup = Loadable({
+const InsuranceCompaniesSetup = Loadable({
   loader: () => import("./Pages/InsuranceCompaniesSetup"),
+  ...loadableProps,
+});
+
+const AllergiesSetup = Loadable({
+  loader: () => import("./Pages/AllergiesSetup"),
   ...loadableProps,
 });
 
@@ -30,7 +35,8 @@ export default () => (
     <Route
       path="/insuranceCompaniesSetup"
       exact
-      component={insuranceCompaniesSetup}
+      component={InsuranceCompaniesSetup}
     />
+    <Route path="/allergiesSetup" exact component={AllergiesSetup} />
   </Switch>
 );
