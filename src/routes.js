@@ -28,6 +28,11 @@ const AllergiesSetup = Loadable({
   ...loadableProps,
 });
 
+const ServiceGroups = Loadable({
+  loader: () => import("./Pages/ServiceGroups"),
+  ...loadableProps,
+});
+
 export default () => (
   <Switch>
     <Route path="/" exact component={LoginPage} />
@@ -38,5 +43,6 @@ export default () => (
       component={InsuranceCompaniesSetup}
     />
     <Route path="/allergiesSetup" exact component={AllergiesSetup} />
+    <Route path="/serviceGroups" exact component={ServiceGroups} />
   </Switch>
 );

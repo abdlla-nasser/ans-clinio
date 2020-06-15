@@ -8,6 +8,7 @@ import consultationSetupReducer from "../../../Pages/ConsultationSetup/modules/r
 import insuranceCompaniesSetupReducer from "../../../Pages/InsuranceCompaniesSetup/modules/reducer";
 import labelsReducer from "../../../global/reducers/labels";
 import loginReducer from "../../../Pages/Login/modules/reducer";
+import serviceGroupsReducer from "../../../Pages/ServiceGroups/modules/reducer";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   insuranceCompaniesSetupReducer,
   labelsReducer,
   loginReducer,
+  serviceGroupsReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

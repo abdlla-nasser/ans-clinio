@@ -1,0 +1,54 @@
+// -------------------------------------- CRUD --------------------------------------
+// On Press Save icon for Saving new record (CREATE)
+export const ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD =
+  "ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD";
+export const ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD_FINISHED =
+  "ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD_FINISHED";
+
+// Fetch initial page dataSource  (READ)
+export const FETCH_SERVICE_GROUPS_DATA = "FETCH_SERVICE_GROUPS_DATA";
+export const FETCH_SERVICE_GROUPS_DATA_FINISHED =
+  "FETCH_SERVICE_GROUPS_DATA_FINISHED";
+
+// On Press Save icon for Editing new record (UPDATE)
+export const ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD =
+  "ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD";
+export const ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD_FINISHED =
+  "ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD_FINISHED";
+
+// Delete record from dataSource request (DELETE)
+export const ON_REQUEST_DELETE_SERVICE_GROUPS_RECORD =
+  "ON_REQUEST_DELETE_SERVICE_GROUPS_RECORD";
+export const ON_REQUEST_DELETE_SERVICE_GROUPS_RECORD_FINISHED =
+  "ON_REQUEST_DELETE_SERVICE_GROUPS_RECORD_FINISHED";
+// ------------------------------------------------------------------------------------
+
+// On click record
+export const ON_SELECT_SERVICE_GROUPS_ROW = "ON_SELECT_SERVICE_GROUPS_ROW";
+
+// On press edit icon
+export const ON_PRESS_SERVICE_GROUPS_EDIT = "ON_PRESS_SERVICE_GROUPS_EDIT";
+
+// On press add icon
+export const ON_PRESS_SERVICE_GROUPS_ADD = "ON_PRESS_SERVICE_GROUPS_ADD";
+
+// On press cancel icon
+export const ON_PRESS_SERVICE_GROUPS_CANCEL = "ON_PRESS_SERVICE_GROUPS_CANCEL";
+
+// While change input value for react controlled input
+export const ON_CHANGE_SERVICE_GROUPS_RECORD_DATA =
+  "ON_CHANGE_SERVICE_GROUPS_RECORD_DATA";
+
+// On press Search button in column
+export const ON_PRESS_SEARCH_SERVICE_GROUPS = "ON_PRESS_SEARCH_SERVICE_GROUPS";
+export const ON_PRESS_SEARCH_SERVICE_GROUPS_FINISHED =
+  "ON_PRESS_SEARCH_SERVICE_GROUPS_FINISHED";
+
+// On press reset the filters
+export const ON_RESET_FILTER_SERVICE_GROUPS = "ON_RESET_FILTER_SERVICE_GROUPS";
+
+// On select last column language
+export const ON_SELECT_LAST_COLUMN_LANGUAGE_SERVICE_GROUPS =
+  "ON_SELECT_LAST_COLUMN_LANGUAGE_SERVICE_GROUPS";
+export const ON_RESET_LAST_COLUMN_LANGUAGE_SERVICE_GROUPS =
+  "ON_RESET_LAST_COLUMN_LANGUAGE_SERVICE_GROUPS";

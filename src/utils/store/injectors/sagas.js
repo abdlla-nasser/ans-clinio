@@ -6,6 +6,7 @@ import consultationSetupSaga from "../../../Pages/ConsultationSetup/modules/saga
 import insuranceCompaniesSetupSaga from "../../../Pages/InsuranceCompaniesSetup/modules/saga";
 import labelsSaga from "../../../global/sagas/labels";
 import loginSaga from "../../../Pages/Login/modules/saga";
+import serviceGroupsSaga from "../../../Pages/ServiceGroups/modules/saga";
 
 export default function* rootSaga() {
   yield all([fork(allergiesSetupSaga)]);
@@ -14,4 +15,5 @@ export default function* rootSaga() {
   yield all([fork(insuranceCompaniesSetupSaga)]);
   yield all([fork(labelsSaga)]);
   yield all([fork(loginSaga)]);
+  yield all([fork(serviceGroupsSaga)]);
 }
