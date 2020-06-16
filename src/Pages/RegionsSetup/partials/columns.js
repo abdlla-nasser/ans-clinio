@@ -1,7 +1,7 @@
 export const excelColumns = [
   {
-    label: "speciality",
-    value: "speciality_code",
+    label: "code",
+    value: "sys_country_code3",
   },
   {
     label: "english",
@@ -13,15 +13,11 @@ export const excelColumns = [
   },
 ];
 
-export const getExcelSheetProps = ({ specialityList, dataSource }) => {
-  const dataSet = dataSource.map(({ speciality_code, name, ...item }) => {
-    const el =
-      specialityList &&
-      specialityList.find((item) => item.key === speciality_code);
+export const getExcelSheetProps = ({ dataSource }) => {
+  const dataSet = dataSource.map(({ name, ...item }) => {
     return {
       ...item,
       ...name,
-      speciality_code: el ? el.value : "",
     };
   });
 
@@ -32,20 +28,19 @@ export const getExcelSheetProps = ({ specialityList, dataSource }) => {
 
 export const columns = [
   {
-    titleLabel: "speciality",
+    titleLabel: "code",
     key: "idValue",
-    width: "20%",
+    width: "5%",
     renderView: {
-      type: "list",
+      type: "text",
       renderCell: {
-        dIdxs: "speciality_code",
-        listName: "specialityList",
+        dIdxs: "sys_country_code3",
       },
     },
   },
   {
     titleLabel: "english",
-    width: "25%",
+    width: "30%",
     sorter: true,
     dataIdxSearch: "en",
     renderView: {
@@ -61,7 +56,7 @@ export const columns = [
   },
   {
     titleLabel: "arabic",
-    width: "25%",
+    width: "30%",
     sorter: true,
     dataIdxSearch: "ar",
     renderView: {

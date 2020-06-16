@@ -2,6 +2,7 @@ import React from "react";
 import { ToolsContainer } from "../styled";
 import Icon from "../../Icon";
 import loadable from "../../Loadable";
+import Flex from "../../Flex";
 import { useRequestLabels } from "../../../utils/customUseHooks";
 
 const Select = loadable(() => import("../../Select"));
@@ -45,7 +46,7 @@ export default ({
 
   return (
     <ToolsContainer justify={langSelectOptions ? "space-between" : "center"}>
-      <div>
+      <Flex width="185px" justify="space-between">
         {(isAddingRecord || isUpdatingRecord) && (
           <Icon
             type="save"
@@ -104,7 +105,7 @@ export default ({
             onClick={onClick(clickable)}
           />
         )}
-      </div>
+      </Flex>
 
       {langSelectOptions && (
         <Select

@@ -7,6 +7,7 @@ const initialState = {
   allergiesSetupLabels: undefined,
   serviceGroupsLabels: undefined,
   countriesSetupLabels: undefined,
+  regionsSetupLabels: undefined,
 };
 
 export default (state = initialState, action) => {

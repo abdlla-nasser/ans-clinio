@@ -4,7 +4,7 @@ import { colors } from "../../utils/theme";
 
 export default styled(Icon)`
   line-height: ${({ lineheight }) => `${lineheight || 20}px`};
-  margin-inline-end: ${({ marginend }) => `${marginend || 8}px`};
+  margin-inline-end: ${({ marginend }) => marginend};
   margin-inline-start: ${({ marginstart }) => marginstart};
   margin-top: ${({ margintop }) => `${margintop || 0}px`};
   margin-bottom: ${({ marginbottom }) => `${marginbottom || 0}px`};

@@ -9,6 +9,7 @@ import countriesSetupReducer from "../../../Pages/CountriesSetup/modules/reducer
 import insuranceCompaniesSetupReducer from "../../../Pages/InsuranceCompaniesSetup/modules/reducer";
 import labelsReducer from "../../../global/reducers/labels";
 import loginReducer from "../../../Pages/Login/modules/reducer";
+import regionsSetupReducer from "../../../Pages/RegionsSetup/modules/reducer";
 import serviceGroupsReducer from "../../../Pages/ServiceGroups/modules/reducer";
 
 const persistConfig = {
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   insuranceCompaniesSetupReducer,
   labelsReducer,
   loginReducer,
+  regionsSetupReducer,
   serviceGroupsReducer,
 });
 

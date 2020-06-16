@@ -25,12 +25,14 @@ function* requestSpecialityList() {
   const { language_code } = yield select(appBaseLangSelector);
   try {
     const apiUrl = createApiUrl({
-      url: "",
+      url: "select/Speciality",
+      params: {
+        lang: language_code,
+      },
     });
     let response = yield getRequest(apiUrl);
     response = yield response.json();
 
-    console.log("requestSpecialityList response: ", response);
     yield put(fetchSpecialityListFinished(response));
   } catch (error) {
     console.log("Error while fetching requestSpecialityList => ", error);
