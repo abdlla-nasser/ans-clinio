@@ -13,26 +13,13 @@ export const excelColumns = [
   },
 ];
 
-// export const getExcelSheetProps = ({ dataSource }) => {
-//   const dataSet = dataSource.map(({ name, ...item }) => {
-//     console.log("name: ", name);
-//     return {
-//       ...item,
-//       ...name,
-//     };
-//   });
-
-//   return {
-//     dataSet,
-//   };
-// };
-
 export const getExcelSheetProps = ({ typeList, dataSource }) => {
   const dataSet = dataSource.map(({ type, name, ...item }) => {
-    // const el = typeList && typeList.find(item => item.key === type)
+    const el = typeList && typeList.find((item) => item.key === type);
     return {
       ...item,
       ...name,
+      type: el ? el.value : "",
     };
   });
 
