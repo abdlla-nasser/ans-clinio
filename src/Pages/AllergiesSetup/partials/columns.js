@@ -1,7 +1,7 @@
 export const excelColumns = [
   {
     label: "type",
-    value: "",
+    value: "type",
   },
   {
     label: "english",
@@ -13,8 +13,23 @@ export const excelColumns = [
   },
 ];
 
-export const getExcelSheetProps = ({ dataSource }) => {
-  const dataSet = dataSource.map(({ name, ...item }) => {
+// export const getExcelSheetProps = ({ dataSource }) => {
+//   const dataSet = dataSource.map(({ name, ...item }) => {
+//     console.log("name: ", name);
+//     return {
+//       ...item,
+//       ...name,
+//     };
+//   });
+
+//   return {
+//     dataSet,
+//   };
+// };
+
+export const getExcelSheetProps = ({ typeList, dataSource }) => {
+  const dataSet = dataSource.map(({ type, name, ...item }) => {
+    // const el = typeList && typeList.find(item => item.key === type)
     return {
       ...item,
       ...name,
@@ -30,17 +45,18 @@ export const columns = [
   {
     titleLabel: "type",
     key: "idValue",
-    width: 50,
+    width: "20%",
     renderView: {
-      type: "text",
+      type: "list",
       renderCell: {
-        dIdxs: "",
+        dIdxs: "type",
+        listName: "typeList",
       },
     },
   },
   {
     titleLabel: "english",
-    width: 300,
+    width: "25%",
     sorter: true,
     dataIdxSearch: "en",
     renderView: {
@@ -56,7 +72,7 @@ export const columns = [
   },
   {
     titleLabel: "arabic",
-    width: 300,
+    width: "25%",
     sorter: true,
     dataIdxSearch: "ar",
     renderView: {

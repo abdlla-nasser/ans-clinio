@@ -1,11 +1,16 @@
-import { takeLatest, all } from "redux-saga/effects";
+import { takeLatest, all, select, put } from "redux-saga/effects";
 import {
   requestInsertRecord,
   requestTableData,
   requestUpdateRecord,
   requestDeleteRequest,
   requestSearchTableData,
+  appBaseLangSelector,
 } from "../../../Hocs/TableHoc/utils/generators";
+
+import createApiUrl from "../../../utils/createApiUrl";
+import { getRequest } from "../../../utils/httpRequests";
+import { fetchSpecialityListFinished } from "../modules/actions";
 
 import {
   FETCH_SERVICE_GROUPS_DATA,
@@ -13,7 +18,25 @@ import {
   ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD,
   ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD,
   ON_PRESS_SEARCH_SERVICE_GROUPS,
+  FETCH_SPECIALITY_LIST_SERVICE_GROUPS,
 } from "./types";
+
+function* requestSpecialityList() {
+  const { language_code } = yield select(appBaseLangSelector);
+  try {
+    const apiUrl = createApiUrl({
+      url: "",
+    });
+    let response = yield getRequest(apiUrl);
+    response = yield response.json();
+
+    console.log("requestSpecialityList response: ", response);
+    yield put(fetchSpecialityListFinished(response));
+  } catch (error) {
+    console.log("Error while fetching requestSpecialityList => ", error);
+    yield put(fetchSpecialityListFinished());
+  }
+}
 
 export default function* InsuranceCompaniesSetupSaga() {
   yield all([takeLatest(FETCH_SERVICE_GROUPS_DATA, requestTableData)]);
@@ -28,5 +51,8 @@ export default function* InsuranceCompaniesSetupSaga() {
   ]);
   yield all([
     takeLatest(ON_PRESS_SEARCH_SERVICE_GROUPS, requestSearchTableData),
+  ]);
+  yield all([
+    takeLatest(FETCH_SPECIALITY_LIST_SERVICE_GROUPS, requestSpecialityList),
   ]);
 }

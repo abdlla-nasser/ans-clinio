@@ -1,25 +1,24 @@
 import initialRowData from "./rowProps";
 import idGenerator from "../../../utils/idGenerator";
 import {
-  FETCH_SERVICE_GROUPS_DATA,
-  FETCH_SERVICE_GROUPS_DATA_FINISHED,
-  ON_SELECT_SERVICE_GROUPS_ROW,
-  ON_PRESS_SERVICE_GROUPS_EDIT,
-  ON_PRESS_SERVICE_GROUPS_ADD,
-  ON_CHANGE_SERVICE_GROUPS_RECORD_DATA,
-  ON_REQUEST_DELETE_SERVICE_GROUPS_RECORD,
-  ON_REQUEST_DELETE_SERVICE_GROUPS_RECORD_FINISHED,
-  ON_PRESS_SERVICE_GROUPS_CANCEL,
-  ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD,
-  ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD_FINISHED,
-  ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD,
-  ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD_FINISHED,
-  ON_SELECT_LAST_COLUMN_LANGUAGE_SERVICE_GROUPS,
-  ON_RESET_LAST_COLUMN_LANGUAGE_SERVICE_GROUPS,
-  ON_PRESS_SEARCH_SERVICE_GROUPS,
-  ON_PRESS_SEARCH_SERVICE_GROUPS_FINISHED,
-  ON_RESET_FILTER_SERVICE_GROUPS,
-  FETCH_SPECIALITY_LIST_SERVICE_GROUPS_FINISHED,
+  FETCH_COUNTRIES_SETUP_DATA,
+  FETCH_COUNTRIES_SETUP_DATA_FINISHED,
+  ON_SELECT_COUNTRIES_SETUP_ROW,
+  ON_PRESS_COUNTRIES_SETUP_EDIT,
+  ON_PRESS_COUNTRIES_SETUP_ADD,
+  ON_CHANGE_COUNTRIES_SETUP_RECORD_DATA,
+  ON_REQUEST_DELETE_COUNTRIES_SETUP_RECORD,
+  ON_REQUEST_DELETE_COUNTRIES_SETUP_RECORD_FINISHED,
+  ON_PRESS_COUNTRIES_SETUP_CANCEL,
+  ON_REQUEST_INSERT_COUNTRIES_SETUP_RECORD,
+  ON_REQUEST_INSERT_COUNTRIES_SETUP_RECORD_FINISHED,
+  ON_REQUEST_UPDATE_COUNTRIES_SETUP_RECORD,
+  ON_REQUEST_UPDATE_COUNTRIES_SETUP_RECORD_FINISHED,
+  ON_SELECT_LAST_COLUMN_LANGUAGE_COUNTRIES_SETUP,
+  ON_RESET_LAST_COLUMN_LANGUAGE_COUNTRIES_SETUP,
+  ON_PRESS_SEARCH_COUNTRIES_SETUP,
+  ON_PRESS_SEARCH_COUNTRIES_SETUP_FINISHED,
+  ON_RESET_FILTER_COUNTRIES_SETUP,
 } from "./types";
 
 import { columns, excelColumns } from "../partials/columns";
@@ -42,18 +41,17 @@ const initialState = {
     { key: "de", value: "German" },
   ],
   stateExcelColumns: excelColumns,
-  specialityList: undefined,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ON_RESET_LAST_COLUMN_LANGUAGE_SERVICE_GROUPS:
+    case ON_RESET_LAST_COLUMN_LANGUAGE_COUNTRIES_SETUP:
       return {
         ...state,
         stateColumns: columns,
         stateExcelColumns: excelColumns,
       };
-    case ON_SELECT_LAST_COLUMN_LANGUAGE_SERVICE_GROUPS:
+    case ON_SELECT_LAST_COLUMN_LANGUAGE_COUNTRIES_SETUP:
       return {
         ...state,
         lastColLang: action.key,
@@ -61,14 +59,14 @@ export default (state = initialState, action) => {
         stateExcelColumns: [...state.stateExcelColumns, action.excelColumn],
       };
 
-    case FETCH_SERVICE_GROUPS_DATA:
-    case ON_PRESS_SEARCH_SERVICE_GROUPS:
+    case FETCH_COUNTRIES_SETUP_DATA:
+    case ON_PRESS_SEARCH_COUNTRIES_SETUP:
       return {
         ...state,
         loading: true,
       };
 
-    case FETCH_SERVICE_GROUPS_DATA_FINISHED:
+    case FETCH_COUNTRIES_SETUP_DATA_FINISHED:
       const dataFromServer = action.data || [];
       const isDataSortedOrFiltered = action.isSorted || action.isFiltered;
 
@@ -81,26 +79,26 @@ export default (state = initialState, action) => {
         loading: false,
       };
 
-    case ON_PRESS_SEARCH_SERVICE_GROUPS_FINISHED:
+    case ON_PRESS_SEARCH_COUNTRIES_SETUP_FINISHED:
       return {
         ...state,
         dataSource: action.data,
         loading: false,
       };
 
-    case ON_RESET_FILTER_SERVICE_GROUPS:
+    case ON_RESET_FILTER_COUNTRIES_SETUP:
       return {
         ...state,
         dataSource: null,
       };
 
-    case ON_SELECT_SERVICE_GROUPS_ROW:
+    case ON_SELECT_COUNTRIES_SETUP_ROW:
       return {
         ...state,
         selectedRow: action.id,
       };
 
-    case ON_PRESS_SERVICE_GROUPS_ADD:
+    case ON_PRESS_COUNTRIES_SETUP_ADD:
       const ds = state.dataSource;
       const recordKey = idGenerator();
       return {
@@ -118,14 +116,14 @@ export default (state = initialState, action) => {
         ],
       };
 
-    case ON_PRESS_SERVICE_GROUPS_EDIT:
+    case ON_PRESS_COUNTRIES_SETUP_EDIT:
       return {
         ...state,
         isEditing: true,
         isUpdatingRecord: true,
       };
 
-    case ON_CHANGE_SERVICE_GROUPS_RECORD_DATA:
+    case ON_CHANGE_COUNTRIES_SETUP_RECORD_DATA:
       const { inputData, key, langCode } = action;
       const name = Object.keys(inputData)[0];
       const value = inputData[name];
@@ -142,15 +140,15 @@ export default (state = initialState, action) => {
         }),
       };
 
-    case ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD:
-    case ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD:
+    case ON_REQUEST_INSERT_COUNTRIES_SETUP_RECORD:
+    case ON_REQUEST_UPDATE_COUNTRIES_SETUP_RECORD:
       return {
         ...state,
         isActionLoading: true,
       };
 
-    case ON_REQUEST_INSERT_SERVICE_GROUPS_RECORD_FINISHED:
-    case ON_REQUEST_UPDATE_SERVICE_GROUPS_RECORD_FINISHED:
+    case ON_REQUEST_INSERT_COUNTRIES_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_UPDATE_COUNTRIES_SETUP_RECORD_FINISHED:
       return {
         ...state,
         isEditing: false,
@@ -161,7 +159,7 @@ export default (state = initialState, action) => {
         ...action.newState,
       };
 
-    case ON_PRESS_SERVICE_GROUPS_CANCEL:
+    case ON_PRESS_COUNTRIES_SETUP_CANCEL:
       return {
         ...state,
         isEditing: false,
@@ -172,7 +170,7 @@ export default (state = initialState, action) => {
         ),
       };
 
-    case ON_REQUEST_DELETE_SERVICE_GROUPS_RECORD:
+    case ON_REQUEST_DELETE_COUNTRIES_SETUP_RECORD:
       const { idValue } = action.record;
       return {
         ...state,
@@ -181,18 +179,12 @@ export default (state = initialState, action) => {
         selectedRow: idValue,
       };
 
-    case ON_REQUEST_DELETE_SERVICE_GROUPS_RECORD_FINISHED:
+    case ON_REQUEST_DELETE_COUNTRIES_SETUP_RECORD_FINISHED:
       return {
         ...state,
         isActionLoading: false,
         selectedRow: undefined,
         ...action.newState,
-      };
-
-    case FETCH_SPECIALITY_LIST_SERVICE_GROUPS_FINISHED:
-      return {
-        ...state,
-        specialityList: action.data || [],
       };
 
     default:

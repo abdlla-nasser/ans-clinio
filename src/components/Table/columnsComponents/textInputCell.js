@@ -70,7 +70,7 @@ const PopoverCell = ({
       <>
         <Input
           width="100%"
-          containerStyle={{ padding: "0 40px" }}
+          containerStyle={{ padding: "0 5px" }}
           inputProps={{
             onChange: (e) =>
               langCode ? handleChange(e, langCode) : handleChange(e),

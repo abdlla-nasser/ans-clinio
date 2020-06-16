@@ -8,8 +8,24 @@ import {
 } from "./utils/selectors";
 import PageTitle from "../../components/Text/PageTitle";
 
-const AllergiesSetup = ({ children, labels }) => {
+const { useEffect } = React;
+
+const AllergiesSetup = ({
+  children,
+  labels,
+  isPrevEqualCurrentlang,
+  typeList,
+  fetchTypeList,
+}) => {
   const pageTitle = labels && labels.alrgsstp;
+
+  useEffect(() => {
+    if (!typeList || !isPrevEqualCurrentlang) {
+      fetchTypeList();
+    }
+    //eslint-disable-next-line
+  }, [isPrevEqualCurrentlang]);
+
   return (
     <>
       <PageTitle children={pageTitle} />
@@ -27,6 +43,6 @@ export default WithTableHoc({
   renderColumns: columns,
   pageName: "allergiesSetup",
   rowKey: "idValue",
-  requiredProps: ["labels"],
   itemsPropNamesToValidate: ["en", "ar"],
+  requiredProps: ["labels", "typeList", "fetchTypeList"],
 });

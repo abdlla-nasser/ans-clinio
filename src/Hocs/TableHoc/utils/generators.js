@@ -15,6 +15,8 @@ import strangeSelector from "../../../utils/selectStrangeReducer";
 // import getPropValues from "./getFields";
 
 export const appBaseSelector = ({ appBaseReducer }) => appBaseReducer;
+export const appBaseLangSelector = ({ appBaseReducer }) =>
+  appBaseReducer.language;
 
 // Request Initial Table Data
 export function* requestTableData({

@@ -12,12 +12,11 @@ import {
   resetColValue,
   onPressSearch,
   resetFilter,
-  fetchTypeList,
 } from "../modules/actions";
 
 export const mapStateToProps = ({
-  allergiesSetupReducer: { lastColLang, lastColLangList, ...otherReducerData },
-  labelsReducer: { allergiesSetupLabels: labels },
+  countriesSetupReducer: { lastColLang, lastColLangList, ...otherReducerData },
+  labelsReducer: { countriesSetupLabels: labels },
 }) => ({
   canInsert: true,
   canDelete: true,
@@ -46,5 +45,4 @@ export const actions = {
 export const mapDispatchToProps = (dispatch) => ({
   onChangeData: (inputData, key, restData) =>
     dispatch(onChangeRowData(inputData, key, restData)),
-  fetchTypeList: () => dispatch(fetchTypeList()),
 });

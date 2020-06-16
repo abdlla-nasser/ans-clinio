@@ -19,6 +19,7 @@ import {
   ON_PRESS_SEARCH_ALLERGIES_SETUP,
   ON_PRESS_SEARCH_ALLERGIES_SETUP_FINISHED,
   ON_RESET_FILTER_ALLERGIES_SETUP,
+  FETCH_TYPE_LIST_ALLERGIES_SETUP_FINISHED,
 } from "./types";
 
 import { columns, excelColumns } from "../partials/columns";
@@ -41,6 +42,7 @@ const initialState = {
     { key: "de", value: "German" },
   ],
   stateExcelColumns: excelColumns,
+  typeList: undefined,
 };
 
 export default (state = initialState, action) => {
@@ -185,6 +187,12 @@ export default (state = initialState, action) => {
         isActionLoading: false,
         selectedRow: undefined,
         ...action.newState,
+      };
+
+    case FETCH_TYPE_LIST_ALLERGIES_SETUP_FINISHED:
+      return {
+        ...state,
+        typeList: action.data || [],
       };
 
     default:

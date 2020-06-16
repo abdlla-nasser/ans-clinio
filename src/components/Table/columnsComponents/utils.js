@@ -24,7 +24,6 @@ export const matchErrors = (
       });
     }
   }
-  console.log("result is: ", result);
   return result;
 };
 

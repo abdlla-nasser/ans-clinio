@@ -12,6 +12,7 @@ import {
   resetColValue,
   onPressSearch,
   resetFilter,
+  fetchSpecialityList,
 } from "../modules/actions";
 
 export const mapStateToProps = ({
@@ -45,4 +46,5 @@ export const actions = {
 export const mapDispatchToProps = (dispatch) => ({
   onChangeData: (inputData, key, restData) =>
     dispatch(onChangeRowData(inputData, key, restData)),
+  fetchSpecialityList: () => dispatch(fetchSpecialityList()),
 });

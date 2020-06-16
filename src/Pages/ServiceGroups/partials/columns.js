@@ -30,17 +30,18 @@ export const columns = [
   {
     titleLabel: "speciality",
     key: "idValue",
-    width: 50,
+    width: "20%",
     renderView: {
-      type: "text",
+      type: "list",
       renderCell: {
         dIdxs: "",
+        listName: "",
       },
     },
   },
   {
     titleLabel: "english",
-    width: 300,
+    width: "25%",
     sorter: true,
     dataIdxSearch: "en",
     renderView: {
@@ -56,7 +57,7 @@ export const columns = [
   },
   {
     titleLabel: "arabic",
-    width: 300,
+    width: "25%",
     sorter: true,
     dataIdxSearch: "ar",
     renderView: {

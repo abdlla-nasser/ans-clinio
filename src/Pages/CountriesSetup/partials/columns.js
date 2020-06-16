@@ -1,7 +1,23 @@
 export const excelColumns = [
   {
-    label: "code",
-    value: "sys_country_code3",
+    label: "ISO 2",
+    value: "code2",
+  },
+  {
+    label: "ISO 3",
+    value: "code3",
+  },
+  {
+    label: "flag",
+    value: "flag_url",
+  },
+  {
+    label: "phone",
+    value: "phone_code",
+  },
+  {
+    label: "sequence",
+    value: "seq",
   },
   {
     label: "english",
@@ -28,19 +44,58 @@ export const getExcelSheetProps = ({ dataSource }) => {
 
 export const columns = [
   {
-    titleLabel: "code",
-    key: "idValue",
+    titleLabel: "ISO 2",
     width: "5%",
     renderView: {
       type: "text",
       renderCell: {
-        dIdxs: "sys_country_code3",
+        dIdxs: "code2",
+      },
+    },
+  },
+  {
+    titleLabel: "ISO 3",
+    width: "5%",
+    renderView: {
+      type: "text",
+      renderCell: {
+        dIdxs: "code3",
+      },
+    },
+  },
+  {
+    titleLabel: "flag",
+    width: "5%",
+    renderView: {
+      type: "ImageView",
+      renderCell: {
+        dIdxs: "flag_url",
+      },
+    },
+  },
+  {
+    titleLabel: "phone",
+    width: "10%",
+    renderView: {
+      type: "text",
+      renderCell: {
+        dIdxs: "phone_code",
+      },
+    },
+  },
+  {
+    titleLabel: "sequence",
+    width: "5%",
+    renderView: {
+      type: "text",
+      renderCell: {
+        dIdxs: "seq",
       },
     },
   },
   {
     titleLabel: "english",
-    width: "30%",
+    width: "20%",
     sorter: true,
     dataIdxSearch: "en",
     renderView: {
@@ -56,7 +111,7 @@ export const columns = [
   },
   {
     titleLabel: "arabic",
-    width: "30%",
+    width: "20%",
     sorter: true,
     dataIdxSearch: "ar",
     renderView: {

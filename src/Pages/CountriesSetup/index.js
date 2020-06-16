@@ -8,24 +8,8 @@ import {
 } from "./utils/selectors";
 import PageTitle from "../../components/Text/PageTitle";
 
-const { useEffect } = React;
-
-const ServiceGroups = ({
-  children,
-  labels,
-  isPrevEqualCurrentlang,
-  specialityList,
-  fetchSpecialityList,
-}) => {
-  const pageTitle = labels && labels.srvcgrps;
-
-  useEffect(() => {
-    if (!specialityList || !isPrevEqualCurrentlang) {
-      fetchSpecialityList();
-    }
-    //eslint-disable-next-line
-  }, [isPrevEqualCurrentlang]);
-
+const CountriesSetup = ({ children, labels }) => {
+  const pageTitle = labels && labels.cntrsstp;
   return (
     <>
       <PageTitle children={pageTitle} />
@@ -35,14 +19,14 @@ const ServiceGroups = ({
 };
 
 export default WithTableHoc({
-  WrappedComponent: ServiceGroups,
+  WrappedComponent: CountriesSetup,
   mapStateToProps,
   mapDispatchToProps,
   getExcelSheetProps,
   actions,
   renderColumns: columns,
-  pageName: "serviceGroups",
+  pageName: "countriesSetup",
   rowKey: "idValue",
   itemsPropNamesToValidate: ["en", "ar"],
-  requiredProps: ["labels", "specialityList", "fetchSpecialityList"],
+  requiredProps: ["labels"],
 });

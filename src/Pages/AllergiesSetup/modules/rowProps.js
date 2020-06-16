@@ -1,5 +1,5 @@
 export default {
-  type: false,
+  type: "",
   name: {
     en: "",
     ar: "",

@@ -18,6 +18,8 @@ import {
   ON_PRESS_SEARCH_ALLERGIES_SETUP,
   ON_PRESS_SEARCH_ALLERGIES_SETUP_FINISHED,
   ON_RESET_FILTER_ALLERGIES_SETUP,
+  FETCH_TYPE_LIST_ALLERGIES_SETUP,
+  FETCH_TYPE_LIST_ALLERGIES_SETUP_FINISHED,
 } from "./types";
 
 const reducerName = "allergiesSetupReducer";
@@ -134,7 +136,7 @@ export const onSelectLastColLang = (langCode, langLabel) => ({
   langCode,
   dynamicColumn: {
     titleLabel: langLabel,
-    width: 120,
+    width: "25%",
     renderView: {
       type: "text",
       renderCell: {
@@ -150,4 +152,13 @@ export const onSelectLastColLang = (langCode, langLabel) => ({
 });
 export const resetColValue = () => ({
   type: ON_RESET_LAST_COLUMN_LANGUAGE_ALLERGIES_SETUP,
+});
+
+//----------------------------- CUSTOM ACTIONS -----------------------------
+export const fetchTypeList = () => ({
+  type: FETCH_TYPE_LIST_ALLERGIES_SETUP,
+});
+export const fetchTypeListFinished = (data) => ({
+  type: FETCH_TYPE_LIST_ALLERGIES_SETUP_FINISHED,
+  data,
 });

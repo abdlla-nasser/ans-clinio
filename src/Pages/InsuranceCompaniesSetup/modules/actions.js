@@ -134,7 +134,7 @@ export const onSelectLastColLang = (langCode, langLabel) => ({
   langCode,
   dynamicColumn: {
     titleLabel: langLabel,
-    width: 120,
+    width: "30%",
     renderView: {
       type: "text",
       renderCell: {

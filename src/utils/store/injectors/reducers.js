@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import allergiesSetupReducer from "../../../Pages/AllergiesSetup/modules/reducer";
 import appBaseReducer from "../../../Pages/BasePage/modules/reducer";
 import consultationSetupReducer from "../../../Pages/ConsultationSetup/modules/reducer";
+import countriesSetupReducer from "../../../Pages/CountriesSetup/modules/reducer";
 import insuranceCompaniesSetupReducer from "../../../Pages/InsuranceCompaniesSetup/modules/reducer";
 import labelsReducer from "../../../global/reducers/labels";
 import loginReducer from "../../../Pages/Login/modules/reducer";
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   allergiesSetupReducer,
   appBaseReducer,
   consultationSetupReducer,
+  countriesSetupReducer,
   insuranceCompaniesSetupReducer,
   labelsReducer,
   loginReducer,

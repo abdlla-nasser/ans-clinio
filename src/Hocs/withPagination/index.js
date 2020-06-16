@@ -59,14 +59,7 @@ export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
         }
         return len * pageSize >= total;
       } else return false;
-    }, [
-      dataSource,
-      isDataSourceExsist,
-      pagesNumbers,
-      pageSize,
-      currentPage,
-      total,
-    ]);
+    }, [isDataSourceExsist, pagesNumbers, pageSize, currentPage, total]);
 
     const forceHidePagination = useMemo(() => {
       const disable =

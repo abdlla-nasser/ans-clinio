@@ -1,5 +1,5 @@
 export default {
-  speciality: false,
+  speciality: "",
   name: {
     en: "",
     ar: "",
