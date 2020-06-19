@@ -18,6 +18,9 @@ import {
   ON_PRESS_SEARCH_REGIONS_SETUP,
   ON_PRESS_SEARCH_REGIONS_SETUP_FINISHED,
   ON_RESET_FILTER_REGIONS_SETUP,
+  FETCH_COUNTRY_LIST_REGIONS_SETUP,
+  FETCH_COUNTRY_LIST_REGIONS_SETUP_FINISHED,
+  ON_REGIONS_SETUP_FORM_CHANGED,
 } from "./types";
 
 const reducerName = "regionsSetupReducer";
@@ -31,10 +34,11 @@ export const fetchData = (sorter, filters) => ({
   sorter,
   filters,
   finishedAction: fetchDataFinished,
+  addtionalParamsFields: ["country"],
 });
 export const fetchDataFinished = (result, isSorted, isFiltered) => ({
   type: FETCH_REGIONS_SETUP_DATA_FINISHED,
-  data: result && result.data && normalizer(result.data),
+  data: result && normalizer(result),
   totalRecords: result.total,
   isSorted,
   isFiltered,
@@ -150,4 +154,20 @@ export const onSelectLastColLang = (langCode, langLabel) => ({
 });
 export const resetColValue = () => ({
   type: ON_RESET_LAST_COLUMN_LANGUAGE_REGIONS_SETUP,
+});
+
+//----------------------------- CUSTOM ACTIONS -----------------------------
+
+export const onFormChange = ({ key, value }) => ({
+  type: ON_REGIONS_SETUP_FORM_CHANGED,
+  key,
+  value,
+});
+
+export const fetchCountryList = () => ({
+  type: FETCH_COUNTRY_LIST_REGIONS_SETUP,
+});
+export const fetchCountryListFinished = (data) => ({
+  type: FETCH_COUNTRY_LIST_REGIONS_SETUP_FINISHED,
+  data,
 });

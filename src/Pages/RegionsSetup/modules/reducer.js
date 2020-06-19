@@ -19,9 +19,40 @@ import {
   ON_PRESS_SEARCH_REGIONS_SETUP,
   ON_PRESS_SEARCH_REGIONS_SETUP_FINISHED,
   ON_RESET_FILTER_REGIONS_SETUP,
+  FETCH_COUNTRY_LIST_REGIONS_SETUP_FINISHED,
+  ON_REGIONS_SETUP_FORM_CHANGED,
 } from "./types";
 
 import { columns, excelColumns } from "../partials/columns";
+
+const dummyData = [
+  {
+    idValue: "5ee776d051003b0b9e911c43",
+    _id: "5ee776d051003b0b9e911c43",
+    name: {
+      en: "Tanta",
+      ar: "طنطا",
+    },
+    sys_country_code3: "EGY",
+    region_code: "Gharb",
+    createdAt: "2020-06-15T13:25:36.147Z",
+    updatedAt: "2020-06-15T13:25:36.147Z",
+    __v: 0,
+  },
+  {
+    idValue: "5ee777a16ac23e0baee7d9da",
+    _id: "5ee777a16ac23e0baee7d9da",
+    name: {
+      en: "Monofia",
+      ar: "المنوفيه",
+    },
+    sys_country_code3: "EGY",
+    region_code: "Monof",
+    createdAt: "2020-06-15T13:29:05.092Z",
+    updatedAt: "2020-06-15T13:29:05.092Z",
+    __v: 0,
+  },
+];
 
 const initialState = {
   loading: false,
@@ -41,6 +72,8 @@ const initialState = {
     { key: "de", value: "German" },
   ],
   stateExcelColumns: excelColumns,
+  country: undefined,
+  countryList: undefined,
 };
 
 export default (state = initialState, action) => {
@@ -185,6 +218,18 @@ export default (state = initialState, action) => {
         isActionLoading: false,
         selectedRow: undefined,
         ...action.newState,
+      };
+
+    case FETCH_COUNTRY_LIST_REGIONS_SETUP_FINISHED:
+      return {
+        ...state,
+        countryList: action.data || [],
+      };
+
+    case ON_REGIONS_SETUP_FORM_CHANGED:
+      return {
+        ...state,
+        [action.key]: action.value,
       };
 
     default:

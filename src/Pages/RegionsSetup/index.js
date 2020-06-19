@@ -11,12 +11,12 @@ import loadable from "../../components/Loadable";
 const PageTitle = loadable(() => import("../../components/Text/PageTitle"));
 const Form = loadable(() => import("./partials/Form"));
 
-const RegionsSetup = ({ children, labels }) => {
+const RegionsSetup = ({ children, labels, isPrevEqualCurrentlang }) => {
   const pageTitle = (labels && labels.insurcompstp) || "T_Regions Setup";
   return (
     <>
       <PageTitle children={pageTitle} />
-      <Form />
+      <Form isPrevEqualCurrentlang={isPrevEqualCurrentlang} />
       {children}
     </>
   );
@@ -28,6 +28,7 @@ export default WithTableHoc({
   mapDispatchToProps,
   getExcelSheetProps,
   actions,
+  noFetchData: true,
   renderColumns: columns,
   pageName: "regionsSetup",
   rowKey: "idValue",

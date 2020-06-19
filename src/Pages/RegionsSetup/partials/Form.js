@@ -4,10 +4,39 @@ import Select from "../../../components/Select/withlabel";
 import Flex from "../../../components/Flex";
 import { IconContainer } from "../../../components/Icon/styled";
 import Icon from "../../../components/Icon";
+import { mapStateToProps, mapDispatchToProps } from "../utils/selectors";
 
-const { memo } = React;
+const { memo, useCallback, useEffect } = React;
 
-const FormView = () => {
+const FormView = ({
+  country,
+  countryList,
+  fetchCountryList,
+  onFormChange,
+  isPrevEqualCurrentlang,
+  fetchData,
+}) => {
+  useEffect(() => {
+    if (!countryList || !isPrevEqualCurrentlang) {
+      fetchCountryList();
+    }
+    //eslint-disable-next-line
+  }, [isPrevEqualCurrentlang]);
+
+  const handleFormChange = useCallback(
+    (key) => (value) => {
+      return onFormChange({ key, value });
+    },
+    [onFormChange]
+  );
+
+  const handleFetchRegions = useCallback(() => {
+    if (country) {
+      fetchData();
+    }
+    //eslint-disable-next-line
+  }, [country]);
+
   return (
     <Flex justify="center" margin="0 0 10px 0">
       <Select
@@ -15,14 +44,16 @@ const FormView = () => {
         labelFlex={0.4}
         width="300px"
         inputProps={{
-          options: [{ key: 1, value: "lwe" }],
+          value: country,
+          options: countryList,
+          onChange: handleFormChange("country"),
         }}
       />
-      <IconContainer onClick={() => console.log("DSFDFs")}>
+      <IconContainer onClick={handleFetchRegions}>
         <Icon type="search" size={20} color="white" margintop={-1} />
       </IconContainer>
     </Flex>
   );
 };
 
-export default connect()(memo(FormView));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(FormView));

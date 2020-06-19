@@ -12,7 +12,7 @@ import {
 } from "../../../utils/httpRequests";
 import deleteDsRow from "../../../utils/deleteRow";
 import strangeSelector from "../../../utils/selectStrangeReducer";
-// import getPropValues from "./getFields";
+import getPropValues from "./getFields";
 
 export const appBaseSelector = ({ appBaseReducer }) => appBaseReducer;
 export const appBaseLangSelector = ({ appBaseReducer }) =>
@@ -26,14 +26,26 @@ export function* requestTableData({
   filters,
   finishedAction,
   addtionalParams = null,
+  addtionalParamsFields,
 }) {
   try {
-    const { dataSource } = yield select(strangeSelector(reducerName));
+    let addtionalParamsFieldsValues = null;
+    const { dataSource, ...reducerValues } = yield select(
+      strangeSelector(reducerName)
+    );
+
+    if (addtionalParamsFields) {
+      addtionalParamsFieldsValues = getPropValues(
+        addtionalParamsFields,
+        reducerValues
+      );
+    }
 
     const apiUrl = createApiUrl({
       url: API_URL,
       params: {
         ...addtionalParams,
+        ...addtionalParamsFieldsValues,
         poffset: dataSource && !sorter ? dataSource.length : 0,
         ...(sorter ? { orderby: sorter } : null),
         ...(filters ? filters : null),
@@ -41,6 +53,8 @@ export function* requestTableData({
     });
     const response = yield getRequest(apiUrl);
     const result = yield response.json();
+
+    console.log("requestTableData apiUrl: ", apiUrl);
 
     yield put(finishedAction(result, !!sorter, !!filters));
   } catch (error) {

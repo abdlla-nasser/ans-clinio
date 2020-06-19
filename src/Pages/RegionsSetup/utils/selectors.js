@@ -1,3 +1,5 @@
+import { onFormChange, fetchCountryList } from "../modules/actions";
+
 import {
   fetchData,
   onPressEdit,
@@ -15,9 +17,17 @@ import {
 } from "../modules/actions";
 
 export const mapStateToProps = ({
-  regionsSetupReducer: { lastColLang, lastColLangList, ...otherReducerData },
+  regionsSetupReducer: {
+    lastColLang,
+    lastColLangList,
+    country,
+    countryList,
+    ...otherReducerData
+  },
   labelsReducer: { regionsSetupLabels: labels },
 }) => ({
+  country,
+  countryList,
   canInsert: true,
   canDelete: true,
   langSelectOptions: lastColLangList,
@@ -45,4 +55,7 @@ export const actions = {
 export const mapDispatchToProps = (dispatch) => ({
   onChangeData: (inputData, key, restData) =>
     dispatch(onChangeRowData(inputData, key, restData)),
+  fetchData: (sorter, filters) => dispatch(fetchData(sorter, filters)),
+  onFormChange: (params) => dispatch(onFormChange(params)),
+  fetchCountryList: () => dispatch(fetchCountryList()),
 });
