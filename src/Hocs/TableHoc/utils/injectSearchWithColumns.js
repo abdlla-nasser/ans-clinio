@@ -1,8 +1,11 @@
+import React from "react";
 import SearchOptions from "./searchColumns";
 import ActionColumn from "./ActionColumn";
+import NavigateColumn from "./navigateColumn";
 import getRenderView from "./renderCell";
 
 export default ({
+  navigateTo,
   columns,
   clearFilter,
   fetchData,
@@ -80,6 +83,20 @@ export default ({
           align: "center",
           width: 70,
           render: ActionColumn(openModal, rowKey),
+        },
+      ];
+    }
+
+    if (navigateTo) {
+      result = [
+        ...result,
+        {
+          title: getTitle("action"),
+          align: "center",
+          width: "3%",
+          render: (row) => (
+            <NavigateColumn rowData={row} navDetails={navigateTo} />
+          ),
         },
       ];
     }

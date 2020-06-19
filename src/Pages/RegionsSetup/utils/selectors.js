@@ -28,6 +28,10 @@ export const mapStateToProps = ({
 }) => ({
   country,
   countryList,
+  navigateTo: {
+    pathName: "areasSetup",
+    attrName: "region_code",
+  },
   canInsert: true,
   canDelete: true,
   langSelectOptions: lastColLangList,

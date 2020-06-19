@@ -35,6 +35,7 @@ export default ({
 }) => {
   const TableHoc = (props) => {
     const {
+      navigateTo,
       stateExcelColumns,
       onSelectLastColLang,
       resetColValue,
@@ -76,7 +77,6 @@ export default ({
       total,
       ...otherProps
     } = props;
-
     const [formError, setFormError] = useState(undefined);
     const [ismodalVisible, setIsModalVisible] = useState(false);
 
@@ -179,6 +179,7 @@ export default ({
           clearFilter,
           fetchData,
           useModalState,
+          navigateTo,
           openModal: toggleModal,
           rowKey,
           selectedRow,
@@ -191,6 +192,7 @@ export default ({
       }
       return columns;
     }, [
+      navigateTo,
       otherProps,
       memoizedColumns,
       formError,

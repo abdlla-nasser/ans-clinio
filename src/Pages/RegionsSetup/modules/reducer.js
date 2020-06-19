@@ -61,7 +61,7 @@ const initialState = {
   isEditing: false,
   isAddingRecord: false,
   isUpdatingRecord: false,
-  dataSource: [],
+  dataSource: dummyData,
   total: undefined,
   stateColumns: columns,
   lastColLang: undefined,

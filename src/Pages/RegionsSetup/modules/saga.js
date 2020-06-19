@@ -10,10 +10,7 @@ import {
 
 import createApiUrl from "../../../utils/createApiUrl";
 import { getRequest } from "../../../utils/httpRequests";
-import {
-  fetchCountryListFinished,
-  fetchDataFinished,
-} from "../modules/actions";
+import { fetchCountryListFinished } from "../modules/actions";
 
 import {
   FETCH_REGIONS_SETUP_DATA,
@@ -24,7 +21,7 @@ import {
   FETCH_COUNTRY_LIST_REGIONS_SETUP,
 } from "./types";
 
-const regionsSetupSelector = ({ regionsSetupReducer }) => regionsSetupReducer;
+// const regionsSetupSelector = ({ regionsSetupReducer }) => regionsSetupReducer;
 
 function* requestCountryList() {
   const { language_code } = yield select(appBaseLangSelector);
@@ -42,31 +39,6 @@ function* requestCountryList() {
   } catch (error) {
     console.log("Error while fetching requestCountryList => ", error);
     yield put(fetchCountryListFinished());
-  }
-}
-
-function* requestRegionsDataUponCountry({ sorter, filters }) {
-  try {
-    const { dataSource, country } = yield select(regionsSetupSelector);
-    const { language_code } = yield select(appBaseLangSelector);
-
-    const apiUrl = createApiUrl({
-      url: "regions",
-      params: {
-        country: country,
-        lang: language_code,
-        poffset: dataSource && !sorter ? dataSource.length : 0,
-        ...(sorter ? { orderby: sorter } : null),
-        ...(filters ? filters : null),
-      },
-    });
-    const response = yield getRequest(apiUrl);
-    const result = yield response.json();
-
-    yield put(fetchDataFinished(result, !!sorter, !!filters));
-  } catch (error) {
-    console.log("Fetching Regions data error => ", error);
-    yield put(fetchDataFinished());
   }
 }
 
