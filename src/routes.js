@@ -43,6 +43,11 @@ const RegionsSetup = Loadable({
   ...loadableProps,
 });
 
+const AreasSetup = Loadable({
+  loader: () => import("./Pages/AreasSetup"),
+  ...loadableProps,
+});
+
 export default () => (
   <Switch>
     <Route path="/" exact component={LoginPage} />
@@ -56,5 +61,6 @@ export default () => (
     <Route path="/serviceGroups" exact component={ServiceGroups} />
     <Route path="/countriesSetup" exact component={CountriesSetup} />
     <Route path="/regionsSetup" exact component={RegionsSetup} />
+    <Route path="/areasSetup" exact component={AreasSetup} />
   </Switch>
 );

@@ -8,6 +8,7 @@ const initialState = {
   serviceGroupsLabels: undefined,
   countriesSetupLabels: undefined,
   regionsSetupLabels: undefined,
+  areasSetupLabels: undefined,
 };
 
 export default (state = initialState, action) => {

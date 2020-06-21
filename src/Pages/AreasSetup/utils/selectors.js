@@ -13,25 +13,21 @@ import {
   onPressSearch,
   resetFilter,
   onFormChange,
-  fetchCountryList,
+  fetchRegionsList,
 } from "../modules/actions";
 
 export const mapStateToProps = ({
-  regionsSetupReducer: {
+  areasSetupReducer: {
     lastColLang,
     lastColLangList,
     country,
     countryList,
     ...otherReducerData
   },
-  labelsReducer: { regionsSetupLabels: labels },
+  labelsReducer: { areasSetupLabels: labels },
 }) => ({
   country,
   countryList,
-  navigateTo: {
-    pathName: "areasSetup",
-    attrName: "region_code",
-  },
   canInsert: true,
   canDelete: true,
   langSelectOptions: lastColLangList,
@@ -61,5 +57,5 @@ export const mapDispatchToProps = (dispatch) => ({
     dispatch(onChangeRowData(inputData, key, restData)),
   fetchData: (sorter, filters) => dispatch(fetchData(sorter, filters)),
   onFormChange: (params) => dispatch(onFormChange(params)),
-  fetchCountryList: () => dispatch(fetchCountryList()),
+  fetchRegionsList: () => dispatch(fetchRegionsList()),
 });
