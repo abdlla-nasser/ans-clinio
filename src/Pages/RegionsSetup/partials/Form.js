@@ -15,6 +15,7 @@ const FormView = ({
   onFormChange,
   isPrevEqualCurrentlang,
   fetchData,
+  labels,
 }) => {
   useEffect(() => {
     if (!countryList || !isPrevEqualCurrentlang) {
@@ -40,7 +41,7 @@ const FormView = ({
   return (
     <Flex justify="center" margin="0 0 10px 0">
       <Select
-        label="Country"
+        label={labels && labels.country}
         labelFlex={0.4}
         width="300px"
         inputProps={{

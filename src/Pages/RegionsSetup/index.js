@@ -12,7 +12,7 @@ const PageTitle = loadable(() => import("../../components/Text/PageTitle"));
 const Form = loadable(() => import("./partials/Form"));
 
 const RegionsSetup = ({ children, labels, isPrevEqualCurrentlang }) => {
-  const pageTitle = (labels && labels.insurcompstp) || "T_Regions Setup";
+  const pageTitle = labels && labels.regnsstp;
   return (
     <>
       <PageTitle children={pageTitle} />

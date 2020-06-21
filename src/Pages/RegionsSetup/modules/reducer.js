@@ -25,34 +25,34 @@ import {
 
 import { columns, excelColumns } from "../partials/columns";
 
-const dummyData = [
-  {
-    idValue: "5ee776d051003b0b9e911c43",
-    _id: "5ee776d051003b0b9e911c43",
-    name: {
-      en: "Tanta",
-      ar: "طنطا",
-    },
-    sys_country_code3: "EGY",
-    region_code: "Gharb",
-    createdAt: "2020-06-15T13:25:36.147Z",
-    updatedAt: "2020-06-15T13:25:36.147Z",
-    __v: 0,
-  },
-  {
-    idValue: "5ee777a16ac23e0baee7d9da",
-    _id: "5ee777a16ac23e0baee7d9da",
-    name: {
-      en: "Monofia",
-      ar: "المنوفيه",
-    },
-    sys_country_code3: "EGY",
-    region_code: "Monof",
-    createdAt: "2020-06-15T13:29:05.092Z",
-    updatedAt: "2020-06-15T13:29:05.092Z",
-    __v: 0,
-  },
-];
+// const dummyData = [
+//   {
+//     idValue: "5ee776d051003b0b9e911c43",
+//     _id: "5ee776d051003b0b9e911c43",
+//     name: {
+//       en: "Tanta",
+//       ar: "طنطا",
+//     },
+//     sys_country_code3: "EGY",
+//     region_code: "Gharb",
+//     createdAt: "2020-06-15T13:25:36.147Z",
+//     updatedAt: "2020-06-15T13:25:36.147Z",
+//     __v: 0,
+//   },
+//   {
+//     idValue: "5ee777a16ac23e0baee7d9da",
+//     _id: "5ee777a16ac23e0baee7d9da",
+//     name: {
+//       en: "Monofia",
+//       ar: "المنوفيه",
+//     },
+//     sys_country_code3: "EGY",
+//     region_code: "Monof",
+//     createdAt: "2020-06-15T13:29:05.092Z",
+//     updatedAt: "2020-06-15T13:29:05.092Z",
+//     __v: 0,
+//   },
+// ];
 
 const initialState = {
   loading: false,
@@ -61,7 +61,7 @@ const initialState = {
   isEditing: false,
   isAddingRecord: false,
   isUpdatingRecord: false,
-  dataSource: dummyData,
+  dataSource: [],
   total: undefined,
   stateColumns: columns,
   lastColLang: undefined,
