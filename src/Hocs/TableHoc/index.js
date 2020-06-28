@@ -77,6 +77,7 @@ export default ({
       total,
       ...otherProps
     } = props;
+
     const [formError, setFormError] = useState(undefined);
     const [ismodalVisible, setIsModalVisible] = useState(false);
 

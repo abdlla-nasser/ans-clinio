@@ -1,3 +1,4 @@
+import { isArrayHasData } from "../../../utils/isThereData";
 import {
   fetchData,
   onPressEdit,
@@ -22,6 +23,7 @@ export const mapStateToProps = ({
     lastColLangList,
     country,
     countryList,
+    dataSource,
     ...otherReducerData
   },
   labelsReducer: { regionsSetupLabels: labels },
@@ -32,10 +34,11 @@ export const mapStateToProps = ({
     pathName: "areasSetup",
     attrName: "region_code",
   },
-  canInsert: true,
+  canInsert: isArrayHasData(dataSource),
   canDelete: true,
   langSelectOptions: lastColLangList,
   langSelectValue: lastColLang,
+  dataSource,
   labels,
   ...otherReducerData,
 });
