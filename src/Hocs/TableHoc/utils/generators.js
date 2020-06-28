@@ -55,6 +55,7 @@ export function* requestTableData({
     const result = yield response.json();
 
     console.log("requestTableData apiUrl: ", apiUrl);
+    console.log("requestTableData result: ", result);
 
     yield put(finishedAction(result, !!sorter, !!filters));
   } catch (error) {
