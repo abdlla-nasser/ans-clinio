@@ -8,11 +8,25 @@ import {
 } from "./utils/selectors";
 import loadable from "../../components/Loadable";
 
+const { useEffect } = React;
 const PageTitle = loadable(() => import("../../components/Text/PageTitle"));
 const Form = loadable(() => import("./partials/Form"));
 
-const AreasSetup = ({ children, labels, isPrevEqualCurrentlang }) => {
+const AreasSetup = ({
+  children,
+  labels,
+  isPrevEqualCurrentlang,
+  location: { state },
+  onFormChange,
+}) => {
   const pageTitle = (labels && labels.regnsstp) || "T_Areas Setup";
+
+  useEffect(() => {
+    if (state && state.fromPrevPage) {
+      onFormChange({ key: "region", value: state.fromPrevPage });
+    }
+  }, [onFormChange, state]);
+
   return (
     <>
       <PageTitle children={pageTitle} />
@@ -32,6 +46,6 @@ export default WithTableHoc({
   renderColumns: columns,
   pageName: "areasSetup",
   rowKey: "idValue",
-  requiredProps: ["labels"],
+  requiredProps: ["labels", "location", "onFormChange"],
   itemsPropNamesToValidate: ["en", "ar"],
 });

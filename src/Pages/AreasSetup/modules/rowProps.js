@@ -1,5 +1,5 @@
 export default {
-  sys_country_code3: false,
+  region_code: false,
   name: {
     en: "",
     ar: "",

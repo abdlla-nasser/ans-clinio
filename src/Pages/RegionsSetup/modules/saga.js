@@ -21,8 +21,6 @@ import {
   FETCH_COUNTRY_LIST_REGIONS_SETUP,
 } from "./types";
 
-// const regionsSetupSelector = ({ regionsSetupReducer }) => regionsSetupReducer;
-
 function* requestCountryList() {
   const { language_code } = yield select(appBaseLangSelector);
   try {

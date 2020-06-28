@@ -1,7 +1,7 @@
 export const excelColumns = [
   {
     label: "code",
-    value: "sys_country_code3",
+    value: "region_code",
   },
   {
     label: "english",
@@ -34,7 +34,7 @@ export const columns = [
     renderView: {
       type: "text",
       renderCell: {
-        dIdxs: "sys_country_code3",
+        dIdxs: "region_code",
       },
     },
   },

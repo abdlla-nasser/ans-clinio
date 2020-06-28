@@ -43,7 +43,7 @@ const initialState = {
     { key: "de", value: "German" },
   ],
   stateExcelColumns: excelColumns,
-  country: undefined,
+  region: undefined,
   regionsList: undefined,
 };
 

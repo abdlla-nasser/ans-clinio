@@ -10,7 +10,7 @@ import {
 
 import createApiUrl from "../../../utils/createApiUrl";
 import { getRequest } from "../../../utils/httpRequests";
-import { fetchRegionsList } from "../modules/actions";
+import { fetchRegionsListFinished } from "../modules/actions";
 
 import {
   FETCH_AREAS_SETUP_DATA,
@@ -21,13 +21,11 @@ import {
   FETCH_REGIONS_LIST_AREAS_SETUP,
 } from "./types";
 
-// const regionsSetupSelector = ({ regionsSetupReducer }) => regionsSetupReducer;
-
 function* requestRegionsList() {
   const { language_code } = yield select(appBaseLangSelector);
   try {
     const apiUrl = createApiUrl({
-      url: "select/country",
+      url: "select/regions",
       params: {
         lang: language_code,
       },
@@ -35,10 +33,10 @@ function* requestRegionsList() {
     let response = yield getRequest(apiUrl);
     response = yield response.json();
 
-    yield put(fetchRegionsList(response));
+    yield put(fetchRegionsListFinished(response));
   } catch (error) {
     console.log("Error while fetching requestRegionsList => ", error);
-    yield put(fetchRegionsList());
+    yield put(fetchRegionsListFinished());
   }
 }
 

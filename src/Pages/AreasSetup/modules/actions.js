@@ -23,22 +23,22 @@ import {
   ON_AREAS_SETUP_FORM_CHANGED,
 } from "./types";
 
-const reducerName = "regionsSetupReducer";
+const reducerName = "areasSetupReducer";
 const rowKey = "idValue";
 
 // Fetch initial data
 export const fetchData = (sorter, filters) => ({
   type: FETCH_AREAS_SETUP_DATA,
   reducerName,
-  API_URL: "regions",
+  API_URL: "areas",
   sorter,
   filters,
   finishedAction: fetchDataFinished,
-  addtionalParamsFields: ["country"],
+  addtionalParamsFields: ["region"],
 });
 export const fetchDataFinished = (result, isSorted, isFiltered) => ({
   type: FETCH_AREAS_SETUP_DATA_FINISHED,
-  data: result && normalizer(result),
+  data: result && result.data && normalizer(result.data),
   totalRecords: result.total,
   isSorted,
   isFiltered,
@@ -81,7 +81,7 @@ export const requestInsertRecord = (recordData) => ({
   recordData,
   rowKey,
   reducerName,
-  API_URL: "regions",
+  API_URL: "areas",
   finishedAction: requestInsertRecordFinished,
 });
 export const requestInsertRecordFinished = (newState) => ({
@@ -95,7 +95,7 @@ export const requestUpdateRecord = (recordData) => ({
   recordData,
   rowKey,
   reducerName,
-  API_URL: `regions/${recordData.idValue}`,
+  API_URL: `areas/${recordData.idValue}`,
   finishedAction: requestUpdateRecordFinished,
 });
 export const requestUpdateRecordFinished = (newState) => ({
@@ -109,7 +109,7 @@ export const onDeleteRecord = (record) => ({
   record,
   reducerName,
   rowKey,
-  API_URL: `regions/${record._id}`,
+  API_URL: `areas/${record._id}`,
   finishedAction: onDeleteRecordFinshed,
 });
 const onDeleteRecordFinshed = (newState) => ({
@@ -120,7 +120,7 @@ const onDeleteRecordFinshed = (newState) => ({
 // On press search button
 export const onPressSearch = (filters) => ({
   type: ON_PRESS_SEARCH_AREAS_SETUP,
-  API_URL: "regions",
+  API_URL: "areas",
   filters,
   finishedAction: onRequestSearchFinished,
 });

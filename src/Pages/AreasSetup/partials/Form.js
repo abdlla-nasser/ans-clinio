@@ -9,20 +9,25 @@ import { mapStateToProps, mapDispatchToProps } from "../utils/selectors";
 const { memo, useCallback, useEffect } = React;
 
 const FormView = ({
-  country,
-  countryList,
-  fetchCountryList,
+  region,
+  regionsList,
+  fetchRegionsList,
   onFormChange,
   isPrevEqualCurrentlang,
   fetchData,
   labels,
 }) => {
-  // useEffect(() => {
-  //   if (!countryList || !isPrevEqualCurrentlang) {
-  //     fetchCountryList();
-  //   }
-  //   //eslint-disable-next-line
-  // }, [isPrevEqualCurrentlang]);
+  useEffect(() => {
+    if (region) {
+      fetchData();
+    }
+  }, [region, fetchData]);
+
+  useEffect(() => {
+    if (!regionsList || !isPrevEqualCurrentlang) {
+      fetchRegionsList();
+    }
+  }, [isPrevEqualCurrentlang, fetchRegionsList, regionsList]);
 
   const handleFormChange = useCallback(
     (key) => (value) => {
@@ -31,26 +36,25 @@ const FormView = ({
     [onFormChange]
   );
 
-  const handleFetchRegions = useCallback(() => {
-    if (country) {
+  const handleFetchAreas = useCallback(() => {
+    if (region) {
       fetchData();
     }
-    //eslint-disable-next-line
-  }, [country]);
+  }, [region, fetchData]);
 
   return (
     <Flex justify="center" margin="0 0 10px 0">
       <Select
-        label={labels && labels.country}
+        label={labels && labels.region}
         labelFlex={0.4}
         width="300px"
         inputProps={{
-          value: country,
-          options: countryList,
-          onChange: handleFormChange("country"),
+          value: region,
+          options: regionsList,
+          onChange: handleFormChange("region"),
         }}
       />
-      <IconContainer onClick={handleFetchRegions}>
+      <IconContainer onClick={handleFetchAreas}>
         <Icon type="search" size={20} color="white" margintop={-1} />
       </IconContainer>
     </Flex>

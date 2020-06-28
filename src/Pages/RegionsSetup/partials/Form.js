@@ -21,8 +21,7 @@ const FormView = ({
     if (!countryList || !isPrevEqualCurrentlang) {
       fetchCountryList();
     }
-    //eslint-disable-next-line
-  }, [isPrevEqualCurrentlang]);
+  }, [isPrevEqualCurrentlang, countryList, fetchCountryList]);
 
   const handleFormChange = useCallback(
     (key) => (value) => {
@@ -35,8 +34,7 @@ const FormView = ({
     if (country) {
       fetchData();
     }
-    //eslint-disable-next-line
-  }, [country]);
+  }, [country, fetchData]);
 
   return (
     <Flex justify="center" margin="0 0 10px 0">
