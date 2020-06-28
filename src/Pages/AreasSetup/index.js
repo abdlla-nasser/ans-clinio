@@ -19,7 +19,7 @@ const AreasSetup = ({
   location: { state },
   onFormChange,
 }) => {
-  const pageTitle = (labels && labels.regnsstp) || "T_Areas Setup";
+  const pageTitle = labels && labels.areasstp;
 
   useEffect(() => {
     if (state && state.fromPrevPage) {
