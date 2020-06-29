@@ -21,6 +21,8 @@ import {
   FETCH_REGIONS_LIST_AREAS_SETUP,
   FETCH_REGIONS_LIST_AREAS_SETUP_FINISHED,
   ON_AREAS_SETUP_FORM_CHANGED,
+  FETCH_COUNTRY_LIST_AREAS_SETUP,
+  FETCH_COUNTRY_LIST_AREAS_SETUP_FINISHED,
 } from "./types";
 
 const reducerName = "areasSetupReducer";
@@ -158,10 +160,18 @@ export const resetColValue = () => ({
 
 //----------------------------- CUSTOM ACTIONS -----------------------------
 
-export const onFormChange = ({ key, value }) => ({
+export const onFormChange = ({ name, value }) => ({
   type: ON_AREAS_SETUP_FORM_CHANGED,
-  key,
+  name,
   value,
+});
+
+export const fetchCountryList = () => ({
+  type: FETCH_COUNTRY_LIST_AREAS_SETUP,
+});
+export const fetchCountryListFinished = (data) => ({
+  type: FETCH_COUNTRY_LIST_AREAS_SETUP_FINISHED,
+  data,
 });
 
 export const fetchRegionsList = () => ({

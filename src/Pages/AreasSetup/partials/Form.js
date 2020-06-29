@@ -5,10 +5,14 @@ import Flex from "../../../components/Flex";
 import { IconContainer } from "../../../components/Icon/styled";
 import Icon from "../../../components/Icon";
 import { mapStateToProps, mapDispatchToProps } from "../utils/selectors";
+import { usePrevious } from "../../../utils/customUseHooks";
 
 const { memo, useCallback, useEffect } = React;
 
 const FormView = ({
+  country,
+  countryList,
+  fetchCountryList,
   region,
   regionsList,
   fetchRegionsList,
@@ -17,21 +21,30 @@ const FormView = ({
   fetchData,
   labels,
 }) => {
+  const prevCountryValue = usePrevious(country);
+  const isCountryValueChanged = country && country !== prevCountryValue;
+
+  useEffect(() => {
+    if (!countryList || !isPrevEqualCurrentlang) {
+      fetchCountryList();
+    }
+  }, [isPrevEqualCurrentlang, countryList, fetchCountryList]);
+
+  useEffect(() => {
+    if (isCountryValueChanged || !isPrevEqualCurrentlang) {
+      fetchRegionsList();
+    }
+  }, [isPrevEqualCurrentlang, fetchRegionsList, isCountryValueChanged]);
+
   useEffect(() => {
     if (region) {
       fetchData();
     }
   }, [region, fetchData]);
 
-  useEffect(() => {
-    if (!regionsList || !isPrevEqualCurrentlang) {
-      fetchRegionsList();
-    }
-  }, [isPrevEqualCurrentlang, fetchRegionsList, regionsList]);
-
   const handleFormChange = useCallback(
-    (key) => (value) => {
-      return onFormChange({ key, value });
+    (name) => (value) => {
+      return onFormChange({ name, value });
     },
     [onFormChange]
   );
@@ -44,6 +57,19 @@ const FormView = ({
 
   return (
     <Flex justify="center" margin="0 0 10px 0">
+      <Select
+        label={labels && labels.country}
+        labelFlex={0.4}
+        width="300px"
+        inputProps={{
+          value: country,
+          options: countryList,
+          onChange: handleFormChange("country"),
+          style: {
+            marginInlineEnd: "30px",
+          },
+        }}
+      />
       <Select
         label={labels && labels.region}
         labelFlex={0.4}

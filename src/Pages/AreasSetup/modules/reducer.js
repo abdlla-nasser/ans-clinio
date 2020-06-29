@@ -21,6 +21,7 @@ import {
   ON_RESET_FILTER_AREAS_SETUP,
   FETCH_REGIONS_LIST_AREAS_SETUP_FINISHED,
   ON_AREAS_SETUP_FORM_CHANGED,
+  FETCH_COUNTRY_LIST_AREAS_SETUP_FINISHED,
 } from "./types";
 
 import { columns, excelColumns } from "../partials/columns";
@@ -43,6 +44,8 @@ const initialState = {
     { key: "de", value: "German" },
   ],
   stateExcelColumns: excelColumns,
+  country: undefined,
+  countryList: undefined,
   region: undefined,
   regionsList: undefined,
 };
@@ -191,6 +194,12 @@ export default (state = initialState, action) => {
         ...action.newState,
       };
 
+    case FETCH_COUNTRY_LIST_AREAS_SETUP_FINISHED:
+      return {
+        ...state,
+        countryList: action.data || [],
+      };
+
     case FETCH_REGIONS_LIST_AREAS_SETUP_FINISHED:
       return {
         ...state,
@@ -200,7 +209,7 @@ export default (state = initialState, action) => {
     case ON_AREAS_SETUP_FORM_CHANGED:
       return {
         ...state,
-        [action.key]: action.value,
+        [action.name]: action.value,
       };
 
     default:

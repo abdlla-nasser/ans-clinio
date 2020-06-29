@@ -20,10 +20,9 @@ const AreasSetup = ({
   onFormChange,
 }) => {
   const pageTitle = labels && labels.areasstp;
-
   useEffect(() => {
     if (state && state.fromPrevPage) {
-      onFormChange({ key: "region", value: state.fromPrevPage });
+      onFormChange({ name: "region", value: state.fromPrevPage });
     }
   }, [onFormChange, state]);
 

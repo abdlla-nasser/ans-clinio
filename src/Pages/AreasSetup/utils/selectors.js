@@ -14,6 +14,7 @@ import {
   resetFilter,
   onFormChange,
   fetchRegionsList,
+  fetchCountryList,
 } from "../modules/actions";
 
 export const mapStateToProps = ({
@@ -57,5 +58,6 @@ export const mapDispatchToProps = (dispatch) => ({
     dispatch(onChangeRowData(inputData, key, restData)),
   fetchData: (sorter, filters) => dispatch(fetchData(sorter, filters)),
   onFormChange: (params) => dispatch(onFormChange(params)),
+  fetchCountryList: () => dispatch(fetchCountryList()),
   fetchRegionsList: () => dispatch(fetchRegionsList()),
 });
