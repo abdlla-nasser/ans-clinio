@@ -40,7 +40,7 @@ function* requestTypeList() {
   }
 }
 
-export default function* InsuranceCompaniesSetupSaga() {
+export default function* () {
   yield all([takeLatest(FETCH_ALLERGIES_SETUP_DATA, requestTableData)]);
   yield all([
     takeLatest(ON_REQUEST_UPDATE_ALLERGIES_SETUP_RECORD, requestUpdateRecord),

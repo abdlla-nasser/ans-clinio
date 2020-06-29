@@ -1,26 +1,26 @@
 import idGenerator from "../../../utils/idGenerator";
 import {
-  FETCH_AREAS_SETUP_DATA,
-  FETCH_AREAS_SETUP_DATA_FINISHED,
-  ON_SELECT_AREAS_SETUP_ROW,
-  ON_PRESS_AREAS_SETUP_EDIT,
-  ON_PRESS_AREAS_SETUP_ADD,
-  ON_CHANGE_AREAS_SETUP_RECORD_DATA,
-  ON_REQUEST_DELETE_AREAS_SETUP_RECORD,
-  ON_REQUEST_DELETE_AREAS_SETUP_RECORD_FINISHED,
-  ON_PRESS_AREAS_SETUP_CANCEL,
-  ON_REQUEST_INSERT_AREAS_SETUP_RECORD,
-  ON_REQUEST_INSERT_AREAS_SETUP_RECORD_FINISHED,
-  ON_REQUEST_UPDATE_AREAS_SETUP_RECORD,
-  ON_REQUEST_UPDATE_AREAS_SETUP_RECORD_FINISHED,
-  ON_SELECT_LAST_COLUMN_LANGUAGE_AREAS_SETUP,
-  ON_RESET_LAST_COLUMN_LANGUAGE_AREAS_SETUP,
-  ON_PRESS_SEARCH_AREAS_SETUP,
-  ON_PRESS_SEARCH_AREAS_SETUP_FINISHED,
-  ON_RESET_FILTER_AREAS_SETUP,
-  FETCH_REGIONS_LIST_AREAS_SETUP_FINISHED,
-  ON_AREAS_SETUP_FORM_CHANGED,
-  FETCH_COUNTRY_LIST_AREAS_SETUP_FINISHED,
+  FETCH_SYSTEM_SERVICES_DATA,
+  FETCH_SYSTEM_SERVICES_DATA_FINISHED,
+  ON_SELECT_SYSTEM_SERVICES_ROW,
+  ON_PRESS_SYSTEM_SERVICES_EDIT,
+  ON_PRESS_SYSTEM_SERVICES_ADD,
+  ON_CHANGE_SYSTEM_SERVICES_RECORD_DATA,
+  ON_REQUEST_DELETE_SYSTEM_SERVICES_RECORD,
+  ON_REQUEST_DELETE_SYSTEM_SERVICES_RECORD_FINISHED,
+  ON_PRESS_SYSTEM_SERVICES_CANCEL,
+  ON_REQUEST_INSERT_SYSTEM_SERVICES_RECORD,
+  ON_REQUEST_INSERT_SYSTEM_SERVICES_RECORD_FINISHED,
+  ON_REQUEST_UPDATE_SYSTEM_SERVICES_RECORD,
+  ON_REQUEST_UPDATE_SYSTEM_SERVICES_RECORD_FINISHED,
+  ON_SELECT_LAST_COLUMN_LANGUAGE_SYSTEM_SERVICES,
+  ON_RESET_LAST_COLUMN_LANGUAGE_SYSTEM_SERVICES,
+  ON_PRESS_SEARCH_SYSTEM_SERVICES,
+  ON_PRESS_SEARCH_SYSTEM_SERVICES_FINISHED,
+  ON_RESET_FILTER_SYSTEM_SERVICES,
+  ON_SYSTEM_SERVICES_FORM_CHANGED,
+  FETCH_COUNTRY_LIST_SYSTEM_SERVICES_FINISHED,
+  FETCH_SERVICE_GROUPS_LIST_SYSTEM_SERVICES_FINISHED,
 } from "./types";
 
 import { columns, excelColumns } from "../partials/columns";
@@ -45,19 +45,19 @@ const initialState = {
   stateExcelColumns: excelColumns,
   country: undefined,
   countryList: undefined,
-  region: undefined,
-  regionsList: undefined,
+  service_group: undefined,
+  serviceGroupsList: undefined,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ON_RESET_LAST_COLUMN_LANGUAGE_AREAS_SETUP:
+    case ON_RESET_LAST_COLUMN_LANGUAGE_SYSTEM_SERVICES:
       return {
         ...state,
         stateColumns: columns,
         stateExcelColumns: excelColumns,
       };
-    case ON_SELECT_LAST_COLUMN_LANGUAGE_AREAS_SETUP:
+    case ON_SELECT_LAST_COLUMN_LANGUAGE_SYSTEM_SERVICES:
       return {
         ...state,
         lastColLang: action.key,
@@ -65,14 +65,14 @@ export default (state = initialState, action) => {
         stateExcelColumns: [...state.stateExcelColumns, action.excelColumn],
       };
 
-    case FETCH_AREAS_SETUP_DATA:
-    case ON_PRESS_SEARCH_AREAS_SETUP:
+    case FETCH_SYSTEM_SERVICES_DATA:
+    case ON_PRESS_SEARCH_SYSTEM_SERVICES:
       return {
         ...state,
         loading: true,
       };
 
-    case FETCH_AREAS_SETUP_DATA_FINISHED:
+    case FETCH_SYSTEM_SERVICES_DATA_FINISHED:
       const dataFromServer = action.data || [];
       const isDataSortedOrFiltered = action.isSorted || action.isFiltered;
 
@@ -85,26 +85,26 @@ export default (state = initialState, action) => {
         loading: false,
       };
 
-    case ON_PRESS_SEARCH_AREAS_SETUP_FINISHED:
+    case ON_PRESS_SEARCH_SYSTEM_SERVICES_FINISHED:
       return {
         ...state,
         dataSource: action.data,
         loading: false,
       };
 
-    case ON_RESET_FILTER_AREAS_SETUP:
+    case ON_RESET_FILTER_SYSTEM_SERVICES:
       return {
         ...state,
         dataSource: null,
       };
 
-    case ON_SELECT_AREAS_SETUP_ROW:
+    case ON_SELECT_SYSTEM_SERVICES_ROW:
       return {
         ...state,
         selectedRow: action.id,
       };
 
-    case ON_PRESS_AREAS_SETUP_ADD:
+    case ON_PRESS_SYSTEM_SERVICES_ADD:
       const ds = state.dataSource;
       const recordKey = idGenerator();
       return {
@@ -114,11 +114,13 @@ export default (state = initialState, action) => {
         selectedRow: recordKey,
         dataSource: [
           {
-            region_code: state.region,
+            sys_country_code3: state.country,
+            parent: state.service_group,
             name: {
               en: "",
               ar: "",
             },
+            price: 0,
             idValue: recordKey,
             isNew: true,
           },
@@ -126,14 +128,14 @@ export default (state = initialState, action) => {
         ],
       };
 
-    case ON_PRESS_AREAS_SETUP_EDIT:
+    case ON_PRESS_SYSTEM_SERVICES_EDIT:
       return {
         ...state,
         isEditing: true,
         isUpdatingRecord: true,
       };
 
-    case ON_CHANGE_AREAS_SETUP_RECORD_DATA:
+    case ON_CHANGE_SYSTEM_SERVICES_RECORD_DATA:
       const { inputData, key, langCode } = action;
       const name = Object.keys(inputData)[0];
       const value = inputData[name];
@@ -150,15 +152,15 @@ export default (state = initialState, action) => {
         }),
       };
 
-    case ON_REQUEST_INSERT_AREAS_SETUP_RECORD:
-    case ON_REQUEST_UPDATE_AREAS_SETUP_RECORD:
+    case ON_REQUEST_INSERT_SYSTEM_SERVICES_RECORD:
+    case ON_REQUEST_UPDATE_SYSTEM_SERVICES_RECORD:
       return {
         ...state,
         isActionLoading: true,
       };
 
-    case ON_REQUEST_INSERT_AREAS_SETUP_RECORD_FINISHED:
-    case ON_REQUEST_UPDATE_AREAS_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_INSERT_SYSTEM_SERVICES_RECORD_FINISHED:
+    case ON_REQUEST_UPDATE_SYSTEM_SERVICES_RECORD_FINISHED:
       return {
         ...state,
         isEditing: false,
@@ -169,7 +171,7 @@ export default (state = initialState, action) => {
         ...action.newState,
       };
 
-    case ON_PRESS_AREAS_SETUP_CANCEL:
+    case ON_PRESS_SYSTEM_SERVICES_CANCEL:
       return {
         ...state,
         isEditing: false,
@@ -180,7 +182,7 @@ export default (state = initialState, action) => {
         ),
       };
 
-    case ON_REQUEST_DELETE_AREAS_SETUP_RECORD:
+    case ON_REQUEST_DELETE_SYSTEM_SERVICES_RECORD:
       const { idValue } = action.record;
       return {
         ...state,
@@ -189,7 +191,7 @@ export default (state = initialState, action) => {
         selectedRow: idValue,
       };
 
-    case ON_REQUEST_DELETE_AREAS_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_DELETE_SYSTEM_SERVICES_RECORD_FINISHED:
       return {
         ...state,
         isActionLoading: false,
@@ -197,19 +199,19 @@ export default (state = initialState, action) => {
         ...action.newState,
       };
 
-    case FETCH_COUNTRY_LIST_AREAS_SETUP_FINISHED:
+    case FETCH_COUNTRY_LIST_SYSTEM_SERVICES_FINISHED:
       return {
         ...state,
         countryList: action.data || [],
       };
 
-    case FETCH_REGIONS_LIST_AREAS_SETUP_FINISHED:
+    case FETCH_SERVICE_GROUPS_LIST_SYSTEM_SERVICES_FINISHED:
       return {
         ...state,
-        regionsList: action.data || [],
+        serviceGroupsList: action.data || [],
       };
 
-    case ON_AREAS_SETUP_FORM_CHANGED:
+    case ON_SYSTEM_SERVICES_FORM_CHANGED:
       return {
         ...state,
         [action.name]: action.value,

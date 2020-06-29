@@ -32,9 +32,10 @@ const FormView = ({
 
   const handleFetchRegions = useCallback(() => {
     if (country) {
+      onFormChange({ name: "dataSource", value: [] });
       fetchData();
     }
-  }, [country, fetchData]);
+  }, [country, fetchData, onFormChange]);
 
   return (
     <Flex justify="center" margin="0 0 10px 0">
@@ -48,8 +49,14 @@ const FormView = ({
           onChange: handleFormChange("country"),
         }}
       />
-      <IconContainer onClick={handleFetchRegions}>
-        <Icon type="search" size={20} color="white" margintop={-1} />
+      <IconContainer onClick={handleFetchRegions} setDisabledBg={!country}>
+        <Icon
+          type="search"
+          size={20}
+          color="white"
+          margintop={-1}
+          disabled={!country}
+        />
       </IconContainer>
     </Flex>
   );

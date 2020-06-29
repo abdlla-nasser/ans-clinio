@@ -40,7 +40,7 @@ function* requestCountryList() {
   }
 }
 
-export default function* InsuranceCompaniesSetupSaga() {
+export default function* () {
   yield all([takeLatest(FETCH_REGIONS_SETUP_DATA, requestTableData)]);
   yield all([
     takeLatest(ON_REQUEST_UPDATE_REGIONS_SETUP_RECORD, requestUpdateRecord),

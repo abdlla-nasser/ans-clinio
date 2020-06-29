@@ -1,26 +1,24 @@
+import initialRowData from "./rowProps";
 import idGenerator from "../../../utils/idGenerator";
 import {
-  FETCH_AREAS_SETUP_DATA,
-  FETCH_AREAS_SETUP_DATA_FINISHED,
-  ON_SELECT_AREAS_SETUP_ROW,
-  ON_PRESS_AREAS_SETUP_EDIT,
-  ON_PRESS_AREAS_SETUP_ADD,
-  ON_CHANGE_AREAS_SETUP_RECORD_DATA,
-  ON_REQUEST_DELETE_AREAS_SETUP_RECORD,
-  ON_REQUEST_DELETE_AREAS_SETUP_RECORD_FINISHED,
-  ON_PRESS_AREAS_SETUP_CANCEL,
-  ON_REQUEST_INSERT_AREAS_SETUP_RECORD,
-  ON_REQUEST_INSERT_AREAS_SETUP_RECORD_FINISHED,
-  ON_REQUEST_UPDATE_AREAS_SETUP_RECORD,
-  ON_REQUEST_UPDATE_AREAS_SETUP_RECORD_FINISHED,
-  ON_SELECT_LAST_COLUMN_LANGUAGE_AREAS_SETUP,
-  ON_RESET_LAST_COLUMN_LANGUAGE_AREAS_SETUP,
-  ON_PRESS_SEARCH_AREAS_SETUP,
-  ON_PRESS_SEARCH_AREAS_SETUP_FINISHED,
-  ON_RESET_FILTER_AREAS_SETUP,
-  FETCH_REGIONS_LIST_AREAS_SETUP_FINISHED,
-  ON_AREAS_SETUP_FORM_CHANGED,
-  FETCH_COUNTRY_LIST_AREAS_SETUP_FINISHED,
+  FETCH_INSURANCE_COMPANIES_SETUP_DATA,
+  FETCH_INSURANCE_COMPANIES_SETUP_DATA_FINISHED,
+  ON_SELECT_INSURANCE_COMPANIES_SETUP_ROW,
+  ON_PRESS_INSURANCE_COMPANIES_SETUP_EDIT,
+  ON_PRESS_INSURANCE_COMPANIES_SETUP_ADD,
+  ON_CHANGE_INSURANCE_COMPANIES_SETUP_RECORD_DATA,
+  ON_REQUEST_DELETE_INSURANCE_COMPANIES_SETUP_RECORD,
+  ON_REQUEST_DELETE_INSURANCE_COMPANIES_SETUP_RECORD_FINISHED,
+  ON_PRESS_INSURANCE_COMPANIES_SETUP_CANCEL,
+  ON_REQUEST_INSERT_INSURANCE_COMPANIES_SETUP_RECORD,
+  ON_REQUEST_INSERT_INSURANCE_COMPANIES_SETUP_RECORD_FINISHED,
+  ON_REQUEST_UPDATE_INSURANCE_COMPANIES_SETUP_RECORD,
+  ON_REQUEST_UPDATE_INSURANCE_COMPANIES_SETUP_RECORD_FINISHED,
+  ON_SELECT_LAST_COLUMN_LANGUAGE_INSURANCE_COMPANIES_SETUP,
+  ON_RESET_LAST_COLUMN_LANGUAGE_INSURANCE_COMPANIES_SETUP,
+  ON_PRESS_SEARCH_INSURANCE_COMPANIES_SETUP,
+  ON_PRESS_SEARCH_INSURANCE_COMPANIES_SETUP_FINISHED,
+  ON_RESET_FILTER_INSURANCE_COMPANIES_SETUP,
 } from "./types";
 
 import { columns, excelColumns } from "../partials/columns";
@@ -43,21 +41,17 @@ const initialState = {
     { key: "de", value: "German" },
   ],
   stateExcelColumns: excelColumns,
-  country: undefined,
-  countryList: undefined,
-  region: undefined,
-  regionsList: undefined,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ON_RESET_LAST_COLUMN_LANGUAGE_AREAS_SETUP:
+    case ON_RESET_LAST_COLUMN_LANGUAGE_INSURANCE_COMPANIES_SETUP:
       return {
         ...state,
         stateColumns: columns,
         stateExcelColumns: excelColumns,
       };
-    case ON_SELECT_LAST_COLUMN_LANGUAGE_AREAS_SETUP:
+    case ON_SELECT_LAST_COLUMN_LANGUAGE_INSURANCE_COMPANIES_SETUP:
       return {
         ...state,
         lastColLang: action.key,
@@ -65,14 +59,14 @@ export default (state = initialState, action) => {
         stateExcelColumns: [...state.stateExcelColumns, action.excelColumn],
       };
 
-    case FETCH_AREAS_SETUP_DATA:
-    case ON_PRESS_SEARCH_AREAS_SETUP:
+    case FETCH_INSURANCE_COMPANIES_SETUP_DATA:
+    case ON_PRESS_SEARCH_INSURANCE_COMPANIES_SETUP:
       return {
         ...state,
         loading: true,
       };
 
-    case FETCH_AREAS_SETUP_DATA_FINISHED:
+    case FETCH_INSURANCE_COMPANIES_SETUP_DATA_FINISHED:
       const dataFromServer = action.data || [];
       const isDataSortedOrFiltered = action.isSorted || action.isFiltered;
 
@@ -85,26 +79,26 @@ export default (state = initialState, action) => {
         loading: false,
       };
 
-    case ON_PRESS_SEARCH_AREAS_SETUP_FINISHED:
+    case ON_PRESS_SEARCH_INSURANCE_COMPANIES_SETUP_FINISHED:
       return {
         ...state,
         dataSource: action.data,
         loading: false,
       };
 
-    case ON_RESET_FILTER_AREAS_SETUP:
+    case ON_RESET_FILTER_INSURANCE_COMPANIES_SETUP:
       return {
         ...state,
         dataSource: null,
       };
 
-    case ON_SELECT_AREAS_SETUP_ROW:
+    case ON_SELECT_INSURANCE_COMPANIES_SETUP_ROW:
       return {
         ...state,
         selectedRow: action.id,
       };
 
-    case ON_PRESS_AREAS_SETUP_ADD:
+    case ON_PRESS_INSURANCE_COMPANIES_SETUP_ADD:
       const ds = state.dataSource;
       const recordKey = idGenerator();
       return {
@@ -114,11 +108,7 @@ export default (state = initialState, action) => {
         selectedRow: recordKey,
         dataSource: [
           {
-            region_code: state.region,
-            name: {
-              en: "",
-              ar: "",
-            },
+            ...initialRowData,
             idValue: recordKey,
             isNew: true,
           },
@@ -126,14 +116,14 @@ export default (state = initialState, action) => {
         ],
       };
 
-    case ON_PRESS_AREAS_SETUP_EDIT:
+    case ON_PRESS_INSURANCE_COMPANIES_SETUP_EDIT:
       return {
         ...state,
         isEditing: true,
         isUpdatingRecord: true,
       };
 
-    case ON_CHANGE_AREAS_SETUP_RECORD_DATA:
+    case ON_CHANGE_INSURANCE_COMPANIES_SETUP_RECORD_DATA:
       const { inputData, key, langCode } = action;
       const name = Object.keys(inputData)[0];
       const value = inputData[name];
@@ -150,15 +140,15 @@ export default (state = initialState, action) => {
         }),
       };
 
-    case ON_REQUEST_INSERT_AREAS_SETUP_RECORD:
-    case ON_REQUEST_UPDATE_AREAS_SETUP_RECORD:
+    case ON_REQUEST_INSERT_INSURANCE_COMPANIES_SETUP_RECORD:
+    case ON_REQUEST_UPDATE_INSURANCE_COMPANIES_SETUP_RECORD:
       return {
         ...state,
         isActionLoading: true,
       };
 
-    case ON_REQUEST_INSERT_AREAS_SETUP_RECORD_FINISHED:
-    case ON_REQUEST_UPDATE_AREAS_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_INSERT_INSURANCE_COMPANIES_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_UPDATE_INSURANCE_COMPANIES_SETUP_RECORD_FINISHED:
       return {
         ...state,
         isEditing: false,
@@ -169,7 +159,7 @@ export default (state = initialState, action) => {
         ...action.newState,
       };
 
-    case ON_PRESS_AREAS_SETUP_CANCEL:
+    case ON_PRESS_INSURANCE_COMPANIES_SETUP_CANCEL:
       return {
         ...state,
         isEditing: false,
@@ -180,7 +170,7 @@ export default (state = initialState, action) => {
         ),
       };
 
-    case ON_REQUEST_DELETE_AREAS_SETUP_RECORD:
+    case ON_REQUEST_DELETE_INSURANCE_COMPANIES_SETUP_RECORD:
       const { idValue } = action.record;
       return {
         ...state,
@@ -189,30 +179,12 @@ export default (state = initialState, action) => {
         selectedRow: idValue,
       };
 
-    case ON_REQUEST_DELETE_AREAS_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_DELETE_INSURANCE_COMPANIES_SETUP_RECORD_FINISHED:
       return {
         ...state,
         isActionLoading: false,
         selectedRow: undefined,
         ...action.newState,
-      };
-
-    case FETCH_COUNTRY_LIST_AREAS_SETUP_FINISHED:
-      return {
-        ...state,
-        countryList: action.data || [],
-      };
-
-    case FETCH_REGIONS_LIST_AREAS_SETUP_FINISHED:
-      return {
-        ...state,
-        regionsList: action.data || [],
-      };
-
-    case ON_AREAS_SETUP_FORM_CHANGED:
-      return {
-        ...state,
-        [action.name]: action.value,
       };
 
     default:

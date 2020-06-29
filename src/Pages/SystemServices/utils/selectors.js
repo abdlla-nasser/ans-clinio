@@ -15,21 +15,18 @@ import {
   resetFilter,
   onFormChange,
   fetchCountryList,
+  fetchServiceGroupsList,
 } from "../modules/actions";
 
 export const mapStateToProps = ({
-  regionsSetupReducer: {
+  systemServicesReducer: {
     lastColLang,
     lastColLangList,
     dataSource,
     ...otherReducerData
   },
-  labelsReducer: { regionsSetupLabels: labels },
+  labelsReducer: { systemServicesLabels: labels },
 }) => ({
-  navigateTo: {
-    pathName: "areasSetup",
-    attrName: "region_code",
-  },
   canInsert: isArrayHasData(dataSource),
   canDelete: true,
   langSelectOptions: lastColLangList,
@@ -61,4 +58,5 @@ export const mapDispatchToProps = (dispatch) => ({
   fetchData: (sorter, filters) => dispatch(fetchData(sorter, filters)),
   onFormChange: (params) => dispatch(onFormChange(params)),
   fetchCountryList: () => dispatch(fetchCountryList()),
+  fetchServiceGroupsList: () => dispatch(fetchServiceGroupsList()),
 });

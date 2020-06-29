@@ -29,15 +29,17 @@ const reducerName = "areasSetupReducer";
 const rowKey = "idValue";
 
 // Fetch initial data
-export const fetchData = (sorter, filters) => ({
-  type: FETCH_AREAS_SETUP_DATA,
-  reducerName,
-  API_URL: "areas",
-  sorter,
-  filters,
-  finishedAction: fetchDataFinished,
-  addtionalParamsFields: ["region"],
-});
+export const fetchData = (sorter, filters) => {
+  return {
+    type: FETCH_AREAS_SETUP_DATA,
+    reducerName,
+    API_URL: "areas",
+    sorter,
+    filters,
+    finishedAction: fetchDataFinished,
+    addtionalParamsFields: ["region"],
+  };
+};
 export const fetchDataFinished = (result, isSorted, isFiltered) => ({
   type: FETCH_AREAS_SETUP_DATA_FINISHED,
   data: result && result.data && normalizer(result.data),

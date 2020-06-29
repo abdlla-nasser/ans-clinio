@@ -64,6 +64,6 @@ function* requestLogin({ actionToNavigate }) {
   }
 }
 
-export default function* loginSaga() {
+export default function* () {
   yield all([takeLatest(ON_LOGIN, requestLogin)]);
 }

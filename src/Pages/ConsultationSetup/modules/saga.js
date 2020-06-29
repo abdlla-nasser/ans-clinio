@@ -15,7 +15,7 @@ import {
   ON_PRESS_SEARCH_CONSULTATION_SETUP,
 } from "./types";
 
-export default function* ConsultationSetupSaga() {
+export default function* () {
   yield all([takeLatest(FETCH_CONSULTATION_SETUP_DATA, requestTableData)]);
   yield all([
     takeLatest(

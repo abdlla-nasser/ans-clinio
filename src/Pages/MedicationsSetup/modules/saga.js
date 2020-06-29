@@ -15,7 +15,7 @@ import {
   ON_PRESS_SEARCH_INSURANCE_COMPANIES_SETUP,
 } from "./types";
 
-export default function* () {
+export default function* InsuranceCompaniesSetupSaga() {
   yield all([
     takeLatest(FETCH_INSURANCE_COMPANIES_SETUP_DATA, requestTableData),
   ]);

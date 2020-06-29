@@ -9,6 +9,8 @@ const initialState = {
   countriesSetupLabels: undefined,
   regionsSetupLabels: undefined,
   areasSetupLabels: undefined,
+  systemServicesLabels: undefined,
+  medicationsSetupLabels: undefined,
 };
 
 export default (state = initialState, action) => {

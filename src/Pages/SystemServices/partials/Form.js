@@ -5,7 +5,6 @@ import Flex from "../../../components/Flex";
 import { IconContainer } from "../../../components/Icon/styled";
 import Icon from "../../../components/Icon";
 import { mapStateToProps, mapDispatchToProps } from "../utils/selectors";
-import { usePrevious } from "../../../utils/customUseHooks";
 
 const { memo, useCallback, useEffect } = React;
 
@@ -13,16 +12,15 @@ const FormView = ({
   country,
   countryList,
   fetchCountryList,
-  region,
-  regionsList,
-  fetchRegionsList,
+  service_group,
+  serviceGroupsList,
+  fetchServiceGroupsList,
   onFormChange,
   isPrevEqualCurrentlang,
   fetchData,
   labels,
 }) => {
-  const prevCountryValue = usePrevious(country);
-  const isCountryValueChanged = country && country !== prevCountryValue;
+  const canSearch = country && service_group;
 
   useEffect(() => {
     if (!countryList || (countryList && !isPrevEqualCurrentlang)) {
@@ -31,22 +29,10 @@ const FormView = ({
   }, [isPrevEqualCurrentlang, countryList, fetchCountryList]);
 
   useEffect(() => {
-    if (isCountryValueChanged || (regionsList && !isPrevEqualCurrentlang)) {
-      fetchRegionsList();
+    if (!serviceGroupsList || (serviceGroupsList && !isPrevEqualCurrentlang)) {
+      fetchServiceGroupsList();
     }
-  }, [
-    isPrevEqualCurrentlang,
-    fetchRegionsList,
-    regionsList,
-    isCountryValueChanged,
-  ]);
-
-  useEffect(() => {
-    if (region) {
-      fetchData();
-    }
-    //eslint-disable-next-line
-  }, []);
+  }, [isPrevEqualCurrentlang, serviceGroupsList, fetchServiceGroupsList]);
 
   const handleFormChange = useCallback(
     (name) => (value) => {
@@ -55,12 +41,12 @@ const FormView = ({
     [onFormChange]
   );
 
-  const handleFetchAreas = useCallback(() => {
-    if (region) {
+  const handleFetchSystemServices = useCallback(() => {
+    if (canSearch) {
       onFormChange({ name: "dataSource", value: [] });
       fetchData();
     }
-  }, [region, fetchData, onFormChange]);
+  }, [fetchData, canSearch, onFormChange]);
 
   return (
     <Flex justify="center" margin="0 0 10px 0">
@@ -78,22 +64,25 @@ const FormView = ({
         }}
       />
       <Select
-        label={labels && labels.region}
-        labelFlex={0.4}
-        width="300px"
+        label={labels && labels.srvcgrp}
+        labelFlex={0.6}
+        width="380px"
         inputProps={{
-          value: region,
-          options: regionsList,
-          onChange: handleFormChange("region"),
+          value: service_group,
+          options: serviceGroupsList,
+          onChange: handleFormChange("service_group"),
         }}
       />
-      <IconContainer onClick={handleFetchAreas} setDisabledBg={!region}>
+      <IconContainer
+        onClick={handleFetchSystemServices}
+        setDisabledBg={!canSearch}
+      >
         <Icon
           type="search"
           size={20}
           color="white"
           margintop={-1}
-          disabled={!region}
+          disabled={!canSearch}
         />
       </IconContainer>
     </Flex>

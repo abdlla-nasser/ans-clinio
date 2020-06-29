@@ -20,6 +20,6 @@ function* requestAllLanguages() {
   }
 }
 
-export default function* basePageSaga() {
+export default function* () {
   yield all([takeEvery(GET_LANGUAGES, requestAllLanguages)]);
 }

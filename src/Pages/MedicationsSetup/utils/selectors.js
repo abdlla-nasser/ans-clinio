@@ -1,4 +1,3 @@
-import { isArrayHasData } from "../../../utils/isThereData";
 import {
   fetchData,
   onPressEdit,
@@ -13,28 +12,20 @@ import {
   resetColValue,
   onPressSearch,
   resetFilter,
-  onFormChange,
-  fetchCountryList,
 } from "../modules/actions";
 
 export const mapStateToProps = ({
-  regionsSetupReducer: {
+  insuranceCompaniesSetupReducer: {
     lastColLang,
     lastColLangList,
-    dataSource,
     ...otherReducerData
   },
-  labelsReducer: { regionsSetupLabels: labels },
+  labelsReducer: { insuranceCompaniesSetupLabels: labels },
 }) => ({
-  navigateTo: {
-    pathName: "areasSetup",
-    attrName: "region_code",
-  },
-  canInsert: isArrayHasData(dataSource),
+  canInsert: true,
   canDelete: true,
   langSelectOptions: lastColLangList,
   langSelectValue: lastColLang,
-  dataSource,
   labels,
   ...otherReducerData,
 });
@@ -58,7 +49,4 @@ export const actions = {
 export const mapDispatchToProps = (dispatch) => ({
   onChangeData: (inputData, key, restData) =>
     dispatch(onChangeRowData(inputData, key, restData)),
-  fetchData: (sorter, filters) => dispatch(fetchData(sorter, filters)),
-  onFormChange: (params) => dispatch(onFormChange(params)),
-  fetchCountryList: () => dispatch(fetchCountryList()),
 });

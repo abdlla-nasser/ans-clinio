@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { colors } from "../../utils/theme";
 
 export const IconContainer = styled.section`
-  cursor: pointer;
   border-radius: 5px;
   margin-inline-end: ${({ marginend }) => marginend};
   margin-inline-start: ${({ marginstart }) => `${marginstart || "5px"}`};
@@ -14,6 +13,6 @@ export const IconContainer = styled.section`
   text-align: center;
   ${({ setDisabledBg }) => `
     background-color: ${setDisabledBg ? "#ebebeb" : colors.appPrimiry};
-    border-radius: ${setDisabledBg ? "2px" : "5px"};
+    cursor: ${setDisabledBg ? "not-allowed" : "pointer"};
   `};
 `;

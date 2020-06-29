@@ -15,7 +15,7 @@ import {
   ON_PRESS_SEARCH_COUNTRIES_SETUP,
 } from "./types";
 
-export default function* InsuranceCompaniesSetupSaga() {
+export default function* () {
   yield all([takeLatest(FETCH_COUNTRIES_SETUP_DATA, requestTableData)]);
   yield all([
     takeLatest(ON_REQUEST_UPDATE_COUNTRIES_SETUP_RECORD, requestUpdateRecord),

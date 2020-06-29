@@ -138,7 +138,8 @@ export function* requestUpdateRecord({
     const response = yield patchRequest(apiUrl, {
       ...otherRecordData,
     });
-    // const result = yield response.json();
+    console.log("requestUpdateRecord apiUrl: ", apiUrl);
+    console.log("requestUpdateRecord response: ", response);
 
     if (response && response.status !== 200) {
       notifyUserError();

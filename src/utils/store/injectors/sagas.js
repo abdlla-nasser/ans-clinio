@@ -10,6 +10,8 @@ import loginSaga from "../../../Pages/Login/modules/saga";
 import serviceGroupsSaga from "../../../Pages/ServiceGroups/modules/saga";
 import regionsSetupSaga from "../../../Pages/RegionsSetup/modules/saga";
 import areasSetupSaga from "../../../Pages/AreasSetup/modules/saga";
+import systemServicesSaga from "../../../Pages/SystemServices/modules/saga";
+import medicationsSetupSaga from "../../../Pages/MedicationsSetup/modules/saga";
 
 export default function* rootSaga() {
   yield all([fork(allergiesSetupSaga)]);
@@ -22,4 +24,6 @@ export default function* rootSaga() {
   yield all([fork(serviceGroupsSaga)]);
   yield all([fork(regionsSetupSaga)]);
   yield all([fork(areasSetupSaga)]);
+  yield all([fork(systemServicesSaga)]);
+  yield all([fork(medicationsSetupSaga)]);
 }
