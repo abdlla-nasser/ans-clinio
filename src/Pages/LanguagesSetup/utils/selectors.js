@@ -8,26 +8,18 @@ import {
   requestUpdateRecord,
   onDeleteRecord,
   onPressCancel,
-  onSelectLastColLang,
-  resetColValue,
   onPressSearch,
   resetFilter,
 } from "../modules/actions";
 
 export const mapStateToProps = ({
-  medicationsSetupReducer: {
-    lastColLang,
-    lastColLangList,
-    ...otherReducerData
-  },
-  labelsReducer: { medicationsSetupLabels: labels },
+  languagesSetupReducer,
+  labelsReducer: { languagesSetupLabels: labels },
 }) => ({
   canInsert: true,
   canDelete: true,
-  langSelectOptions: lastColLangList,
-  langSelectValue: lastColLang,
   labels,
-  ...otherReducerData,
+  ...languagesSetupReducer,
 });
 
 export const actions = {
@@ -41,8 +33,6 @@ export const actions = {
   requestInsertRecord,
   requestUpdateRecord,
   onDeleteRecord,
-  onSelectLastColLang,
-  resetColValue,
   resetFilter,
 };
 

@@ -14,6 +14,7 @@ import serviceGroupsReducer from "../../../Pages/ServiceGroups/modules/reducer";
 import areasSetupReducer from "../../../Pages/AreasSetup/modules/reducer";
 import systemServicesReducer from "../../../Pages/SystemServices/modules/reducer";
 import medicationsSetupReducer from "../../../Pages/MedicationsSetup/modules/reducer";
+import languagesSetupReducer from "../../../Pages/LanguagesSetup/modules/reducer";
 
 const persistConfig = {
   key: "root",
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   countriesSetupReducer,
   insuranceCompaniesSetupReducer,
   labelsReducer,
+  languagesSetupReducer,
   loginReducer,
   medicationsSetupReducer,
   regionsSetupReducer,

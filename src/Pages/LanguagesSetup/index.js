@@ -8,24 +8,24 @@ import {
 } from "./utils/selectors";
 import PageTitle from "../../components/Text/PageTitle";
 
-const MedicationsSetup = ({ children, labels }) => {
-  const pageTitle = labels && labels.insurcompstp;
+const LanguagesSetup = ({ children, labels }) => {
+  const pageTitle = labels && labels.langsstp;
   return (
     <>
-      <PageTitle children="T_Medications Setup" />
+      <PageTitle children={pageTitle} />
       {children}
     </>
   );
 };
 
 export default WithTableHoc({
-  WrappedComponent: MedicationsSetup,
+  WrappedComponent: LanguagesSetup,
   mapStateToProps,
   mapDispatchToProps,
   getExcelSheetProps,
   actions,
   renderColumns: columns,
-  pageName: "medicationsSetup",
+  pageName: "languagesSetup",
   rowKey: "idValue",
   requiredProps: ["labels"],
   itemsPropNamesToValidate: ["en", "ar"],

@@ -58,6 +58,11 @@ const MedicationsSetup = Loadable({
   ...loadableProps,
 });
 
+const LanguagesSetup = Loadable({
+  loader: () => import("./Pages/LanguagesSetup"),
+  ...loadableProps,
+});
+
 export default () => (
   <Switch>
     <Route path="/" exact component={LoginPage} />
@@ -74,5 +79,6 @@ export default () => (
     <Route path="/areasSetup" exact component={AreasSetup} />
     <Route path="/systemServices" exact component={SystemServices} />
     <Route path="/medicationsSetup" exact component={MedicationsSetup} />
+    <Route path="/languagesSetup" exact component={LanguagesSetup} />
   </Switch>
 );

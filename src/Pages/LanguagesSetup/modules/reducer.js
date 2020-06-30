@@ -1,24 +1,22 @@
 import initialRowData from "./rowProps";
 import idGenerator from "../../../utils/idGenerator";
 import {
-  FETCH_MEDICATIONS_SETUP_DATA,
-  FETCH_MEDICATIONS_SETUP_DATA_FINISHED,
-  ON_SELECT_MEDICATIONS_SETUP_ROW,
-  ON_PRESS_MEDICATIONS_SETUP_EDIT,
-  ON_PRESS_MEDICATIONS_SETUP_ADD,
-  ON_CHANGE_MEDICATIONS_SETUP_RECORD_DATA,
-  ON_REQUEST_DELETE_MEDICATIONS_SETUP_RECORD,
-  ON_REQUEST_DELETE_MEDICATIONS_SETUP_RECORD_FINISHED,
-  ON_PRESS_MEDICATIONS_SETUP_CANCEL,
-  ON_REQUEST_INSERT_MEDICATIONS_SETUP_RECORD,
-  ON_REQUEST_INSERT_MEDICATIONS_SETUP_RECORD_FINISHED,
-  ON_REQUEST_UPDATE_MEDICATIONS_SETUP_RECORD,
-  ON_REQUEST_UPDATE_MEDICATIONS_SETUP_RECORD_FINISHED,
-  ON_SELECT_LAST_COLUMN_LANGUAGE_MEDICATIONS_SETUP,
-  ON_RESET_LAST_COLUMN_LANGUAGE_MEDICATIONS_SETUP,
-  ON_PRESS_SEARCH_MEDICATIONS_SETUP,
-  ON_PRESS_SEARCH_MEDICATIONS_SETUP_FINISHED,
-  ON_RESET_FILTER_MEDICATIONS_SETUP,
+  FETCH_LANGUAGES_SETUP_DATA,
+  FETCH_LANGUAGES_SETUP_DATA_FINISHED,
+  ON_SELECT_LANGUAGES_SETUP_ROW,
+  ON_PRESS_LANGUAGES_SETUP_EDIT,
+  ON_PRESS_LANGUAGES_SETUP_ADD,
+  ON_CHANGE_LANGUAGES_SETUP_RECORD_DATA,
+  ON_REQUEST_DELETE_LANGUAGES_SETUP_RECORD,
+  ON_REQUEST_DELETE_LANGUAGES_SETUP_RECORD_FINISHED,
+  ON_PRESS_LANGUAGES_SETUP_CANCEL,
+  ON_REQUEST_INSERT_LANGUAGES_SETUP_RECORD,
+  ON_REQUEST_INSERT_LANGUAGES_SETUP_RECORD_FINISHED,
+  ON_REQUEST_UPDATE_LANGUAGES_SETUP_RECORD,
+  ON_REQUEST_UPDATE_LANGUAGES_SETUP_RECORD_FINISHED,
+  ON_PRESS_SEARCH_LANGUAGES_SETUP,
+  ON_PRESS_SEARCH_LANGUAGES_SETUP_FINISHED,
+  ON_RESET_FILTER_LANGUAGES_SETUP,
 } from "./types";
 
 import { columns, excelColumns } from "../partials/columns";
@@ -45,28 +43,14 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ON_RESET_LAST_COLUMN_LANGUAGE_MEDICATIONS_SETUP:
-      return {
-        ...state,
-        stateColumns: columns,
-        stateExcelColumns: excelColumns,
-      };
-    case ON_SELECT_LAST_COLUMN_LANGUAGE_MEDICATIONS_SETUP:
-      return {
-        ...state,
-        lastColLang: action.key,
-        stateColumns: [...state.stateColumns, action.dynamicColumn],
-        stateExcelColumns: [...state.stateExcelColumns, action.excelColumn],
-      };
-
-    case FETCH_MEDICATIONS_SETUP_DATA:
-    case ON_PRESS_SEARCH_MEDICATIONS_SETUP:
+    case FETCH_LANGUAGES_SETUP_DATA:
+    case ON_PRESS_SEARCH_LANGUAGES_SETUP:
       return {
         ...state,
         loading: true,
       };
 
-    case FETCH_MEDICATIONS_SETUP_DATA_FINISHED:
+    case FETCH_LANGUAGES_SETUP_DATA_FINISHED:
       const dataFromServer = action.data || [];
       const isDataSortedOrFiltered = action.isSorted || action.isFiltered;
 
@@ -79,26 +63,26 @@ export default (state = initialState, action) => {
         loading: false,
       };
 
-    case ON_PRESS_SEARCH_MEDICATIONS_SETUP_FINISHED:
+    case ON_PRESS_SEARCH_LANGUAGES_SETUP_FINISHED:
       return {
         ...state,
         dataSource: action.data,
         loading: false,
       };
 
-    case ON_RESET_FILTER_MEDICATIONS_SETUP:
+    case ON_RESET_FILTER_LANGUAGES_SETUP:
       return {
         ...state,
         dataSource: null,
       };
 
-    case ON_SELECT_MEDICATIONS_SETUP_ROW:
+    case ON_SELECT_LANGUAGES_SETUP_ROW:
       return {
         ...state,
         selectedRow: action.id,
       };
 
-    case ON_PRESS_MEDICATIONS_SETUP_ADD:
+    case ON_PRESS_LANGUAGES_SETUP_ADD:
       const ds = state.dataSource;
       const recordKey = idGenerator();
       return {
@@ -116,14 +100,14 @@ export default (state = initialState, action) => {
         ],
       };
 
-    case ON_PRESS_MEDICATIONS_SETUP_EDIT:
+    case ON_PRESS_LANGUAGES_SETUP_EDIT:
       return {
         ...state,
         isEditing: true,
         isUpdatingRecord: true,
       };
 
-    case ON_CHANGE_MEDICATIONS_SETUP_RECORD_DATA:
+    case ON_CHANGE_LANGUAGES_SETUP_RECORD_DATA:
       const { inputData, key, langCode } = action;
       const name = Object.keys(inputData)[0];
       const value = inputData[name];
@@ -140,15 +124,15 @@ export default (state = initialState, action) => {
         }),
       };
 
-    case ON_REQUEST_INSERT_MEDICATIONS_SETUP_RECORD:
-    case ON_REQUEST_UPDATE_MEDICATIONS_SETUP_RECORD:
+    case ON_REQUEST_INSERT_LANGUAGES_SETUP_RECORD:
+    case ON_REQUEST_UPDATE_LANGUAGES_SETUP_RECORD:
       return {
         ...state,
         isActionLoading: true,
       };
 
-    case ON_REQUEST_INSERT_MEDICATIONS_SETUP_RECORD_FINISHED:
-    case ON_REQUEST_UPDATE_MEDICATIONS_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_INSERT_LANGUAGES_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_UPDATE_LANGUAGES_SETUP_RECORD_FINISHED:
       return {
         ...state,
         isEditing: false,
@@ -159,7 +143,7 @@ export default (state = initialState, action) => {
         ...action.newState,
       };
 
-    case ON_PRESS_MEDICATIONS_SETUP_CANCEL:
+    case ON_PRESS_LANGUAGES_SETUP_CANCEL:
       return {
         ...state,
         isEditing: false,
@@ -170,7 +154,7 @@ export default (state = initialState, action) => {
         ),
       };
 
-    case ON_REQUEST_DELETE_MEDICATIONS_SETUP_RECORD:
+    case ON_REQUEST_DELETE_LANGUAGES_SETUP_RECORD:
       const { idValue } = action.record;
       return {
         ...state,
@@ -179,7 +163,7 @@ export default (state = initialState, action) => {
         selectedRow: idValue,
       };
 
-    case ON_REQUEST_DELETE_MEDICATIONS_SETUP_RECORD_FINISHED:
+    case ON_REQUEST_DELETE_LANGUAGES_SETUP_RECORD_FINISHED:
       return {
         ...state,
         isActionLoading: false,

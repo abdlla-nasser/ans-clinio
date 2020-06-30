@@ -13,6 +13,10 @@ export const ToolsContainer = styled(TableContainer)`
   height: 42px;
   justify-content: ${({ justify }) => justify || "center"};
   align-items: center;
-  padding-inline-start: 45%;
-  padding-inline-end: 1%;
+  ${({ withLangSelectOptions }) =>
+    withLangSelectOptions &&
+    `
+      padding-inline-start: 45%;
+      padding-inline-end: 1%;
+    `};
 `;

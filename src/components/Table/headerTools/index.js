@@ -45,7 +45,10 @@ export default ({
   const { labels } = useRequestLabels("tableHoc");
 
   return (
-    <ToolsContainer justify={langSelectOptions ? "space-between" : "center"}>
+    <ToolsContainer
+      justify={langSelectOptions ? "space-between" : "center"}
+      withLangSelectOptions={langSelectOptions}
+    >
       <Flex width="185px" justify="space-between">
         {(isAddingRecord || isUpdatingRecord) && (
           <Icon

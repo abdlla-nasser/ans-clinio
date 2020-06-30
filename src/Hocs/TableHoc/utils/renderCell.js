@@ -1,5 +1,6 @@
 import TextInput from "../../../components/Table/columnsComponents/textInputCell";
 import CheckBoxCell from "../../../components/Table/columnsComponents/checkBoxCell";
+import SwitchCell from "../../../components/Table/columnsComponents/switchCell";
 import SelectCell from "../../../components/Table/columnsComponents/SelectCell";
 import InputNumber from "../../../components/Table/columnsComponents/numberInput";
 import InputPercent from "../../../components/Table/columnsComponents/percentageInput";
@@ -9,6 +10,7 @@ import ImageView from "../../../components/Table/columnsComponents/ImageCell";
 const CELLS = {
   text: TextInput,
   checkbox: CheckBoxCell,
+  switch: SwitchCell,
   list: SelectCell,
   inputnumber: InputNumber,
   inputpercent: InputPercent,

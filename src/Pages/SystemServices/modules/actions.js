@@ -41,7 +41,6 @@ export const fetchData = (sorter, filters) => ({
 export const fetchDataFinished = (result, isSorted, isFiltered) => ({
   type: FETCH_SYSTEM_SERVICES_DATA_FINISHED,
   data: result && result.data && normalizer(result.data),
-  // data: result && result && normalizer(result),
   totalRecords: result.total,
   isSorted,
   isFiltered,
