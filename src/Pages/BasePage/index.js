@@ -21,15 +21,16 @@ const BasePage = ({
   },
 }) => {
   useEffect(() => {
-    if (languages.length === 0) {
-      getAppLanguages();
-    }
-
     if (!language) {
       setDefaultLangToBrowserLang();
     }
-    //eslint-disable-next-line
-  }, []);
+  }, [language, setDefaultLangToBrowserLang]);
+
+  useEffect(() => {
+    if (languages.length === 0) {
+      getAppLanguages();
+    }
+  }, [languages.length, getAppLanguages]);
 
   const isLogin = pathname === "/";
   const dir = language && language.r2l ? "rtl" : "ltr";

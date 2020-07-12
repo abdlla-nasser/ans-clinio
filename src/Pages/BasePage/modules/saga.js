@@ -13,7 +13,7 @@ function* requestAllLanguages() {
     let response = yield getRequest(apiUrl);
     response = yield response.json();
 
-    yield put(getAppLanguagesFinished(response));
+    yield put(getAppLanguagesFinished(response.data));
   } catch (error) {
     console.log("Error while requestAllLanguages =>", error);
     yield put(getAppLanguagesFinished());

@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Menu from "./menu";
 import Text from "../Text";
 import Flex from "../Flex";
@@ -14,6 +14,8 @@ import {
   HeaderSvg,
   StyledBadge,
 } from "./styled";
+import { logout } from "../../Pages/BasePage/modules/actions";
+import { useHistory } from "react-router-dom";
 
 import bellSvg from "../../assets/svgs/bell.svg";
 import logoutSvg from "../../assets/svgs/logout.svg";
@@ -22,7 +24,7 @@ import clinioLogo from "../../assets/svgs/mainLogo.svg";
 import messagesSvg from "../../assets/svgs/messages.svg";
 import settingsSvg from "../../assets/svgs/settings.svg";
 
-const { memo } = React;
+const { memo, useCallback } = React;
 
 const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
   <Flex column>
@@ -41,12 +43,19 @@ const WelcomeText = ({ user = "Mr. Nagy", lastLogin = "10 mins" }) => (
 );
 
 const AppHeader = () => {
+  let history = useHistory();
+  const dispatch = useDispatch();
   const language = useSelector(
     ({ appBaseReducer }) => appBaseReducer.language.language_code
   );
   const languages = useSelector(
     ({ appBaseReducer }) => appBaseReducer.languages
   );
+
+  const handleLogout = useCallback(() => {
+    dispatch(logout());
+    history.push("/");
+  }, [dispatch, history]);
 
   return (
     <MainHeader>
@@ -69,7 +78,12 @@ const AppHeader = () => {
             userSelectedLanguage={language}
             allOtherUserLanguages={languages}
           />
-          <HeaderSvg src={logoutSvg} alt="logout" marginEnd="0px" />
+          <HeaderSvg
+            src={logoutSvg}
+            alt="logout"
+            marginEnd="0px"
+            onClick={handleLogout}
+          />
         </SettingsContainer>
       </LogoSettingsContainer>
 

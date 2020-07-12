@@ -4,11 +4,16 @@ import {
   SET_DEFAULT_LANGUAGE_TO_BROWSER_LANGUAGE,
   CHANGE_APP_LANGUAGE,
   SET_USER_TOKEN,
+  ON_LOGOUT,
 } from "./types";
 import { ON_LOGIN_SUCCESS } from "../../Login/modules/types";
 
 const initialState = {
-  language: undefined,
+  language: {
+    r2l: false,
+    language_code: "en",
+    name: "DefaultBrowserLanguage",
+  },
   Active_Flag: undefined,
   Role: undefined,
   email: undefined,
@@ -45,7 +50,7 @@ export default (state = initialState, action) => {
       const langObj = {
         r2l: isR2l,
         language_code: browserLang,
-        name: "Default",
+        name: "DefaultBrowserLanguage",
       };
       return {
         ...state,
@@ -57,6 +62,10 @@ export default (state = initialState, action) => {
         ...state,
         language: action.selectedLang,
       };
+
+    case ON_LOGOUT:
+      localStorage.clear();
+      return initialState;
 
     default:
       return state;

@@ -4,6 +4,7 @@ import {
   SET_DEFAULT_LANGUAGE_TO_BROWSER_LANGUAGE,
   CHANGE_APP_LANGUAGE,
   SET_USER_TOKEN,
+  ON_LOGOUT,
 } from "./types";
 
 export const getAppLanguages = () => ({
@@ -27,4 +28,8 @@ export const changeAppLanguage = (selectedLang) => ({
 export const setUserToken = (token) => ({
   type: SET_USER_TOKEN,
   token,
+});
+
+export const logout = () => ({
+  type: ON_LOGOUT,
 });
