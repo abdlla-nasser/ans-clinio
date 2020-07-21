@@ -13,10 +13,10 @@ export const NavLi = ({ imageSrc, to, children }) => {
   )
 }
 
-export const CountDiv = ({ num, image }) => {
+export const CountDiv = ({ num, image, size = 50 }) => {
   return (
     <div className="count-div">
-      <CircleDiv>{num}</CircleDiv>
+      <CircleDiv size={size}>{num}</CircleDiv>
       <img className="svg-img" src={image} alt=""/>
     </div>
   )

@@ -1,17 +1,17 @@
 import React from 'react';
-import { NavUl, StatsDiv, StatDiv, ColoredH3, ColoredNum, VerticalLine, NumsDiv, StatDivider, ImgsContainer } from './styled';
+import { NavUl, StatsDiv, StatDiv, ColoredH3, ColoredH2, ColoredNum, VerticalLine, NumsDiv, StatDivider, ImgsContainer } from './styled';
 import { NavLi, CountDiv } from './Partials';
-import PatientRegistraionImage from '../../assets/images/layer-3@3x.jpg'
-import BookingImage from '../../assets/images/layer-5@3x.jpg';
-import ConsultationImage from '../../assets/images/layer-7@3x.jpg';
-import CashReceiptImage from '../../assets/images/layer-8@3x.jpg';
-import DocumentScanImage from '../../assets/images/layer-9@3x.jpg';
-import medicalRecordImage from '../../assets/images/layer-10@3x.jpg';
-import malePatientsSVG from '../../assets/svgs/forma-1.svg';
-import femalePatientsSVG from '../../assets/svgs/forma-1_2.svg';
-import image1 from '../../assets/images/Capture1.PNG';
-import image2 from '../../assets/images/Capture2.PNG';
-import image3 from '../../assets/images/Capture3.PNG';
+import {
+  PatientRegistraionImage,
+  BookingImage,
+  ConsultationImage,
+  CashReceiptImage,
+  DocumentScanImage,
+  medicalRecordImage,
+  malePatientsSVG, malePatientsSVGYellow,
+  femalePatientsSVG, femalePatientsSVGYellow,
+  image1, image2, image3
+} from './Images';
 
 const links = [
   { imageSrc: PatientRegistraionImage, to: "/patientregistration", text: 'Patient Registration' },
@@ -30,6 +30,10 @@ export default () => {
           <NavLi key={link.text} imageSrc={link.imageSrc} to={link.to}>{link.text}</NavLi>
         ))}
       </NavUl>
+      <div>
+        <ColoredH2>Feature Service Info</ColoredH2>
+
+      </div>
       <StatsDiv>
         <StatDiv>
           <ColoredH3>New Registration</ColoredH3>
@@ -43,8 +47,8 @@ export default () => {
         <StatDiv>
           <ColoredH3>Total Patients</ColoredH3>
           <NumsDiv>
-            <CountDiv num={330} image={malePatientsSVG} />
-            <CountDiv num={340} image={femalePatientsSVG} />
+            <CountDiv size={40} num={330} image={malePatientsSVGYellow} />
+            <CountDiv size={40} num={340} image={femalePatientsSVGYellow} />
           </NumsDiv>
           <p>670</p>
         </StatDiv>

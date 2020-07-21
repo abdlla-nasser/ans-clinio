@@ -29,8 +29,8 @@ export const CircleDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #326dbb;
-  width: 50px;
-  height: 50px;
+  width: ${({size}) => `${size}px`};
+  height: ${({size}) => `${size}px`};
   border-radius: 50%;
   color: white;
   font-size: 18px;
@@ -71,6 +71,11 @@ export const ColoredH3 = styled.h3`
   color: #546a79;
   font-size: 18px;
   text-align: left;
+`
+export const ColoredH2 = styled.h2`
+  color:#306cbb;
+  font-size: 24px;
+  font-weight: 500;
 `
 export const NumsDiv = styled.div`
   display: flex;
