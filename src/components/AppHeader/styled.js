@@ -6,7 +6,7 @@ import Badge from "antd/lib/badge";
 export const MainHeader = styled.header`
   height: min-content;
   background-color: transparent;
-  padding: 0px 50px;
+  padding: 0px 70px;
 `;
 
 export const LogoSettingsContainer = styled(Flex)`

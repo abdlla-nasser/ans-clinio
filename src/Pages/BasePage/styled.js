@@ -8,5 +8,5 @@ export const Layout = styled.div`
 `;
 
 export const Content = styled.div`
-  padding: 10px 50px;
+  padding: 10px 70px;
 `;
