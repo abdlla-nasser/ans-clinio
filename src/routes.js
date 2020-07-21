@@ -3,11 +3,24 @@ import { Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
 import LoadingComponent from "./components/LoadableLoading";
 
+
 const loadableProps = {
   delay: 3,
   loading: LoadingComponent,
 };
 
+const Home = Loadable({
+  loader: () => import("./Pages/Home"),
+  ...loadableProps
+})
+const PatientRegistration = Loadable({
+  loader: () => import("./Pages/PatientRegistration"),
+  ...loadableProps,
+})
+const Booking = Loadable({
+  loader: () => import("./Pages/Booking"),
+  ...loadableProps,
+})
 const LoginPage = Loadable({
   loader: () => import("./Pages/Login"),
   ...loadableProps,
@@ -72,6 +85,9 @@ export default () => (
       exact
       component={InsuranceCompaniesSetup}
     />
+    <Route path="/home" exact component={Home} />
+    <Route path="/booking" exact component={Booking} />
+    <Route path="/patientregistration" exact component={PatientRegistration} />
     <Route path="/allergiesSetup" exact component={AllergiesSetup} />
     <Route path="/serviceGroups" exact component={ServiceGroups} />
     <Route path="/countriesSetup" exact component={CountriesSetup} />
