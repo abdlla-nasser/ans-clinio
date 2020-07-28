@@ -21,25 +21,16 @@ const Input = styled.input`
   }
 `;
 
-export default ({
-  value,
-  onChange,
-  placeholder,
-  disabled,
-  type = "text",
-  autocomplete,
-  ...otherProps
-}) =>
-  CreateShadowField({
-    ...otherProps,
-    children: (
-      <Input
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        disabled={disabled}
-        type={type}
-        autocomplete={autocomplete}
-      />
-    ),
-  });
+export default ({ value, name, onChange, placeholder, disabled, type = "text", autocomplete, ...otherProps }) => CreateShadowField({ ...otherProps,
+  children: (
+    <Input
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      disabled={disabled}
+      type={type}
+      autocomplete={autocomplete}
+    />
+  ),
+});

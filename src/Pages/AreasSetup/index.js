@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WithTableHoc from "../../Hocs/TableHoc";
 import { columns, getExcelSheetProps } from "./partials/columns";
 import {
@@ -8,7 +8,6 @@ import {
 } from "./utils/selectors";
 import loadable from "../../components/Loadable";
 
-const { useEffect } = React;
 const PageTitle = loadable(() => import("../../components/Text/PageTitle"));
 const Form = loadable(() => import("./partials/Form"));
 

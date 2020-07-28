@@ -1,6 +1,8 @@
-import React from 'react';
-import { NavUl, StatsDiv, StatDiv, ColoredH3, ColoredH2, ColoredNum, VerticalLine, NumsDiv, StatDivider, ImgsContainer } from './styled';
-import { NavLi, CountDiv } from './Partials';
+import React, { useState } from 'react';
+import { Radio, DatePicker } from 'antd';
+import { NavUl, ColoredH2, ImgsContainer } from './styled';
+import NavLi from './Partials/NavLi';
+import Stats from './Partials/Stats';
 import {
   PatientRegistraionImage,
   BookingImage,
@@ -8,11 +10,10 @@ import {
   CashReceiptImage,
   DocumentScanImage,
   medicalRecordImage,
-  malePatientsSVG, malePatientsSVGYellow,
-  femalePatientsSVG, femalePatientsSVGYellow,
   image1, image2, image3
 } from './Images';
 
+const { RangePicker } = DatePicker
 const links = [
   { imageSrc: PatientRegistraionImage, to: "/patientregistration", text: 'Patient Registration' },
   { imageSrc: BookingImage, to: "/booking", text: 'Booking' },
@@ -23,6 +24,10 @@ const links = [
 ]
 
 export default () => {
+  const [filterValue, setFilterValue] = useState({
+    date: "today",
+    customRange: null
+  });
   return (
     <>
       <NavUl>
@@ -30,56 +35,24 @@ export default () => {
           <NavLi key={link.text} imageSrc={link.imageSrc} to={link.to}>{link.text}</NavLi>
         ))}
       </NavUl>
-      <div>
-        <ColoredH2>Feature Service Info</ColoredH2>
-
+      <div style={{ padding: '1rem 0'}}>
+        <Radio.Group defaultValue={filterValue.date} buttonStyle="solid" onChange={(e) => {
+          setFilterValue({...filterValue, date: e.target.value })
+        }}>
+          <Radio.Button value="today">Today</Radio.Button>
+          <Radio.Button value="yesterday">Yesterday</Radio.Button>
+          <Radio.Button value="lastweek">Last Week</Radio.Button>
+          <Radio.Button value="lastmonth">Last Month</Radio.Button>
+          <Radio.Button value="thismonth">This Month</Radio.Button>
+          <Radio.Button value="lastyear">Last Year</Radio.Button>
+          <RangePicker  onOpenChange={(e) => {
+            setFilterValue({ date: null, customRange: true })
+          }} onChange={(e) => {
+            setFilterValue({ date: e, customRange: true })
+          }}/>
+        </Radio.Group>
       </div>
-      <StatsDiv>
-        <StatDiv>
-          <ColoredH3>New Registration</ColoredH3>
-          <NumsDiv>
-            <CountDiv num={250} image={malePatientsSVG} />
-            <CountDiv num={250} image={femalePatientsSVG} />
-          </NumsDiv>
-          <p>500</p>
-        </StatDiv>
-        <StatDivider />
-        <StatDiv>
-          <ColoredH3>Total Patients</ColoredH3>
-          <NumsDiv>
-            <CountDiv size={40} num={330} image={malePatientsSVGYellow} />
-            <CountDiv size={40} num={340} image={femalePatientsSVGYellow} />
-          </NumsDiv>
-          <p>670</p>
-        </StatDiv>
-        <StatDivider />
-        <StatDiv>
-          <ColoredH3>Follow up</ColoredH3>
-          <NumsDiv>
-            <ColoredNum color="#18bfa5">2.6$</ColoredNum>
-            <VerticalLine />
-            <ColoredNum color="#aaa">65%</ColoredNum>
-          </NumsDiv>
-        </StatDiv>
-        <StatDivider />
-        <StatDiv>
-          <ColoredH3>Cash Income</ColoredH3>
-          <NumsDiv>
-            <ColoredNum color="#28a5f0">130$</ColoredNum>
-            <VerticalLine />
-            <ColoredNum color="#aaa">65%</ColoredNum>
-          </NumsDiv>
-        </StatDiv>
-        <StatDivider />
-        <StatDiv>
-          <ColoredH3>Credit Income</ColoredH3>
-          <NumsDiv>
-            <ColoredNum color="#ebb74e">30$</ColoredNum>
-            <VerticalLine />
-            <ColoredNum color="#aaa">15%</ColoredNum>
-          </NumsDiv>
-        </StatDiv>
-      </StatsDiv>
+      <Stats />
       <ImgsContainer>
           <img src={image1} alt=""/>
           <img src={image2} alt=""/>

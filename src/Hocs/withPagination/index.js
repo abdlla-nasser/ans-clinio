@@ -1,9 +1,9 @@
 import React from "react";
+import Pagination from "./partials/index";
 import { getPageNumbers, PAGE_SIZE_OPTIONS } from "./utils";
 import { isArrayHasData } from "../../utils/isThereData";
 
-const { memo, useState, useMemo, lazy, Suspense, useCallback } = React;
-const Pagination = lazy(() => import("./partials/index"));
+const { memo, useState, useMemo, useCallback } = React;
 
 export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
   const WrapperComponent = (props) => {
@@ -76,18 +76,16 @@ export default ({ WrappedComponent, pageSizeOptions = PAGE_SIZE_OPTIONS }) => {
         }
       >
         {isDataSourceExsist && withPagination && !forceHidePagination && (
-          <Suspense fallback={null}>
-            <Pagination
-              onfetchMoreData={onfetchMoreData}
-              updateCurrentPage={updateCurrentPage}
-              onUpdatePageSize={onUpdatePageSize}
-              pageSize={pageSize}
-              pageSizeOptions={pageSizeOptions}
-              pagesNumbers={pagesNumbers}
-              currentPage={currentPage}
-              disableNextIcon={disableNextIcon}
-            />
-          </Suspense>
+          <Pagination
+            onfetchMoreData={onfetchMoreData}
+            updateCurrentPage={updateCurrentPage}
+            onUpdatePageSize={onUpdatePageSize}
+            pageSize={pageSize}
+            pageSizeOptions={pageSizeOptions}
+            pagesNumbers={pagesNumbers}
+            currentPage={currentPage}
+            disableNextIcon={disableNextIcon}
+          />
         )}
       </WrappedComponent>
     );

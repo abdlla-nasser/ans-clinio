@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WithTableHoc from "../../Hocs/TableHoc";
 import { columns, getExcelSheetProps } from "./partials/columns";
 import {
@@ -7,8 +7,6 @@ import {
   actions,
 } from "./utils/selectors";
 import PageTitle from "../../components/Text/PageTitle";
-
-const { useEffect } = React;
 
 const ServiceGroups = ({
   children,

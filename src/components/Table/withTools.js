@@ -1,10 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import Table from "./index";
 import HeaderTools from "./headerTools";
 import PageContent from "../PageContent";
 import Flex from "../Flex";
-
-const { memo } = React;
 
 function TableWithToolsContainer({
   total,
@@ -39,8 +37,7 @@ function TableWithToolsContainer({
   onDoubleClickRecord,
   withPagination,
 }) {
-  const isThereSelectedRow =
-    selectedRow || (typeof selectedRow === "number" && selectedRow >= 0);
+  const isThereSelectedRow = selectedRow || (typeof selectedRow === "number" && selectedRow >= 0);
   let x = 0,
     y = 155;
   if (tableScroll) {

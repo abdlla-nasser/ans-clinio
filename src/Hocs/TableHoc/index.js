@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useMemo, memo, useCallback } from "react";
 import { connect } from "react-redux";
 import { createDispatcher } from "./utils/createDispatcher";
 import validateForm from "./utils/validateFields";
@@ -13,8 +13,6 @@ import { usePrevious } from "../../utils/customUseHooks";
 import loadable from "../../components/Loadable";
 
 const DownloadExcel = loadable(() => import("../../components/DownloadExcel"));
-const { useEffect, useState, useMemo, memo, useCallback } = React;
-
 const defaultRequiredProps = ["isPrevEqualCurrentlang"];
 
 export default ({
@@ -167,11 +165,7 @@ export default ({
     //   } else return false;
     // }, [otherProps]);
     const memoizedColumns = useMemo(() => stateColumns, [stateColumns]);
-
-    const getLabelTitle = useCallback((title) => getTitle(labels, title), [
-      labels,
-    ]);
-
+    const getLabelTitle = useCallback((title) => getTitle(labels, title), [labels]);
     const columnsWithSearch = useMemo(() => {
       let columns;
       if (memoizedColumns) {
