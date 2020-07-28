@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { onInputChange } from "./modules/actions";
 import { usePrevious } from "../../utils/customUseHooks";
 import { requestPageLabels } from "../../global/actions/labels";
 import { onLogin } from "./modules/actions";
@@ -30,6 +31,8 @@ const LoginPage = () => {
   });
   const handleSubmit = e => {
     e.preventDefault();
+    dispatch(onInputChange({ name: "username", value: state.form.username }))
+    dispatch(onInputChange({ name: "password", value: state.form.password }))
     if (!state.form.username) {
       setState({ ...state, errors: { usernameError: "please enter an email" } })
     }
@@ -62,7 +65,6 @@ const LoginPage = () => {
           />
         </Flex>
         <Text children={loginLabels.signintoyouraccount} />
-        {/* <Form push={push} /> */}
         <NewForm state={state} setState={setState} labels={loginLabels} handleSubmit={handleSubmit} formError={formError} isSubmittingLogin={isSubmittingLogin} />
       </Wrapper>
     </Container>
